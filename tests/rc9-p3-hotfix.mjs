@@ -65,7 +65,10 @@ check('MANA BURN: attacker seat projection has no notification, target projectio
   assert.equal(b.appState.presentationEvents[0].removed_shards[0].class_name,'Mage');
   assertViewerSafeBoard(a);assertViewerSafeBoard(b);
   const self=st();self.presentationEvents=[manaEvent('PLAYER','PLAYER')];
-  assert.equal(viewerSafeBoard({appState:self},{seat:1,revision:10,secret:Buffer.alloc(32)}).appState.presentationEvents.length,0);
+  const ownAbility=viewerSafeBoard({appState:self},{seat:1,revision:10,secret:Buffer.alloc(32)});
+  assert.equal(ownAbility.appState.presentationEvents.length,1,'paying player receives own Class Ability Mana notice');
+  assert.equal(ownAbility.appState.presentationEvents[0].loss_kind,'ABILITY_SPEND');
+  assertViewerSafeBoard(ownAbility);
 });
 check('Mana choice must resolve and face-up selected shard must fly BEFORE target toast',()=>{
   notices.length=0;revealBatches.length=0;timers.length=0;endReveal=null;
