@@ -11,8 +11,13 @@ const safeEvent = (event) => {
   // Only the affected player receives their resolved loss notification.
   // A Mana Burn/Steal result goes ONLY to the losing seat. Self-paid
   // Ability costs and the initiating player's choice must not produce a loss toast.
-  if(event.type==='MANA_LOSS_COMMITTED'&&
-     (event.side!=='PLAYER'||event.source_side!=='AI'||event.loss_kind==='ABILITY_SPEND'))return null;
+  if(event.type==='MANA_LOSS_COMMITTED'){
+    // Self-paid Paladin/Crusader Class Ability is visible ONLY to its owner;
+    // opponent-caused Mana Burn/Steal retains its existing recipient-only policy.
+    const ownAbilitySpend=event.side==='PLAYER'&&event.source_side==='PLAYER'&&event.loss_kind==='ABILITY_SPEND';
+    const enemyRemoval=event.side==='PLAYER'&&event.source_side==='AI'&&event.loss_kind!=='ABILITY_SPEND';
+    if(!ownAbilitySpend&&!enemyRemoval)return null;
+  }
   const out = {};
   for (const k of ['id', 'type', 'side', 'actor_side', 'reason', 'group_id', 'group_index', 'hand_index', 'timestamp']) {
     if (Object.hasOwn(event, k)) out[k] = event[k];
@@ -263,10 +268,23 @@ function publicIncomingAttack(r,depth=0) {
   else if(Number.isFinite(Number(r?.base_damage)))out.base_damage=publicNumber(r.base_damage);
   return out;
 }
+// The Response target is the player who may respond, NOT necessarily the
+// played Item's actual effect target. Publish ONLY public targeting geometry;
+// never expose the canonical action (Hand/Deck/Mana/payment/commit secrets).
+function publicCommittedCardTarget(r) {
+  if(r?.kind!=='incoming_card'||!r.action||typeof r.action!=='object')return null;
+  const a=r.action;
+  const target={target_side:publicSide(a.target_side),target_lane:publicLane(a.target_lane)};
+  if(publicCardId(a.target_hero_card_id))target.target_hero_card_id=a.target_hero_card_id;
+  if(Array.isArray(a.target_lanes))target.target_lanes=a.target_lanes.map(publicLane).filter(Boolean).slice(0,3);
+  return target;
+}
 function safeResponse(r) {
   if(!r)return null;
   if(r.response_owner==='PLAYER'){
     const owned=clone(r),attack=publicIncomingAttack(r);
+    const declared=publicCommittedCardTarget(r);
+    if(declared)owned.public_card_target=declared;
     if(attack?.damage_formula)owned.damage_formula=attack.damage_formula;
     if(attack&&Object.hasOwn(attack,'base_damage'))owned.base_damage=attack.base_damage;
     return owned;
@@ -283,6 +301,8 @@ function safeResponse(r) {
       publicIncomingAttack(r.response_continuation);
     if(publicAttack)out.original_attack_context=publicAttack;
   }
+  const declared=publicCommittedCardTarget(r);
+  if(declared)out.public_card_target=declared;
   out.private_masked=true;
   return out;
 }
