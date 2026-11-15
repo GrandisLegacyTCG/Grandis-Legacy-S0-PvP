@@ -55,7 +55,7 @@ assert.match(runtime,/function updateCommittedHandSlotVisibility\(side\)/);
 assert.match(runtime,/for\(let i=0;i<5;i\+\+\)groups\.push/);
 assert.doesNotMatch(runtime,/<h2 id="glCoinTitle">Opening Coin Flip<\/h2>/);
 assert.match(runtime,/aria-label="Coin flip"/);
-assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc40-patch32-item-discard-2026-11-14/);
+assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16/);
 assert.match(server,/const VERSION='S0-RC40-PVP-NET-RC6-STAGE2-PATCH3\.2'/); // RC40 authoritative server identity
 assert.doesNotMatch(runtime,/addAction\(actions,'WHY\?'/,'No PvP-only Tune Up button absent from donor UI');
 // Public EXP card IDs are visible to either seat, but hidden opposing Hand and
@@ -79,8 +79,10 @@ assert.equal(view.appState.presentationEvents[0].card_id,'S0-ARC-002');
 // RC8-compatible invariant: RC6 socket, RC5 local Mana Draft, and headless
 // authority are byte-identical to RC7. Viewer-safe and combat projections are
 // intentionally updated for recipient-only effects and status outcomes.
+// Previous nav-order release changed the lobby host. Pin the verified
+// latest approved baseline; continue byte-guarding runtime/network/headless.
 const fingerprints={
- 'public/pvp/pvp-host.js':'58ed3fcf0da6b8bb7c8b24aa44e310f8a9cdf4530d4d01d25b1b732975a258dc',
+ 'public/pvp/pvp-host.js':'f26a6a5a4c8014dd72ddbc74f000a704dd6a575b2a06871bdcde2fa035ba485d',
  'public/battle/runtime/pvp-network.js':'696e8d81c4e125ce3604555ea0a20ecd52777057209e270cf1f1b32d7c9c8c42',
  'public/battle/runtime/pvp-mana-draft.js':'0dfb813cf7c549f01f83d6c7cb46fd5192fc78d554fbd53de90e8b2b572d92b7',
  'server/headless-rc32.mjs':'e5c3013e099051ba1f9bcc43cb2c6b4a7d5b130d1fd5df91ad71d4ec61446864'

@@ -23,6 +23,19 @@ const safeEvent = (event) => {
     if (Object.hasOwn(event, k)) out[k] = event[k];
   }
   if (event.type === 'CARD_DRAWN' && (event.side || event.actor_side) === 'PLAYER') out.card_id = event.card_id;
+  // Explicit selected Main Deck / Discard pickups are public BY RULE after
+  // their source action commits. Ordinary Draw and Opening Hand stay private.
+  if (event.type === 'CARD_PUBLIC_PICKUP') {
+    if(!['Main Deck','Discard'].includes(event.from_zone) ||
+       !['PLAYER','AI'].includes(event.side) ||
+       !/^[A-Za-z0-9_-]{1,80}$/.test(String(event.card_id||'')) ||
+       !/^S0-[A-Z0-9]+-[A-Z0-9]+$/.test(String(event.card_id||''))) return null;
+    out.card_id=event.card_id;
+    out.from_zone=event.from_zone;
+    delete out.hand_index; // Public card identity does not expose opponent Hand slot. 
+    if(typeof event.source_card_id==='string'&&/^S0-[A-Z0-9]+-[A-Z0-9]+$/.test(event.source_card_id))
+      out.source_card_id=event.source_card_id;
+  }
   if (event.type === 'CARD_NEGATED') {
     for (const k of ['counter_side','counter_card_id','target_side','target_card_id'])
       if (Object.hasOwn(event,k)) out[k]=event[k];
@@ -201,7 +214,12 @@ function safePlayedAction(event,side) {
       name:publicScalar(x?.name||'Hero',100),side:publicSide(x?.side),lane:publicLane(x?.lane),
       status:publicScalar(x?.status||x?.status_name||'',25),
       before:Math.max(0,Math.min(6,Math.trunc(Number(x?.before??x?.previous_duration)||0))),
-      after:Math.max(0,Math.min(6,Math.trunc(Number(x?.after??x?.final_duration)||0)))
+      after:Math.max(0,Math.min(6,Math.trunc(Number(x?.after??x?.final_duration)||0))),
+      base_duration:Math.max(0,Math.min(6,Math.trunc(Number(x?.base_duration??x?.duration_applied??0)||0))),
+      bonus_duration:Math.max(0,Math.min(6,Math.trunc(Number(x?.bonus_duration)||0))),
+      duration_applied:Math.max(0,Math.min(6,Math.trunc(Number(x?.duration_applied??(Number(x?.base_duration||0)+Number(x?.bonus_duration||0)))||0))),
+      bonus_name:publicScalar(x?.bonus_name||'',65),
+      limit:Math.max(0,Math.min(6,Math.trunc(Number(x?.limit)||0)))
     })).filter(x=>x.side&&x.lane&&/^(Poison|Burn|Bleed|Freeze|Stun|Sleep)$/i.test(x.status));
   if(typeof event.response_to_event_id==='string')out.response_to_event_id=publicScalar(event.response_to_event_id,120);
   if(publicCardId(event.response_to_card_id))out.response_to_card_id=event.response_to_card_id;

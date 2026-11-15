@@ -1,5 +1,9 @@
 # Grandis Legacy PvP Season 0 - RC40 Patch 3.2 (PvP-Trial)
 
+## VS AI RC40 presentation parity maintenance (16 November 2026)
+
+The VS AI donor was re-audited against the PvP RC40 Patch 3.2 authority. Newly integrated: committed public selected-card (Main Deck/Discard to Hand) artwork notices, server-safe Status duration detail, faster first-open Card Preview (19 CSS requests combined into one, earlier warmup), and approved review terminology. PvP gameplay, server authority, spectator privacy, existing Item Arrow and Paladin hotfixes are preserved. New build ID: `gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16`. Two release archives are intended: (1) complete standalone PvP repo, (2) complete Website `pvp/` folder. No GitHub push. Full browser/production live test remains unverified. See `docs/RC40_VSAI_PARITY_AUDIT_2026-11-16.md`.
+
 **Release target:** `GrandisLegacyTCG/Grandis-Legacy-PvP-Trial`, branch `main`. This is a **complete repository root package**, not a GitHub patch or nested project folder. Deployments/commits are performed manually by the project owner.
 
 ## Final runtime Hand artwork fix (15 November 2026)

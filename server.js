@@ -26,8 +26,8 @@ const PUBLIC=path.join(BASE,'public');
 const PORT=Number(process.env.PORT||3000);
 const HOST=String(process.env.HOST||'0.0.0.0').trim()||'0.0.0.0';
 const VERSION='S0-RC40-PVP-NET-RC6-STAGE2-PATCH3.2';
-const BUILD_ID='gl-s0-pvp-rc40-patch32-item-discard-2026-11-14';
-const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC40 Patch 3.2 · Item/Discard Source Validator · Network RC6 Stage 2`;
+const BUILD_ID='gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16';
+const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC40 Patch 3.2 · VS AI Presentation Parity · Network RC6 Stage 2`;
 const AUTHORITY_BUNDLE_SHA256=createHash('sha256').update(readFileSync(path.join(PUBLIC,'battle/engine/shared-app/app.bundle.js'))).digest('hex');
 // Parse the immutable RC40 engine BEFORE the server accepts players. This
 // removes script reads + JS compilation from the synchronous START MATCH path.
