@@ -15,7 +15,7 @@ const between=(start,end)=>{
 const routeSource=between('const RESPONSE_ALLIED_SOURCE_CARDS=', 'function renderResponseRouteGuide(');
 const panelSource=between('  const tributePanelAction=', '  hc.ondblclick=');
 const buildId=readFileSync(new URL('../server.js',import.meta.url),'utf8').match(/const BUILD_ID='([^']+)'/)?.[1];
-assert.match(buildId||'',/^gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16$/,'Only the RC40 Patch3.2 authority may be served');
+assert.match(buildId||'',/^gl-s0-pvp-rc40-v34-mobile-parity-2026-11-17$/,'Only the RC40 Patch3.2 authority may be served');
 const runtimeRef=html.match(/src="(shared-app\/app-runtime\.js\?[^"\n]+)"/)?.[1];
 assert.ok(runtimeRef,'Browser must load its active PvP battlefield runtime');
 const runtimeSrc=new URL(runtimeRef.replace(/&amp;/g,'&'),'https://test.invalid/battle/');

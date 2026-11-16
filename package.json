@@ -69,7 +69,8 @@
     "test:rc40-p32": "node tests/rc40-item-discard-hotfix.cjs",
     "check:rc40-p32": "npm run check:rc40-p31 && npm run test:rc40-p32 && npm run test:ws-gate && npm run test:privacy && npm run test:hand-artwork && npm run test:vsai-parity",
     "test:hand-artwork": "node tests/rc40-p32-battlefield-hand-artwork.mjs",
-    "test:vsai-parity": "node tests/rc40-vsai-pvp-parity-20261116.mjs"
+    "test:vsai-parity": "node tests/rc40-vsai-pvp-parity-20261116.mjs",
+    "test:v34-mobile": "node tests/rc40-v34-mobile-donor-parity.cjs"
   },
   "engines": {
     "node": ">=18"

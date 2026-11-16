@@ -238,7 +238,7 @@ check('public pickup is separate from existing Paladin notice, arrow and privacy
  assert(safe.includes('public_card_target'));
 });
 check('client and server use a single build identity',()=>{
- const build='gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16';
+ const build='gl-s0-pvp-rc40-v34-mobile-parity-2026-11-17';
  assert(read('server.js').includes("const BUILD_ID='"+build+"'"));
  assert(read('public/index.html').includes(build));
  assert(read('public/battle/index.html').includes(build));
