@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'../public/battle');
 const ctx={console,URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextDecoder,TextEncoder,performance:{now:()=>0},setTimeout:()=>0,clearTimeout:()=>{},setInterval:()=>0,clearInterval:()=>{},requestAnimationFrame:()=>0,cancelAnimationFrame:()=>{},crypto:require('crypto').webcrypto};
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://example.test/index.html',origin:'http://example.test'};ctx.navigator={userAgent:'RC33 patch QA'};ctx.document={readyState:'loading',addEventListener:()=>{},getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],body:null,documentElement:null};vm.createContext(ctx);
 const expose=`\nwindow.__PATCH_QA={get state(){return appState},setState:s=>{appState=s},initCards,validateDeck,normalizeDeck,stonebloodAvailable,resolveEndPhaseCleanupForSide,expireEndPhaseAttachmentsForSide,resolveStatusTicksForSide,resolveStonebloodChoice,commitLegacyDefeatChoice,resolvePendingCastingsFor,resolveResponseWindow,openPrimalStrikeResponseWindow,resolveAbilityDamageResponseWindow,openAttackResponseWindow,responseOptionsFor,primalStrikeResponseOptions,responseKind,card,cardName,sourceCompatibleForResponse,s0BardDrawOption,resolveS0BardDrawExchange,getActivatedLegacyAbilities,legacyAbilityUsedThisTurn,markLegacyAbilityUsed,legacyOnceKey,legacyDiscardReturnCandidates,legacyCostCandidates,beginActivatedLegacyAbility,commitLegacyCostChoice,continueLegacyAbilityAfterCost,resolveLegacyAbility,resolveActivatedRacialAbility,getActivatedRacialAbilities,legalDefSkillCard,consumeEnrageBonus,hasEnrageBonus,hasStatus,applyDefeatCheck,rankHeroIdFromProgression,attachmentPolicyForCard,heroState,sideHeroes,heroClass,heroRank,clone,parseRank,resolveS0ProvokeAtOpponentEnd,renderHandLimitDiscardChoice,bindDynamicButtons,v253DelegatedReadablePreviewSource,checkGameEnd,runtimeTurnStamp,legacyAbilityData,cardFamily,cardSubtype,chooseAIDefenseResponseOption,beginResponsePayment,finalizeResponsePayment,commitResponsePaymentChoice,refreshResponseWindowOptions,getActivatedRacialAbilities,commitCardSearchChoice};\n})();`;
-for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,file),'utf8');
  if(file.endsWith('app.bundle.js')){
   src=src.replace(/function aiTurnDirectorAvailable\(\)\{[^}]*\}/g,'function aiTurnDirectorAvailable(){return false;}');
@@ -20,7 +20,7 @@ ctx.GL_LOCAL_AI_BRIDGE.setRenderSuppressed(true);
 const E=ctx.GL_GAME_ENGINE, R=ctx.__PATCH_QA, clone=x=>JSON.parse(JSON.stringify(x));R.initCards();
 const report=[],logs=[];
 function t(id,title,fn){try{const details=fn()||{};console.log('PASS',id,title);report.push({id,title,ok:true,details});}catch(err){const error=String(err.stack||err);console.log('FAIL',id,title,'\n '+error.slice(0,1200));report.push({id,title,ok:false,error:error.slice(0,2400)});}}
-function newGame(id='s0_starter_01_red_white',idAi='s0_starter_03_yellow_blue'){
+function newGame(id='s0_starter_03_red_white',idAi='s0_starter_02_yellow_blue'){
  assert(E.selectDeck('PLAYER',id).ok,'select PLAYER '+id);assert(E.selectDeck('AI',idAi).ok,'select AI '+idAi);
  const ready=E.startLocalMatch('PLAYER');assert(ready.ok,'startLocalMatch: '+JSON.stringify(ready));
  const s=R.state;s.turn='PLAYER';s.phase='Battle';s.round=2;s.pending=null;s.responseWindow=null;s.aiControl=null;s.gameOver=false;s.autoEndTurnPending=false;s.racial=2;s.aiRacial=2;s.mana=30;s.aiMana=30;
@@ -39,7 +39,7 @@ t('F08','all five official starter decks accepted',()=>{
  }return result;
 });
 t('F08','main deck and starter illegal structures rejected',()=>{
- const original=clone(ctx.GL_ACTIVE_STARTER_DECKS['s0_starter_01_red_white'].deck);
+ const original=clone(ctx.GL_ACTIVE_STARTER_DECKS['s0_starter_03_red_white'].deck);
  const check=(desc,mutate)=>{const d=clone(original);mutate(d);const r=R.validateDeck(d,'PLAYER');assert(!r.ok,desc+' accepted');return r.errors.slice(0,4);};
  const ids={};const repl=(d,id)=>{d.main_deck[0].card_id=id;d.main_deck[0].quantity=1;const other=d.main_deck.find(x=>x!==d.main_deck[0] && x.quantity>1);if(other) other.quantity+=1;};
  ids.mainHero=check('Hero in Main',d=>repl(d,'S0-WAR-H001'));

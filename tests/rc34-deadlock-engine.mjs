@@ -5,7 +5,7 @@ import {pathToFileURL} from 'node:url';
 import {Season0HeadlessAuthority} from '../server/headless-rc32.mjs';
 
 const root=join(process.cwd(),'public/battle');
-const deck1='s0_starter_01_red_white',deck2='s0_starter_02_blue_red';
+const deck1='s0_starter_03_red_white',deck2='s0_starter_01_blue_red';
 const seatFor=s=>s.turn==='PLAYER'?1:2;
 let checks=0;
 for(const first of [1,2]){

@@ -8,7 +8,7 @@ ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://test/index.html',or
 ctx.document={readyState:'loading',addEventListener(){},getElementById(id){return fake[id]||null;},querySelector(){return null;},querySelectorAll(){return []},createElement(){return {style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
 const inject=`window.__QA={initCards,card,buildInitialMatchState,addStatus,applyResolvedAttackDamage,heroState,poisonVialHostEligible,racialActionFor,getActivatedRacialAbilities,resolveActivatedRacialAbility,manaPoolCardsForSide,manaDeckForSide,syncManaCountForSide,setState:s=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true;}};\n})();`;
-for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,f),'utf8');if(f.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,inject);
  vm.runInContext(src,ctx,{filename:f,timeout:60000});
 }
@@ -42,16 +42,16 @@ test('Poison Vial host lineage based on the new printed class requirement',()=>{
  for(const id of ['S0-ARC-H001','S0-THF-H001','S0-WAR-H001'])assert(q.poisonVialHostEligible(h(id)),id);
  for(const id of ['S0-CLE-H001','S0-MAG-H001'])assert(!q.poisonVialHostEligible(h(id)),id);
 });
-test('Ancestral Focus gains 2 printed Mana Shards, from usable Racial Trait on PvP seat',()=>{
+test('Ancestral Focus gains 3 printed Mana Shards, from usable Racial Trait on PvP seat',()=>{
  const s=fresh();s.phase='Deploy';s.racial=1;s.playerHeroes.CENTER=q.heroState('S0-MAG-H001','PLAYER','CENTER');
- const descriptor=q.racialActionFor(s.playerHeroes.CENTER);assert(descriptor,'New Mana Shards printed wording must parse');assert.equal(descriptor.effect.gain_mana,2);
+ const descriptor=q.racialActionFor(s.playerHeroes.CENTER);assert(descriptor,'New Mana Shards printed wording must parse');assert.equal(descriptor.effect.gain_mana,3);
  const pool=q.manaPoolCardsForSide(s,'PLAYER'),deck=q.manaDeckForSide(s,'PLAYER');
  // Guarantee 1 available in deck by moving previously-drawn opening Shards back.
- if(deck.length<2&&pool.length){deck.unshift(...pool.splice(0));q.syncManaCountForSide(s,'PLAYER');}
+ if(deck.length<3&&pool.length){deck.unshift(...pool.splice(0));q.syncManaCountForSide(s,'PLAYER');}
  const before=pool.length,options=q.getActivatedRacialAbilities(s,'PLAYER','CENTER');
  assert(options.some(x=>String(x.abilityId||x.ability_id||'').toLowerCase()==='ancestral_focus'),JSON.stringify(options));
  assert(q.resolveActivatedRacialAbility(s,'PLAYER','CENTER','ancestral_focus',null),'Racial ability must activate');
- assert.equal(pool.length,Math.min(12,before+2));assert.equal(s.racial,0);
+ assert.equal(pool.length,Math.min(12,before+3));assert.equal(s.racial,0);
 });
 test('Magic Compass Deck search excludes Ultimate Skill at the actual commit location',()=>{
  const bundle=fs.readFileSync(path.join(root,'engine/shared-app/app.bundle.js'),'utf8');

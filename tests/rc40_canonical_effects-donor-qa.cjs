@@ -17,7 +17,7 @@ legacyDiscardReturnCandidates,legacyDeckSearchCandidates,aiChooseLegacyCostIndex
 attachmentPolicyForCard,applyImmediateEventItemEffects,isDefensiveFormationCard,isResponseOnly,sourceShouldExhaust,defensiveFormationBonus,
 applyResolvedAttackDamage,expireEndPhaseAttachmentsForSide,coordinationAttackBonus,coordinationAttackBonusAmount,
 activeAlliedBaseFamiliesDifferent,calculateCardCost:cardCost,damageTypeForActionSource};\n})();`;
-for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,file),'utf8');
  if(file.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,injection);
  vm.runInContext(src,ctx,{filename:file,timeout:60000});

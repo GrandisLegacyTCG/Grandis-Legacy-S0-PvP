@@ -32,7 +32,7 @@ try:
    if check(v):return v
   raise AssertionError(f'Timeout: {label}')
  def start(a,b):
-  for ws,deck in [(a,'s0_starter_01_red_white'),(b,'s0_starter_02_blue_red')]:
+  for ws,deck in [(a,'s0_starter_03_red_white'),(b,'s0_starter_01_blue_red')]:
    send(ws,'set-deck',deckKey=deck);until(ws,lambda x:x['type']=='snapshot' and x['local']['deckKey']==deck,'deck')
    send(ws,'ready',ready=True);until(ws,lambda x:x['type']=='snapshot' and x['local']['ready'],'ready')
   # Stale snapshots from prior rounds may remain unread on either WebSocket.

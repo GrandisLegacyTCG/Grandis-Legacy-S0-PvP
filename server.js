@@ -25,9 +25,9 @@ const BASE=path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC=path.join(BASE,'public');
 const PORT=Number(process.env.PORT||3000);
 const HOST=String(process.env.HOST||'0.0.0.0').trim()||'0.0.0.0';
-const VERSION='S0-RC40-PVP-NET-RC6-STAGE2-PATCH3.2';
-const BUILD_ID='gl-s0-pvp-rc40-v34-mobile-parity-2026-11-17';
-const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC40 Patch 3.2 · VS AI RC40 / Rulebook v3.4 / Mobile Parity · Network RC6 Stage 2`;
+const VERSION='S0-RC41-PVP-NET-RC6-STAGE2-INTEGRATION-1';
+const BUILD_ID='gl-s0-pvp-rc41-r39-v34-part5-2026-11-19';
+const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC41 · R3.9 / Rulebook v3.4 · Network RC6 Stage 2`;
 const AUTHORITY_BUNDLE_SHA256=createHash('sha256').update(readFileSync(path.join(PUBLIC,'battle/engine/shared-app/app.bundle.js'))).digest('hex');
 // Parse the immutable RC40 engine BEFORE the server accepts players. This
 // removes script reads + JS compilation from the synchronous START MATCH path.
@@ -440,7 +440,7 @@ const server=http.createServer(async(req,res)=>{
     }
     if(url.pathname==='/health'||url.pathname==='/pvp/health'){
       res.writeHead(200,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});
-      res.end(JSON.stringify({ok:true,version:VERSION,buildId:BUILD_ID,architecture:'s1-v38017-lite-lobby__s0-rc40-authority',transport:WS_BACKEND,authoritySources:{'engine/shared-app/app.bundle.js':AUTHORITY_BUNDLE_SHA256}}));return;
+      res.end(JSON.stringify({ok:true,version:VERSION,buildId:BUILD_ID,architecture:'s0-rc41-pvp-authority-network-rc6',transport:WS_BACKEND,authoritySources:{'engine/shared-app/app.bundle.js':AUTHORITY_BUNDLE_SHA256}}));return;
     }
     let rel=decodeURIComponent(url.pathname);if(rel==='/pvp'||rel==='/pvp/')rel='/index.html';else if(rel.startsWith('/pvp/'))rel=rel.slice(4);if(rel==='/'||rel==='')rel='/index.html';if(rel==='/battle'||rel==='/battle/')rel='/battle/index.html';
     rel=path.posix.normalize(rel).replace(/^\.\.(\/|$)/g,'');const file=path.resolve(PUBLIC,'.'+rel);

@@ -106,13 +106,13 @@ const ctx={console,Date,Math,URL,TextEncoder,TextDecoder,Uint8Array,crypto:webcr
  location:{origin:'https://unit.invalid',href:'https://unit.invalid'},navigator:{userAgent:'RC5 test'},performance:{now:()=>0},
  setTimeout(){return 0},clearTimeout(){},setInterval(){return 0},clearInterval(){},requestAnimationFrame(){return 0},cancelAnimationFrame(){},GL_APP_MODE:'PVP',GL_PVP_SHARED_BOARD_ACTIVE:true};
 ctx.window=ctx;ctx.globalThis=ctx;vm.createContext(ctx);
-for(const rel of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const rel of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let code=readFileSync(join(root,rel),'utf8');
  if(rel.endsWith('app.bundle.js')){
   const inject=`\nwindow.__RC5_EXTRA_TEST__=function(){
    initCards();SUPPRESS_RENDER=true;matchStarted=true;
-   GL_GAME_ENGINE.selectDeck('PLAYER','s0_starter_01_red_white');
-   GL_GAME_ENGINE.selectDeck('AI','s0_starter_03_yellow_blue');
+   GL_GAME_ENGINE.selectDeck('PLAYER','s0_starter_03_red_white');
+   GL_GAME_ENGINE.selectDeck('AI','s0_starter_02_yellow_blue');
    GL_GAME_ENGINE.startLocalMatch('PLAYER');
    var s=appState;s.preGame=null;s.pvpHumanVsHuman=true;s.turn='AI';s.phase='Battle';s.round=2;s.mana=30;s.aiMana=30;
    s.aiHeroes.CENTER=heroState('S0-WAR-H004','AI','CENTER');

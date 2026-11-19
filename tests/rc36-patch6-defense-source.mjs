@@ -15,11 +15,11 @@ const between=(start,end)=>{
 const routeSource=between('const RESPONSE_ALLIED_SOURCE_CARDS=', 'function renderResponseRouteGuide(');
 const panelSource=between('  const tributePanelAction=', '  hc.ondblclick=');
 const buildId=readFileSync(new URL('../server.js',import.meta.url),'utf8').match(/const BUILD_ID='([^']+)'/)?.[1];
-assert.match(buildId||'',/^gl-s0-pvp-rc40-v34-mobile-parity-2026-11-17$/,'Only the RC40 Patch3.2 authority may be served');
+assert.match(buildId||'',/^gl-s0-pvp-rc41-r39-v34-part5-2026-11-19$/,'Only the approved RC41 PvP-Trial authority may be served');
 const runtimeRef=html.match(/src="(shared-app\/app-runtime\.js\?[^"\n]+)"/)?.[1];
 assert.ok(runtimeRef,'Browser must load its active PvP battlefield runtime');
 const runtimeSrc=new URL(runtimeRef.replace(/&amp;/g,'&'),'https://test.invalid/battle/');
-assert.equal(runtimeSrc.searchParams.get('v'),buildId,'Browser must load the EXACT active RC40 server Build ID');
+assert.equal(runtimeSrc.searchParams.get('v'),buildId,'Browser must load the EXACT active RC41 server Build ID');
 assert.equal(runtimeSrc.searchParams.get('hotfix'),'handart-20261115','Hand runtime hotfix must bypass old immutable JS cache');
 assert.doesNotMatch(runtime,/\breturnToLobbyDuringCoin\b/,'No unrelated coin UI control added');
 

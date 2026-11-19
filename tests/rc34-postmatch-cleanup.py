@@ -24,7 +24,7 @@ try:
   raise AssertionError('timeout '+label)
  a,b=conn('rc3a'),conn('rc3b')
  until(a,lambda m:m['type']=='snapshot','join1');until(b,lambda m:m['type']=='snapshot','join2')
- for ws,key in [(a,'s0_starter_01_red_white'),(b,'s0_starter_02_blue_red')]:
+ for ws,key in [(a,'s0_starter_03_red_white'),(b,'s0_starter_01_blue_red')]:
   send(ws,'set-deck',deckKey=key);until(ws,lambda x:x['type']=='snapshot' and x['local'].get('deckKey')==key,'deck')
   send(ws,'ready',ready=True);until(ws,lambda x:x['type']=='snapshot' and x['local']['ready'],'ready')
  send(a,'start-match');until(a,lambda x:x['type']=='snapshot' and x['match']['status']=='coin-flip','coin flip')
@@ -40,10 +40,10 @@ try:
  # Neither player does anything; the server must expire and broadcast setup.
  restored=until(a,lambda x:x['type']=='snapshot' and x['match']['status']=='setup','cleanup',timeout=6)
  assert restored['match']['board'] is None and not restored['local']['ready']
- assert restored['local']['deckKey']=='s0_starter_01_red_white','Deck must persist after cleanup'
+ assert restored['local']['deckKey']=='s0_starter_03_red_white','Deck must persist after cleanup'
  assert restored['local']['formation'],'Formation must persist after cleanup'
  restored2=until(b,lambda x:x['type']=='snapshot' and x['match']['status']=='setup','other cleanup',timeout=5)
- assert restored2['local']['deckKey']=='s0_starter_02_blue_red'
+ assert restored2['local']['deckKey']=='s0_starter_01_blue_red'
  assert not restored2['local']['ready']
  print('PASS RC3 60-second server-owned cleanup (test accelerated 1.2 sec): both players return, deck/formation preserved, ready cleared')
 finally:

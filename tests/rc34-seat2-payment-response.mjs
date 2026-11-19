@@ -10,7 +10,7 @@ const root=join(process.cwd(),'public/battle');
 let found=false,tries=0;
 for(;tries<36&&!found;tries++){
   const a=new Season0HeadlessAuthority(root);
-  a.start({player1Deck:decks.s0_starter_01_red_white.deck,player2Deck:decks.s0_starter_02_blue_red.deck});
+  a.start({player1Deck:decks.s0_starter_03_red_white.deck,player2Deck:decks.s0_starter_01_blue_red.deck});
   a.completeOpening(1,'HEADS');
   let reached=false;
   for(let n=0;n<12;n++){

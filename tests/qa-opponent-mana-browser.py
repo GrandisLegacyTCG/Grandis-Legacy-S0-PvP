@@ -33,7 +33,7 @@ with sync_playwright() as p:
   }''',source)
   page.wait_for_timeout(350)
   data=page.evaluate('''()=>{
-   const a=document.querySelector('.opponent-mana-pool'),label=a.querySelector('.gl-pool-badge'),field=document.querySelector('.battlefield');
+   const a=document.querySelector('.opponent-mana-pool'),label=a.querySelector('.count'),field=document.querySelector('.battlefield');
    const rect=e=>{let x=e.getBoundingClientRect();return {left:x.left,right:x.right,top:x.top,bottom:x.bottom,width:x.width,height:x.height}};
    return {pool:rect(a),label:rect(label),field:rect(field),parent:a.parentElement.className,
      childCount:a.querySelectorAll('.mana-card').length, poolDisplay:getComputedStyle(a).display,

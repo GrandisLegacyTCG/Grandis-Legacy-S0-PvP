@@ -12,8 +12,8 @@ try:
       meta=json.load(urllib.request.urlopen(BASE+'/health',timeout=.6));break
     except Exception: time.sleep(.08)
   else: raise AssertionError('Server did not start')
-  assert meta['architecture']=='s1-v38017-lite-lobby__s0-rc40-authority', f'Unexpected authority: {meta}'
-  assert meta.get('ok') is True and meta.get('version')=='S0-RC40-PVP-NET-RC6-STAGE2-PATCH3.2', meta
+  assert meta['architecture']=='s0-rc41-pvp-authority-network-rc6', f'Unexpected authority: {meta}'
+  assert meta.get('ok') is True and meta.get('version')=='S0-RC41-PVP-NET-RC6-STAGE2-INTEGRATION-1', meta
   assert meta['authoritySources']['engine/shared-app/app.bundle.js']==hashlib.sha256((ROOT/'public/battle/engine/shared-app/app.bundle.js').read_bytes()).hexdigest(), 'Server authority bundle differs from repository source'
   build=meta['buildId']
   lobby=(ROOT/'public/pvp/pvp-host.js').read_text()
@@ -41,7 +41,7 @@ try:
     raise AssertionError(f'Timeout at {where}')
   a=conn('test-p1');b=conn('test-p2');
   until(a,lambda d:d['type']=='snapshot','connect p1');until(b,lambda d:d['type']=='snapshot','connect p2')
-  for ws,key,label in [(a,'s0_starter_01_red_white','p1-deck'),(b,'s0_starter_02_blue_red','p2-deck')]:
+  for ws,key,label in [(a,'s0_starter_03_red_white','p1-deck'),(b,'s0_starter_01_blue_red','p2-deck')]:
     send(ws,'set-deck',deckKey=key)
     until(ws,lambda d:d['type']=='snapshot' and d.get('local',{}).get('deckKey')==key,label)
   for ws,label in [(a,'p1-ready'),(b,'p2-ready')]:

@@ -1,0 +1,20 @@
+{
+  "donor_archive": "Grandis_Legacy_VS_AI_Season0_RC41_2026-11-18.zip",
+  "donor_clean_files": {
+    "engine/js/runtime-authority.js": "74700775e8e91e5baa056a1a12a974658a12efa5a39e5113e31aaa892ad31344",
+    "engine/js/static-data.js": "0bb58a4a1c8190eebb6669537dcc56c4a5a425b364e542f912da4486b7b0e73a",
+    "engine/shared-app/active-starters.js": "cc58f5155bfd04ebf5dfee97b61ad7ff16f91bcfbff29fed463f33865225b711"
+  },
+  "patched_bundle_sha256": "534e3840dd291e0dbe1dc792a57ded284cbf9092ae7a973ef532f2027d38d848",
+  "base_pvp_repository": "Grandis-Legacy-PvP-Trial RC40 Patch 3.2",
+  "donor_bundle_original_sha256": "b6e1419cc53d504a4ad1d06e956ce7ea6c27ac31b091cbf789b15f4e0dc8ea8e",
+  "approved_bundle_changes": [
+    "PvP recipient-only Mana-loss committed notifications",
+    "Provoke auto-End single resume after pending Mana choice",
+    "Paladin and Crusader PvP Mana-loss notice to both seats",
+    "seat 2 physical Mana decks/pools/classes/count correctly mirrored",
+    "manual Reposition and per-turn side stamp map keys mirrored",
+    "prevent duplicate mirror of Rank Up events and last opponent action",
+    "PvP exact physical Mana payment and response adapters"
+  ]
+}

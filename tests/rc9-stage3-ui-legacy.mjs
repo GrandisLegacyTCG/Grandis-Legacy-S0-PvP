@@ -124,7 +124,7 @@ assert.ok(inject.includes('injectFixtureForQA(snapshot)'));
 const {Season0HeadlessAuthority}=await import('data:text/javascript;charset=utf-8,'+encodeURIComponent(inject));
 for(const seat of [1,2]){
  const a=new Season0HeadlessAuthority(join(process.cwd(),'public/battle'));
- a.start({player1DeckKey:'s0_starter_01_red_white',player2DeckKey:'s0_starter_02_blue_red'});
+ a.start({player1DeckKey:'s0_starter_03_red_white',player2DeckKey:'s0_starter_01_blue_red'});
  a.completeOpening(1,'HEADS');
  const seed=a._canonicalForServerOnly(),s=seed.appState,side=seat===1?'PLAYER':'AI';
  const h=s[seat===1?'playerHeroes':'aiHeroes'].LEFT;
@@ -172,7 +172,7 @@ eCtx.document={readyState:'loading',addEventListener(){},getElementById(){return
 vm.createContext(eCtx);
 const engineInjection='window.__S3={initCards,buildInitialMatchState,heroIdFrom,heroState,positionLockedOneVsOne,activeNonLegacyLanes,manualRepositionAvailable,manualRepositionPairsForSide,repositionPairsForSide,sourceSwapOptions,soulBlastTargetSwapOptions,shadowSwitchCanReposition,swapBoardStateLanes,autoCenterOneVsOne,setState:(s)=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true}};\n})();';
 for(const file of ['public/battle/engine/js/static-data.js','public/battle/engine/js/runtime-authority.js',
- 'public/battle/engine/shared-app/active-starters.js','public/battle/engine/shared-app/app.bundle.js']){
+ 'public/battle/engine/shared-app/active-starters.js','public/battle/runtime/season0-generated/rc41-approved-print-overrides.js','public/battle/engine/shared-app/app.bundle.js']){
  let src=read(file);if(file.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,engineInjection);
  vm.runInContext(src,eCtx,{filename:file,timeout:60000});
 }

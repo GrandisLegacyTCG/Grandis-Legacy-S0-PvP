@@ -1,3 +1,9 @@
+# CURRENT DEVELOPMENT: Season 0 PvP RC41 Part 5
+
+See `README_RC41_INTEGRATION.md` and `docs/RC41_PART5_QA_REPORT.md`. The older RC40 material below is retained for history. The target repository is **Grandis-Legacy-PvP-Trial**, never Season 1.
+
+---
+
 # Grandis Legacy PvP Season 0 - RC40 Patch 3.2 (PvP-Trial)
 
 ## VS AI RC40 presentation parity maintenance (16 November 2026)

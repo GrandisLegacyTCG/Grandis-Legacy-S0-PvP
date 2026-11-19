@@ -11,7 +11,7 @@ import {viewerSafeBoard} from '../server/viewer-safe.mjs';
 // regression tested the server alone, and missed a browser-only deadlock.
 const root=join(process.cwd(),'public/battle');
 const code=readFileSync('public/battle/runtime/pvp-network.js','utf8');
-const deckRW=starters.s0_starter_01_red_white.deck,deckBR=starters.s0_starter_02_blue_red.deck;
+const deckRW=starters.s0_starter_03_red_white.deck,deckBR=starters.s0_starter_01_blue_red.deck;
 const safe=(authority,seat)=>viewerSafeBoard(authority._viewForMaskingOnly(seat),{seat,revision:authority.revision,secret:Buffer.alloc(32,3)});
 function findAttack(attackerSeat){
  for(let trial=0;trial<60;trial++){

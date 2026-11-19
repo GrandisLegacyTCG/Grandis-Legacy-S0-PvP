@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'../public/battle');
 const ctx={console,URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextEncoder,TextDecoder,performance:{now:()=>0},setTimeout:()=>0,clearTimeout(){},setInterval:()=>0,clearInterval(){},requestAnimationFrame:()=>0,cancelAnimationFrame(){},crypto:require('crypto').webcrypto};
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://qa.invalid/',origin:'http://qa.invalid'};ctx.navigator={userAgent:'Atomic mana QA'};
 ctx.document={readyState:'loading',addEventListener(){},getElementById(){return null},querySelector(){return null},querySelectorAll(){return []},body:null,documentElement:null};vm.createContext(ctx);
-for(const rel of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const rel of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let js=fs.readFileSync(path.join(root,rel),'utf8');
  if(rel.endsWith('app.bundle.js')){
   const expose=`\nwindow.__SETUP_PAYMENT_TEST=function(){

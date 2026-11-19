@@ -1,0 +1,130 @@
+[
+  {
+    "viewport": "1440x900",
+    "mobile": false,
+    "pool": {
+      "left": 952.4390258789062,
+      "right": 1212.2999267578125,
+      "top": 123.1171875,
+      "bottom": 223.22811889648438,
+      "width": 259.86090087890625,
+      "height": 100.11093139648438
+    },
+    "label": {
+      "left": 949.739013671875,
+      "right": 967.739013671875,
+      "top": 207.92811584472656,
+      "bottom": 225.92811584472656,
+      "width": 18,
+      "height": 18
+    },
+    "field": {
+      "left": 0,
+      "right": 1224,
+      "top": 0,
+      "bottom": 900,
+      "width": 1224,
+      "height": 900
+    },
+    "parent": "field-row opponent-field",
+    "childCount": 4,
+    "poolDisplay": "flex",
+    "scale": "0.9"
+  },
+  {
+    "viewport": "1280x600",
+    "mobile": false,
+    "pool": {
+      "left": 846.6124877929688,
+      "right": 1077.5999755859375,
+      "top": 9.4375,
+      "bottom": 98.42500305175781,
+      "width": 230.98748779296875,
+      "height": 88.98750305175781
+    },
+    "label": {
+      "left": 844.2125244140625,
+      "right": 860.2125244140625,
+      "top": 84.82500457763672,
+      "bottom": 100.82500457763672,
+      "width": 16,
+      "height": 16
+    },
+    "field": {
+      "left": 0,
+      "right": 1088,
+      "top": 0,
+      "bottom": 600,
+      "width": 1088,
+      "height": 600
+    },
+    "parent": "field-row opponent-field",
+    "childCount": 4,
+    "poolDisplay": "flex",
+    "scale": "0.8"
+  },
+  {
+    "viewport": "844x390",
+    "mobile": true,
+    "pool": {
+      "left": 556.8375244140625,
+      "right": 707.5823364257812,
+      "top": 5.37587833404541,
+      "bottom": 63.45005130767822,
+      "width": 150.74481201171875,
+      "height": 58.07417297363281
+    },
+    "label": {
+      "left": 555.271240234375,
+      "right": 565.7130126953125,
+      "top": 54.574546813964844,
+      "bottom": 65.01631164550781,
+      "width": 10.4417724609375,
+      "height": 10.441764831542969
+    },
+    "field": {
+      "left": 4.329317092895508,
+      "right": 714.369478225708,
+      "top": -2.842170943040401e-14,
+      "bottom": 390,
+      "width": 710.0401611328125,
+      "height": 390
+    },
+    "parent": "field-row opponent-field",
+    "childCount": 4,
+    "poolDisplay": "flex",
+    "scale": "0.5220883534136547"
+  },
+  {
+    "viewport": "390x844",
+    "mobile": true,
+    "pool": {
+      "left": 326.5499572753906,
+      "right": 384.6241149902344,
+      "top": 556.8374633789062,
+      "bottom": 707.5823364257812,
+      "width": 58.07415771484375,
+      "height": 150.744873046875
+    },
+    "label": {
+      "left": 324.9836730957031,
+      "right": 335.4254455566406,
+      "top": 555.2711791992188,
+      "bottom": 565.7129516601562,
+      "width": 10.4417724609375,
+      "height": 10.4417724609375
+    },
+    "field": {
+      "left": 3.3974647521972656e-06,
+      "right": 390.00000339746475,
+      "top": 4.329317092895508,
+      "bottom": 714.3694171905518,
+      "width": 390,
+      "height": 710.0401000976562
+    },
+    "parent": "field-row opponent-field",
+    "childCount": 4,
+    "poolDisplay": "flex",
+    "scale": "0.5220883534136547"
+  }
+]

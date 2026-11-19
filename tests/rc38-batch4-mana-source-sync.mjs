@@ -56,7 +56,9 @@ console.log('PASS Batch4: all five starter decks derive 12 Mana from selected He
 // must succeed. Main/Legacy remain authoritative and still validate normally.
 function builderExport(deck){
  const legacy_packages=deck.legacy_deck_package_slots.map(p=>({
-   hero_rank_ids:deck.legacy_deck_expanded.filter(x=>x.package_id===p.package_id&&x.card_type==='Hero').map(x=>x.card_id),
+   // Current R3.9 packages are keyed by progression; legacy slots intentionally
+   // no longer carry the old v1.64 package_id metadata.
+   hero_rank_ids:Array.from({length:3},(_,i)=>p.progression.replace(/H(\d{3})$/,(_,n)=>'H'+String(Number(n)+i).padStart(3,'0'))),
    legacy_card_id:p.legacy
  }));
  return {season:'S0',schema:'GL-SEASON0-DECK-DRAFT-1',
@@ -92,7 +94,7 @@ for(let i=0;i<3;i++){
  assert.ok(donor,'Missing approved hybrid '+prog);
  const p=donor.legacy_deck_package_slots.find(x=>x.progression===prog);
  custom.legacy_deck_package_slots.push({...structuredClone(p),slot:lanes[i]});
- custom.legacy_deck_expanded.push(...structuredClone(donor.legacy_deck_expanded.filter(e=>e.package_id===p.package_id)));
+ custom.legacy_deck_expanded.push(...structuredClone(donor.legacy_deck_expanded.filter(e=>e.card_id===p.legacy||new Set(Array.from({length:3},(_,i)=>p.progression.replace(/H(\d{3})$/,(_,n)=>'H'+String(Number(n)+i).padStart(3,'0')))).has(e.card_id))));
  custom.default_formation[lanes[i]]=prog;
 }
 custom.mana_deck=[{kind:'MANA',quantity:12}];custom.shard_deck='not even an array';

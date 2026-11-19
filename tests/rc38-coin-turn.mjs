@@ -7,7 +7,7 @@ const root=join(process.cwd(),'public/battle');
 for(const winnerSeat of [1,2])for(const order of ['FIRST','SECOND']){
  const firstSeat=order==='FIRST'?winnerSeat:(winnerSeat===1?2:1);
  const a=new Season0HeadlessAuthority(root);
- a.start({player1DeckKey:'s0_starter_01_red_white',player2DeckKey:'s0_starter_02_blue_red'});
+ a.start({player1DeckKey:'s0_starter_03_red_white',player2DeckKey:'s0_starter_01_blue_red'});
  a.completeOpening(firstSeat,'HEADS',winnerSeat,order);
  const s=a._canonicalForServerOnly().appState;
  assert.equal(s.turn,firstSeat===1?'PLAYER':'AI');

@@ -15,7 +15,7 @@ const {Season0HeadlessAuthority}=await import('data:text/javascript;charset=utf-
 let cases=0;
 for(const actorSeat of [1,2]){
  const a=new Season0HeadlessAuthority(join(process.cwd(),'public/battle'));
- a.start({player1DeckKey:'s0_starter_01_red_white',player2DeckKey:'s0_starter_02_blue_red'});
+ a.start({player1DeckKey:'s0_starter_03_red_white',player2DeckKey:'s0_starter_01_blue_red'});
  a.completeOpening(1,'HEADS');
  const seed=a._canonicalForServerOnly(),s=seed.appState;
  const actor=actorSeat===1?'PLAYER':'AI',other=actor==='PLAYER'?'AI':'PLAYER';

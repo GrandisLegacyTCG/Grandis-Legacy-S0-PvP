@@ -10,7 +10,7 @@ const dummy={style:{},classList:{add(){},remove(){},toggle(){}},addEventListener
 const document={readyState:'loading',body:null,addEventListener(){},getElementById(){return dummy},querySelector(){return null},querySelectorAll(){return []}};
 const ctx={console,Date,Math,URL,TextEncoder,TextDecoder,Uint8Array,crypto:webcrypto,document,location:{origin:'https://unit.invalid',href:'https://unit.invalid'},navigator:{userAgent:'Batch3 real engine'},performance:{now:()=>0},setTimeout(){return 0},clearTimeout(){},setInterval(){return 0},clearInterval(){},requestAnimationFrame(){return 0},cancelAnimationFrame(){},GL_APP_MODE:'PVP',GL_PVP_SHARED_BOARD_ACTIVE:true};
 ctx.window=ctx;ctx.globalThis=ctx;vm.createContext(ctx);
-for(const path of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const path of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let code=readFileSync(join(root,path),'utf8');
  if(path.endsWith('app.bundle.js')){
    const inject=`\nwindow.__B3_TEST__={

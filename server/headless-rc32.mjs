@@ -286,6 +286,7 @@ const RUNTIME_SOURCES = Object.freeze([
   'runtime/overrides/grand-finale-designer-nerf.js',
   'engine/js/runtime-authority.js',
   'engine/shared-app/active-starters.js',
+  'runtime/season0-generated/rc41-approved-print-overrides.js',
   'engine/shared-app/app.bundle.js'
 ]);
 
@@ -317,9 +318,9 @@ export function primeSeason0Runtime(clientRoot) {
 export function runtimeBootstrapStatsForQA(){return Object.freeze({...bootstrapStats});}
 
 const STARTERS = new Set([
-  's0_starter_01_red_white',
-  's0_starter_02_blue_red',
-  's0_starter_03_yellow_blue',
+  's0_starter_01_blue_red',
+  's0_starter_02_yellow_blue',
+  's0_starter_03_red_white',
   's0_starter_04_green_yellow',
   's0_starter_05_white_green'
 ]);
@@ -414,7 +415,7 @@ export class Season0HeadlessAuthority {
       throw new Error('RC32 canonical PvP bridge contract is incomplete.');
     }
     const meta = ctx.GL_ACTIVE_STARTER_SET_META;
-    if (meta?.schema_version !== 'GL-ACTIVE-STARTERS-S0-R3.6-RULEBOOK-V3.2' ||
+    if (meta?.schema_version !== 'GL-ACTIVE-STARTERS-S0-R3.9-RULEBOOK-V3.4' ||
         meta.active_starter_count !== 5 || !Array.isArray(meta.ids) ||
         !meta.ids.every(id => STARTERS.has(id))) {
       throw new Error('Season 0 starter authority mismatch.');

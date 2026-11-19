@@ -8,8 +8,8 @@ const root=join(process.cwd(),'public/battle');
 function responseAuthority(attackerSeat){
   for(let trial=0;trial<48;trial++){
     const a=new Season0HeadlessAuthority(root);
-    const p1=attackerSeat===1?decks.s0_starter_02_blue_red.deck:decks.s0_starter_01_red_white.deck;
-    const p2=attackerSeat===2?decks.s0_starter_02_blue_red.deck:decks.s0_starter_01_red_white.deck;
+    const p1=attackerSeat===1?decks.s0_starter_01_blue_red.deck:decks.s0_starter_03_red_white.deck;
+    const p2=attackerSeat===2?decks.s0_starter_01_blue_red.deck:decks.s0_starter_03_red_white.deck;
     a.start({player1Deck:p1,player2Deck:p2});a.completeOpening(attackerSeat===1?2:1,'HEADS');
     try{
       for(let n=0;n<20;n++){

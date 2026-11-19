@@ -11,7 +11,7 @@ const ctx={console,URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextDecod
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://example.test/',origin:'http://example.test'};
 ctx.navigator={userAgent:'RC40 v3.4 donor test'};ctx.document={readyState:'loading',addEventListener:()=>{},getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],body:null,documentElement:null};
 vm.createContext(ctx);
-for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,f),'utf8');
  if(f.endsWith('app.bundle.js')){
   src=src.replace('function showResult(){','function showResult(){if(SUPPRESS_RENDER)return;');
@@ -32,7 +32,7 @@ check('Rulebook v3.4: all five official starter decks remain legal',()=>{
 });
 const nonultimate=all.filter(c=>c.family==='Skill'&&!c.is_ultimate).map(c=>c.card_id).slice(0,17);
 assert.equal(nonultimate.length,17);
-const base=clone(ctx.GL_ACTIVE_STARTER_DECKS.s0_starter_01_red_white.deck);
+const base=clone(ctx.GL_ACTIVE_STARTER_DECKS.s0_starter_03_red_white.deck);
 base.main_deck=nonultimate.map((card_id,i)=>({card_id,quantity:i===16?2:3}));
 // Use 16x3 + 1x2 = 50 ordinary legal Skills.
 const baseline=R.validateDeck(clone(base),'PLAYER');assert(baseline.ok,baseline.errors.join('\n'));

@@ -46,7 +46,7 @@ const ctx={console, URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextDeco
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://test.local/pvp/battle/index.html',origin:'http://test.local'};
 ctx.navigator={userAgent:'P3.1 canonical renderer test'};ctx.document={readyState:'loading',addEventListener(){},getElementById(id){return fakeDom[id]||null;},querySelector(){return null},querySelectorAll(){return []},createElement(){return {style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
-for(const path of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','engine/shared-app/app.bundle.js']){
+for(const path of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
  let source=f('public/battle/'+path);
  if(path.endsWith('app.bundle.js'))source=source.replace(/\n\}\)\(\);\s*$/,`\nwindow.__P31TEST={initCards,getState:()=>appState,setState:(s)=>{appState=s;}};\n})();`);
  vm.runInContext(source,ctx,{filename:path,timeout:60000});

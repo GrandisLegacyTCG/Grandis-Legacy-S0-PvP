@@ -1,0 +1,17 @@
+{
+  "target_repo": "Grandis-Legacy-PvP-Trial",
+  "season": "Season 0",
+  "donor": "VS AI RC41 2026-11-18",
+  "website": "RC41 DB167",
+  "rulebook": "v3.4",
+  "backend_files": 787,
+  "website_root_files": 241,
+  "release_gate_pass": 50,
+  "engine_regression_pass": 20,
+  "viewport_smoke_pass": 4,
+  "shared_website_card_art_sha_matches": 248,
+  "backend_art_files": 248,
+  "website_art_files": 0,
+  "backend_engine_sha256": "534e3840dd291e0dbe1dc792a57ded284cbf9092ae7a973ef532f2027d38d848",
+  "deployment_validation": "After manual upload; native ws Docker and live two-browser gameplay not run in local tool"
+}
