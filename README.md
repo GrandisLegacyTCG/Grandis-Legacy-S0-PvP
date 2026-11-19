@@ -1,6 +1,6 @@
 # CURRENT DEVELOPMENT: Season 0 PvP RC41 Part 5
 
-See `README_RC41_INTEGRATION.md` and `docs/RC41_PART5_QA_REPORT.md`. The older RC40 material below is retained for history. The target repository is **Grandis-Legacy-PvP-Trial**, never Season 1.
+See `README_RC41_INTEGRATION.md` and `docs/RC41_PART5_QA_REPORT.md`. The older RC40 material below is retained for history. The CURRENT Season 0 repository is **Grandis-Legacy-S0-PvP** (`main`), never Season 1. Archived notes below retain historical names.
 
 ---
 
@@ -10,7 +10,7 @@ See `README_RC41_INTEGRATION.md` and `docs/RC41_PART5_QA_REPORT.md`. The older R
 
 The VS AI donor was re-audited against the PvP RC40 Patch 3.2 authority. Newly integrated: committed public selected-card (Main Deck/Discard to Hand) artwork notices, server-safe Status duration detail, faster first-open Card Preview (19 CSS requests combined into one, earlier warmup), and approved review terminology. PvP gameplay, server authority, spectator privacy, existing Item Arrow and Paladin hotfixes are preserved. New build ID: `gl-s0-pvp-rc40-patch32-vsai-parity-2026-11-16`. Two release archives are intended: (1) complete standalone PvP repo, (2) complete Website `pvp/` folder. No GitHub push. Full browser/production live test remains unverified. See `docs/RC40_VSAI_PARITY_AUDIT_2026-11-16.md`.
 
-**Release target:** `GrandisLegacyTCG/Grandis-Legacy-PvP-Trial`, branch `main`. This is a **complete repository root package**, not a GitHub patch or nested project folder. Deployments/commits are performed manually by the project owner.
+**Archived release target (pre-rename):** `GrandisLegacyTCG/Grandis-Legacy-PvP-Trial`, branch `main`. Current target is `GrandisLegacyTCG/Grandis-Legacy-S0-PvP`. This is a **complete repository root package**, not a GitHub patch or nested project folder. Deployments/commits are performed manually by the project owner.
 
 ## Final runtime Hand artwork fix (15 November 2026)
 

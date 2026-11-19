@@ -1,6 +1,6 @@
 {
   "build": "VS AI Season 0 RC34 Patch Candidate",
-  "date": "2026-11-19T05:29:40.895Z",
+  "date": "2026-11-19T20:22:08.712Z",
   "passed": 20,
   "failed": 0,
   "tests": [
@@ -135,10 +135,10 @@
       "ok": true,
       "details": {
         "hand": [
-          "S0-WAR-002"
+          "S0-WAR-001"
         ],
         "deck": [
-          "S0-WAR-001",
+          "S0-WAR-002",
           "S0-CLE-026"
         ]
       }

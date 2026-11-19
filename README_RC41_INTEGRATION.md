@@ -1,6 +1,6 @@
 # Grandis Legacy Season 0 PvP RC41 — Part 5 release
 
-**Deploy only to `Grandis-Legacy-PvP-Trial` (Season 0).** Do not touch the separate Season 1 repository `Grandis-Legacy-PvP`.
+**Deploy only to `GrandisLegacyTCG/Grandis-Legacy-S0-PvP` on `main` (Season 0).** Do not touch the separate Season 1 repository `Grandis-Legacy-PvP`.
 
 ## Base and source of truth
 - Backend base: full PvP-Trial RC40 Patch 3.2 (17 Nov 2026) retaining server authority, room state, WebSocket, rejoin, and privacy.
@@ -26,6 +26,13 @@
 - A real deployed Northflank + two-browser, full-match gameplay run was **not** performed in this local environment. Live deployment validation is still required after upload; do not claim that this source ZIP is proof of production availability.
 
 ## Manual upload order
-1. Replace **only** the PvP-Trial Season 0 backend repo with the contents of the backend ZIP, deploy the service, confirm `/health` reports RC41 build ID and WebSocket transport `ws`.
-2. Merge the website ZIP's **`pvp/` folder** into website repository root. Do not remove or overwrite root `card-art/`, `assets/`, `vs-ai/`, `deck-builder/`, or homepage.
+1. Replace **only** the `Grandis-Legacy-S0-PvP` Season 0 backend repo with the contents of the backend ZIP, deploy the service, confirm `/health` reports RC41 build ID and WebSocket transport `ws`.
+2. Merge the website ZIP's **`pvp/` folder** into `Grandis-Legacy-S0-Website` repository root. Do not remove or overwrite root `card-art/`, `assets/`, `vs-ai/`, `deck-builder/`, or homepage.
 3. Open `/pvp/` in two distinct browsers, start match, verify turn/Response/EXP/payment/reconnect and asset loading. Never change the Season 1 PvP repo.
+
+## 20 November 2026 — S0 repository rename, WebSocket migration and donor mobile adaptation
+- Canonical backend: `GrandisLegacyTCG/Grandis-Legacy-S0-PvP`, `main`. Website: `GrandisLegacyTCG/Grandis-Legacy-S0-Website`, `main`. **Do not change `Grandis-Legacy-PvP` (Season 1)**.
+- Current Northflank service: `Grandis Legacy S0 PvP` (`wss://p01--grandis-legacy-s0-pvp--2kwws8nzlcc2.code.run/ws`). The website `/pvp/config.js` owns this external endpoint; standalone backend `/config.js` is same-origin and remains unchanged.
+- **No version/buildId change**. This package takes from the 20 Nov VS AI Season 0 donor **compatible MOBILE presentation only**: portrait card preview placement/size. The standalone PvP body already rotates the whole 1600x747 stage, so the VS AI viewport-specific flying-card coordinate transform and AI decision policy MUST NOT be copied. Core gameplay, card data and network authority are unchanged.
+- Required website-root assets for the updated `/pvp/` overlay: `/assets/css/gl-site-brand.css`, `/assets/css/gl-site-navigation.css`, `/assets/js/gl-site-analytics.js`, `/assets/js/s0-artwork-fallback.js`, `/assets/site/web-s0/logo-transparent.webp`, existing `/card-art/`, and other 109 SHA-verified shared assets. **Do not duplicate root assets in `/pvp/`**.
+- Historical docs still reference pre-rename repos and Room2 as history only; they are NOT deployment instructions. Room2 must remain available as fallback. See `docs/S0_PVP_20261120_HANDOFF.md` for the latest manual handoff.
