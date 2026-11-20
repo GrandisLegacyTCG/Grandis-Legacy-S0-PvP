@@ -104,7 +104,8 @@ const donorMarker="if(p.type==='trial_rankup_return_exp'||p.type==='scouting_exp
 assert.ok(base.includes(donorMarker));
 assert.match(base,/titleText=scouting\?'SCOUTING — DISCARD OPPONENT EXP':expReturn\?'RANK '/);
 assert.match(base,/if\(expReturn\|\|scouting\)\{[\s\S]*?intent\('handleChoiceConfirm',\[\]\);/);
-assert.match(base,/const p=s.pending,allowed=\['card_search_choice','legacy_card_choice','crystal_ball_reorder'\]/);
+assert.match(base,/const p=s.pending,allowed=\['card_search_choice','legacy_card_choice','crystal_ball_reorder','optional_swap'\]/);
+assert.match(base,/skip.textContent='SKIP';skip.disabled=false/, 'RC41 F19 optional Swap uses a required visible SKIP action');
 assert.match(base,/legacy_defeat_choice/);
 assert.match(base,/if\(!game\|\|raw.length<10\)return false;/);
 assert.match(base,/const groups=\[\];for\(let i=0;i<5;i\+\+\)/);

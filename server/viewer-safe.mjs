@@ -32,6 +32,7 @@ const safeEvent = (event) => {
        !/^S0-[A-Z0-9]+-[A-Z0-9]+$/.test(String(event.card_id||''))) return null;
     out.card_id=event.card_id;
     out.from_zone=event.from_zone;
+    if(typeof event.source_action_id==='string'&&/^pvp_(?:PLAYER|AI)_[A-Za-z0-9_-]{1,100}$/.test(event.source_action_id))out.source_action_id=event.source_action_id;
     delete out.hand_index; // Public card identity does not expose opponent Hand slot. 
     if(typeof event.source_card_id==='string'&&/^S0-[A-Z0-9]+-[A-Z0-9]+$/.test(event.source_card_id))
       out.source_card_id=event.source_card_id;
@@ -106,7 +107,7 @@ const safePlayedResultLine = line => {
   if(/\b(hand|main deck|shard deck|search|reveal|look at|top card|bottom card|deck order|random card|private)\b/i.test(line)||/S0-[A-Z0-9]+-[A-Z0-9]+/i.test(line))return false;
   return /\b(damag\w*|hp\s*:|block\w*|dodg\w*|counter\w*|negat\w*|cancel\w*|status\w*|heal\w*|poison\w*|burn\w*|bleed\w*|freez\w*|stun\w*|sleep\w*|invincib\w*|prevent\w*|resolv\w*|defeat\w*|reflect\w*)\b/i.test(line);
 };
-function safePlayedAction(event,side) {
+function safePlayedAction(event,side,committedPickups=[]) {
   if(!event||typeof event!=='object'||!publicCardId(event.card_id))return null;
   if(!publicSide(side))return null;
   const label=publicScalar(event.label||'ACTION',22).toUpperCase();
@@ -195,17 +196,26 @@ function safePlayedAction(event,side) {
       removed_count:Math.max(0,Math.min(12,Math.trunc(Number(event.mana_result.removed_count)||0))),
       gained_count:Math.max(0,Math.min(12,Math.trunc(Number(event.mana_result.gained_count)||0)))};
   }
-  // Result-only card movement. A card brought from Main Deck into Hand
-  // remains private to both players: its identity is never serialized here.
+  // Result-only movement: previously public Discard cards remain public; Main
+  // Deck Search identity needs an exact committed selected-pickup receipt.
+  // Ordinary Draw / Opening Hand and unconfirmed deck identities stay hidden.
   if(Array.isArray(event.card_movements))out.card_movements=event.card_movements.slice(0,20).map(move=>{
     const from=String(move?.from||''),to=String(move?.to||'');
     if(!['Hand','Main Deck','Discard','Field','EXP'].includes(from)||
        !['Hand','Main Deck','Discard','Field','EXP'].includes(to))return null;
+    const pickup=to==='Hand'&&from==='Main Deck'&&move.known===true;
+    // Only card IDs backed by an actual committed public Search/Return pickup
+    // may cross from Main Deck into a Card Played detail. Ordinary Draw stays hidden.
+    const matchesPublicPickup=id=>committedPickups.some(note=>note?.type==='CARD_PUBLIC_PICKUP'&&
+      note.side===side&&note.from_zone===from&&note.card_id===id&&
+      note.source_card_id===event.card_id&&
+      note.source_action_id===event.id);
     const disclose=from==='Discard'||from==='Field'||from==='EXP'||
       (from==='Hand'&&to==='Discard'&&side==='PLAYER');
-    const ids=disclose?(Array.isArray(move.card_ids)?move.card_ids:[]).filter(publicCardId).slice(0,20):[];
+    const ids=(Array.isArray(move.card_ids)?move.card_ids:[]).filter(publicCardId).slice(0,20)
+      .filter(id=>pickup?matchesPublicPickup(id):disclose);
     return {from,to,count:ids.length||Math.max(0,Math.min(40,Math.trunc(Number(move.count)||0))),
-      card_ids:ids,known:disclose&&ids.length>0};
+      card_ids:ids,known:ids.length>0};
   }).filter(Boolean);
   // Attack aftermath is a public HP/status transition, not a private hand
   // inspection or an internal action trace.
@@ -231,8 +241,10 @@ function safePlayedAction(event,side) {
 }
 function publicPlayedJournal(st) {
   const raw=st.pvpActionEventsBySide||{};
-  return {PLAYER:(Array.isArray(raw.PLAYER)?raw.PLAYER:[]).map(e=>safePlayedAction(e,'PLAYER')).filter(Boolean).slice(0,120),
-    AI:(Array.isArray(raw.AI)?raw.AI:[]).map(e=>safePlayedAction(e,'AI')).filter(Boolean).slice(0,120)};
+  const picked=(Array.isArray(st.presentationEvents)?st.presentationEvents:[])
+    .filter(e=>e?.type==='CARD_PUBLIC_PICKUP');
+  return {PLAYER:(Array.isArray(raw.PLAYER)?raw.PLAYER:[]).map(e=>safePlayedAction(e,'PLAYER',picked)).filter(Boolean).slice(0,120),
+    AI:(Array.isArray(raw.AI)?raw.AI:[]).map(e=>safePlayedAction(e,'AI',picked)).filter(Boolean).slice(0,120)};
 }
 
 function ownerOf(p) { return p?.decision_side || p?.response_owner || p?.side || p?.source_side || null; }
@@ -376,6 +388,15 @@ export function viewerSafeBoard(raw, {revision, secret, seat} = {}) {
   st.pvpActionEventsBySide=played;
   st.playerPlayedEvents=played.PLAYER;
   st.opponentPlayedEvents=played.AI;
+  // Forced card-effect Swap feedback is recipient-only, not an opponent reveal.
+  st.cardSwapNotices=(st.cardSwapNotices||[]).filter(n=>n&&n.side==='PLAYER'&&
+    ['completed','canceled'].includes(n.kind)).slice(-32).map(n=>({
+      sequence:Math.max(0,Math.trunc(Number(n.sequence)||0)),
+      kind:n.kind,side:'PLAYER',card_id:publicCardId(n.card_id)?n.card_id:null,
+      from_lane:publicLane(n.from_lane),to_lane:publicLane(n.to_lane),
+      reason:publicScalar(n.reason||'',140)
+    }));
+  delete st.lastSwapCompleted;delete st.lastSwapCanceled;
   st.presentationEvents = (st.presentationEvents||[]).map(safeEvent).filter(Boolean).slice(-80);
   st.log = [];
   const rawPending = st.pending;

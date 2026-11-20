@@ -1,13 +1,13 @@
 {
-  "donor_archive": "Grandis_Legacy_VS_AI_Season0_RC41_Part7_F15_PopupHotfix_2026-11-21_STANDALONE.zip",
+  "donor_archive": "Grandis_Legacy_VS_AI_Season0_RC41_Part7_F18_F19_ScrollSwapHotfix_2026-11-21_STANDALONE.zip",
   "donor_clean_files": {
     "engine/js/runtime-authority.js": "74700775e8e91e5baa056a1a12a974658a12efa5a39e5113e31aaa892ad31344",
     "engine/js/static-data.js": "0bb58a4a1c8190eebb6669537dcc56c4a5a425b364e542f912da4486b7b0e73a",
     "engine/shared-app/active-starters.js": "cc58f5155bfd04ebf5dfee97b61ad7ff16f91bcfbff29fed463f33865225b711"
   },
-  "patched_bundle_sha256": "104fb7f2af357c9e5f965b52c8c4a8860e9825cbfab06e81510b3cac35977a36",
+  "patched_bundle_sha256": "f7c36579450b267bfb400ca4d759278518fdea1f9fe131a010c2b7113f8bfd30",
   "base_pvp_repository": "Grandis-Legacy-PvP-Trial RC40 Patch 3.2",
-  "donor_bundle_original_sha256": "d142b07f6baaf4ceeed2fbaa0b484252e94dd3d25412d31b6381d19aece8fff8",
+  "donor_bundle_original_sha256": "8fea5d1682af540f385e7f5348914e3743dbdb1c9928471510b1b07a8a35c6de",
   "approved_bundle_changes": [
     "PvP recipient-only Mana-loss committed notifications",
     "Provoke auto-End single resume after pending Mana choice",
@@ -18,8 +18,13 @@
     "PvP exact physical Mana payment and response adapters",
     "PvP mobile-only visual VFX portal geometry and attack indicator coordinate mapping; no gameplay or authority logic",
     "Part7 donor Protection Item recipient Hero ownership and Unicode apostrophe parsing",
-    "Read-only public Card Played detail API (viewer-projected committed journal only)"
+    "Read-only public Card Played detail API (viewer-projected committed journal only)",
+    "RC41 F19: mandatory Soul Blast target Swap is automatically server-determined and no longer leaves a user choice pending; recipient-only sequenced swap notices",
+    "Explicit commit_token-bound public Search/Return pickups are recorded against exact authoritative pvpActionEventsBySide Card Played events",
+    "Card Played Search/Return identity disclosure requires matching committed public pickup source action id; private Draw stays hidden",
+    "RC41 F18: card-selection scroll remains stable through deserialized PvP snapshots using commit token; single scrolling grid; no gameplay change",
+    "RC41 F19 optional Swap popup SKIP + two choices with server-authoritative validation; no duplicate on-board buttons"
   ],
-  "previous_donor_archive": "Grandis_Legacy_VS_AI_Season0_RC41_2026-11-18.zip",
-  "qa_note": "Donor F15 sources, gameplay semantics + privacy-safe presentation bridge. Baseline hash updated only after source review and targeted regression."
+  "previous_donor_archive": "Grandis_Legacy_VS_AI_Season0_RC41_Part7_F15_PopupHotfix_2026-11-21_STANDALONE.zip",
+  "qa_note": "RC41 Part7 F18/F19 donor; selected gameplay/presentation parity plus PvP search journal, recipient privacy, two-seat network and existing regression tested locally. New bundle hash pinned after deterministic source audit."
 }

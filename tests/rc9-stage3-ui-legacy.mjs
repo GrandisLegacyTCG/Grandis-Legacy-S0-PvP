@@ -93,7 +93,7 @@ check('Legacy centered selection is local-only, modal suppression and CONFIRM av
  assert.ok(network.includes("window.GL_GAME_UI.renderLocalChoiceDraft()"));
  assert.ok(runtime.includes("renderLocalChoiceDraft:()=>renderCenterChoiceStage(st())"));
  assert.ok(css.includes('body.gl-center-legacy #choiceOverlay{display:none'));
- assert.ok(runtime.includes("allowed=['card_search_choice','legacy_card_choice','crystal_ball_reorder']"));
+ assert.ok(runtime.includes("allowed=['card_search_choice','legacy_card_choice','crystal_ball_reorder','optional_swap']"),"Legacy centered choice remains distinct from RC41 F19 optional card Swap modal");
 });
 check('Card Review reuses frame + lazy preloads styles without per-action fetch',()=>{
  const review=read('public/battle/shared-app/db158-card-review.js');
