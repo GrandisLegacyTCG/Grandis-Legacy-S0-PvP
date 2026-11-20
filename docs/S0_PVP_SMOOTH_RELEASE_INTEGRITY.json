@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "backend_files": 791,
+  "website_pvp_files": 139,
+  "backend_original_changed": [
+    "docs/RC41_RELEASE_GATE_RESULTS.json",
+    "public/battle/index.html",
+    "public/battle/index.html.br",
+    "public/battle/index.html.gz",
+    "public/battle/shared-app/app-runtime.js",
+    "public/battle/shared-app/app-runtime.js.br",
+    "public/battle/shared-app/app-runtime.js.gz",
+    "public/index.html",
+    "public/index.html.br",
+    "public/index.html.gz",
+    "public/lobby/pvp-mobile-desktop.css",
+    "public/lobby/pvp-mobile-desktop.css.br",
+    "public/lobby/pvp-mobile-desktop.css.gz",
+    "public/pvp/pvp-host.js",
+    "public/pvp/pvp-host.js.br",
+    "public/pvp/pvp-host.js.gz",
+    "tests/RC34_PVP_REGRESSION.json",
+    "tests/rc39-rc3-ui-parity.mjs",
+    "tests/rc40-p32-battlefield-hand-artwork.mjs"
+  ],
+  "backend_original_added": [
+    "docs/S0_PVP_SMOOTH_RELEASE_INTEGRITY.json",
+    "docs/S0_PVP_SMOOTH_RENDERING_2026-11-20.md",
+    "public/battle/runtime/pvp-image-stability.css"
+  ],
+  "website_original_changed": [
+    "pvp/battle/index.html",
+    "pvp/battle/shared-app/app-runtime.js",
+    "pvp/index.html",
+    "pvp/lobby/pvp-mobile-desktop.css",
+    "pvp/lobby/pvp-shared-header-20261120.css",
+    "pvp/pvp/pvp-host.js"
+  ],
+  "website_original_added": [
+    "pvp/README_S0_PVP_SMOOTH_RENDERING_2026-11-20.md",
+    "pvp/battle/runtime/pvp-image-stability.css"
+  ],
+  "removed_files": 0,
+  "shared_assets_checked": 109,
+  "shared_assets_sha256_exact": true,
+  "shared_card_art": 248,
+  "unchanged_authority_sha256": "534e3840dd291e0dbe1dc792a57ded284cbf9092ae7a973ef532f2027d38d848",
+  "new_ws_endpoint": "wss://p01--grandis-legacy-s0-pvp--2kwws8nzlcc2.code.run/ws",
+  "buildId": "gl-s0-pvp-rc41-r39-v34-part5-2026-11-19",
+  "root_shared_nav_and_analytics": true,
+  "backend_standalone_retain_assets": true
+}

@@ -50,14 +50,15 @@ t('F08','main deck and starter illegal structures rejected',()=>{
  return ids;
 });
 
-// Explicit designer rule: Stun does NOT remove Item response permission.
-t('ruling-F04','Stun still permits Protection Item response',()=>{
+// Donor RC41 Part7 + Rulebook v3.5: Stun does not ban Items by category,
+// but Stun DOES prevent BLOCK and DODGE effects, including Protection Items.
+t('ruling-F04','Stun blocks Chain Mail BLOCK while ordinary Items remain legal',()=>{
  const s=newGame();const h=setHero(s,'PLAYER','CENTER','S0-WAR-H001',100);
  h.statuses=[{name:'Stun',duration:2}];s.playerHand=['S0-ITM-016'];
  const incoming={damage:30,damage_type:'Physical',attack_type:'Single Target',cannot_dodge:false,cannot_block:false,target_lane:'CENTER',source_lane:'CENTER',card_id:'S0-WAR-001'};
  const opts=R.responseOptionsFor(s,'PLAYER',incoming);
- assert(opts.some(o=>o.card_id==='S0-ITM-016'),'Chain Mail item was disabled under Stun');
- return{item:'S0-ITM-016',stunned:true,responseAvailable:true};
+ assert(!opts.some(o=>o.card_id==='S0-ITM-016'),'Stunned Hero was offered forbidden BLOCK Protection Item');
+ return{item:'S0-ITM-016',stunned:true,blockResponseAvailable:false};
 });
 
 // F01 pause on lethal Poison, resume cursor exactly once.

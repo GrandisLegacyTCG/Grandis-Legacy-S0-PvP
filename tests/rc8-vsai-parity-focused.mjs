@@ -168,11 +168,23 @@ for(const file of ['../public/pvp/db158-card-review.js','../public/battle/shared
     assert.ok(win.GL_DB158_REVIEW);
     const html=win.GL_DB158_REVIEW.documentHtml({id:'S0-WAR-009',name:'Test Card',family:'Skill',image:'card-art/S0-WAR-009.webp'},[]);
     const inline=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(Boolean);
-    assert.ok(inline.length>=2,'review inline scripts missing');
+    assert.ok(inline.length>=1,'review inline bootstrap missing');
+    assert.match(html,/review-renderer-v158\.js/);
+    assert.match(html,/s0-review-clarity\.js/);
     for(const script of inline)new vm.Script(script,{filename:file+' (inline)'});
-    assert.match(js,/existing\.dataset\.glReviewKey===key/);
-    assert.match(js,/GL_S0_REVIEW_READY/);
-    assert.match(js,/function warmStyles\(/);
+    if(file.includes('/battle/shared-app/')){
+      // Current donor F15: persistent iframe and art/font decode guard.
+      assert.match(js,/frame\.__glPendingReview/);
+      assert.match(js,/frame\.addEventListener\('load'/);
+      assert.match(js,/Promise\.race/);
+      assert.match(js,/1600/);
+      assert.match(js,/function scheduleWarmReview\(/);
+    }else{
+      // The PvP lobby's independent card preview keeps its original lifecycle.
+      assert.match(js,/existing\.dataset\.glReviewKey===key/);
+      assert.match(js,/GL_S0_REVIEW_READY/);
+      assert.match(js,/function warmStyles\(/);
+    }
   });
 }
 console.log(`PASS RC8 VS AI adoption: ${n} focused checks`);

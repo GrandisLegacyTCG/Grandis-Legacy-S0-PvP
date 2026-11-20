@@ -76,16 +76,17 @@ assert.equal(view.appState.aiHand[0],'__HIDDEN_CARD_BACK__');
 assert.equal(view.appState.playerDeck[0],'__HIDDEN_CARD_BACK__');
 assert.equal(view.appState.presentationEvents[0].hand_index,1);
 assert.equal(view.appState.presentationEvents[0].card_id,'S0-ARC-002');
-// RC8-compatible invariant: RC6 socket, RC5 local Mana Draft, and headless
-// authority are byte-identical to RC41. Viewer-safe and combat projections are
+// Release-reviewed network baseline: RC6 socket, local Mana Draft and headless
+// authority retain their protocol while card-choice transaction handling is repaired. Viewer-safe and combat projections are
 // intentionally updated for recipient-only effects and status outcomes.
-// Current RC41 M01 mobile hamburger also updates lobby host. Pin this
+// Current PvP mobile lobby keeps the visible IMPORT DECK button. The Mana
+// Draft digest pins the reviewed incomplete-choice selection repair. Pin this
 // reviewed frontend-only baseline; continue byte-guarding runtime/network/headless.
 const fingerprints={
- 'public/pvp/pvp-host.js':'e65b530b07b9a99d6d7be62f45f56a1f65e17fbbb8d05e5d988eb583c2e466ee',
- 'public/battle/runtime/pvp-network.js':'696e8d81c4e125ce3604555ea0a20ecd52777057209e270cf1f1b32d7c9c8c42',
- 'public/battle/runtime/pvp-mana-draft.js':'0dfb813cf7c549f01f83d6c7cb46fd5192fc78d554fbd53de90e8b2b572d92b7',
- 'server/headless-rc32.mjs':'92155b70710947ca253cbdd9cd528da99dd0e999fa01182d3aceb056d121a57c'
+ 'public/pvp/pvp-host.js':'5a0521ef7f6b13d3c9e3bc983783f3539efadb5b0886d89eb13840cd23f99113',
+ 'public/battle/runtime/pvp-network.js':'5b7c889528c95666f412f731deb797f193c58e2181e9b610fa22847b8527cff3',
+ 'public/battle/runtime/pvp-mana-draft.js':'97519e377f92a0f496f3dcd024020103adb15764eb08d65580b81c6fc28e5cf7',
+ 'server/headless-rc32.mjs':'d89733639259e105d826b19c42110d2e92abb0e689cb5bd43cdabb50d8384425'
 };
 for(const [p,expected] of Object.entries(fingerprints)){
  const got=createHash('sha256').update(readFileSync(new URL('../'+p,import.meta.url))).digest('hex');

@@ -131,7 +131,7 @@ assert.equal(win.GL_S0_PVP_NETWORK.sendIntent('selectCardSearchChoice',[1]).ok,t
 assert.equal(sent.length,base,'Two Tune Up choices must not send gameplay WebSocket intents');
 assert.equal(win.GL_S0_PVP_NETWORK.sendIntent('handleChoiceConfirm',[]).ok,true);
 assert.equal(sent.length,base+1);
-const packet=sent.at(-1);assert.equal(packet.type,'runtime-intent');assert.equal(packet.intent,'commitExactTuneUpChoice');
-assert.equal(JSON.stringify(packet.args),JSON.stringify([[0,1],'test-unique-token']));
+const packet=sent.at(-1);assert.equal(packet.type,'runtime-intent');assert.equal(packet.intent,'commitExactCardSearchChoice');
+assert.deepEqual(JSON.parse(JSON.stringify(packet.args)),[{indices:[0,1],token:'test-unique-token',zone:'deck',source:'S0-CLE-029',resolveTo:''}]);
 assert.ok(rendered.length>=3);
 console.log('PASS production PvP browser adapter: Tune Up selects locally and commits in one server RTT');

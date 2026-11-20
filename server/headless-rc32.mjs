@@ -22,7 +22,8 @@ import vm from 'node:vm';
 const OWNED_TYPES = new Set([
   'trial_rankup_return_exp', 'scouting_exp_selection', 'hand_limit_discard',
   's0_bard_draw_choice', 'crystal_ball_reorder', 'legacy_card_choice',
-  'legacy_defeat_choice'
+  'legacy_defeat_choice', 'legacy_cost_selection', 'status_removal_choice',
+  'saint_purify_choice', 'opponent_hand_choice'
 ]);
 const index = (n, length) => Number.isInteger(n) && n >= 0 && n < length;
 const exact = (array, need, length) => Array.isArray(array) &&
@@ -95,6 +96,39 @@ export function applyExactLocalChoiceDraft({bridge, readPending, payload}) {
     if (!exact(readPending()?.selected_indices, selected.length, hand.length))
       throw new Error('Bard Draw selection did not match the draft.');
     return run('commitS0BardDrawChoice', [false]);
+  }
+  if (kind === 'legacy_cost_selection') {
+    const candidates=p.cost_candidates||[],need=Number(p.required_cost||1),
+      min=Number(p.min_cost??need),count=payload.selected?.length;
+    if (!Array.isArray(payload.selected)||!Number.isInteger(need)||need<1||need>8||
+        !Number.isInteger(min)||min<1||min>need||count<min||count>need||
+        !exact(payload.selected,count,candidates.length))
+      throw new Error('Invalid Legacy cost selection.');
+    const initial=(p.selected_cost_indices||[]).slice();
+    for(const i of initial)run('selectLegacyCostChoice',[i]);
+    for(const i of payload.selected)run('selectLegacyCostChoice',[i]);
+    const actual=readPending()?.selected_cost_indices||[];
+    if(actual.length!==count||actual.some((v,i)=>v!==payload.selected[i]))
+      throw new Error('Legacy cost was not selected by the authoritative engine.');
+    return run('handleChoiceConfirm', []);
+  }
+  if (kind === 'status_removal_choice'||kind === 'saint_purify_choice') {
+    const choices=p.status_choices||[],wanted=payload.index;
+    if(choices.length<1||choices.length>16||!index(wanted,choices.length))
+      throw new Error('Invalid status choice.');
+    run(kind==='saint_purify_choice'?'selectSaintPurifyChoice':'selectStatusRemovalChoice',[wanted]);
+    if(readPending()?.selected_status_choice!==wanted)
+      throw new Error('Status choice was not applied.');
+    return run('handleChoiceConfirm', []);
+  }
+  if (kind === 'opponent_hand_choice') {
+    const choices=p.candidates||[],wanted=payload.index;
+    if(choices.length<1||choices.length>50||!index(wanted,choices.length))
+      throw new Error('Invalid opponent Hand selection.');
+    run('selectOpponentHandChoice',[wanted]);
+    if(readPending()?.selected_index!==wanted)
+      throw new Error('Opponent Hand selection was not applied.');
+    return run('handleChoiceConfirm', []);
   }
   if (kind === 'legacy_defeat_choice') {
     const candidates = p.candidates || [];
@@ -251,6 +285,38 @@ export function applyOptimizedPvpIntent({bridge, readPending, name, args}) {
     // Exact physical UID validation and all card-specific Response CONDITIONS
     // are performed in the original Season 0 RC34 engine.
     return run('commitExactResponsePaymentChoice', [selectedUids]);
+  }
+  if (name === 'commitExactCardSearchChoice') {
+    const p=readPending(),packet=args?.[0];
+    if(!p||p.type!=='card_search_choice'||p.decision_side!=='PLAYER'||
+       !packet||typeof packet!=='object'||Array.isArray(packet))
+      throw new Error('Card Search choice is not available to this seat.');
+    const choices=p.candidates||[],selected=packet.indices;
+    const required=p.multi_select?Math.min(Number(p.required_count||p.max_count||1),choices.length):1;
+    const max=p.multi_select?Number(p.max_count||p.required_count||1):1;
+    if(choices.length<1||choices.length>50||!Number.isInteger(required)||required<1||
+       !Number.isInteger(max)||max<required||max>50||
+       !Array.isArray(selected)||selected.length<required||selected.length>max||
+       !exact(selected,selected.length,choices.length)||
+       String(packet.token||'')!==String(p.commit_token||'')||
+       String(packet.zone||'')!==String(p.zone||'')||
+       String(packet.source||'')!==String(p.source_card_id||'')||
+       String(packet.resolveTo||'')!==String(p.resolve_to||''))
+      throw new Error('Card Search selection expired or has invalid indices.');
+    if(p.multi_select){
+      // Normalize stale prior picks on the SERVER, never by copying the
+      // viewer's masked Main Deck into the gameplay engine.
+      for(const idx of (p.selected_indices||[]).slice())run('selectCardSearchChoice',[idx]);
+      for(const idx of selected)run('selectCardSearchChoice',[idx]);
+      const actual=readPending()?.selected_indices||[];
+      if(actual.length!==selected.length||actual.some((v,i)=>v!==selected[i]))
+        throw new Error('Card Search picks did not match physical deck positions.');
+    }else{
+      run('selectCardSearchChoice',[selected[0]]);
+      if(readPending()?.selected_index!==selected[0])
+        throw new Error('Card Search selection did not match the physical card.');
+    }
+    return run('handleChoiceConfirm',[]);
   }
   if (name === 'commitExactTuneUpChoice') {
     const p = readPending();

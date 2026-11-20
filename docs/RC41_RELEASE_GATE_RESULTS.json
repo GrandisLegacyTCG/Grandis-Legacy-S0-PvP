@@ -6,350 +6,350 @@
     {
       "command": "node tests/rc41-seat-mirror-mana.mjs",
       "status": 0,
-      "duration_ms": 430,
+      "duration_ms": 502,
       "tail": "PASS RC41 seat mirror with physical Mana shards first=1\nPASS RC41 seat mirror with physical Mana shards first=2\n",
       "error": ""
     },
     {
       "command": "node tests/s1-source-parity.mjs",
       "status": 0,
-      "duration_ms": 52,
+      "duration_ms": 42,
       "tail": "{\n  \"ok\": true,\n  \"S1PvPLobbyCSSRetained\": true,\n  \"lobbyEngineEliminated\": true,\n  \"RC34PvPBattlePresent\": true,\n  \"atomicManaIntents\": true\n}\n",
       "error": ""
     },
     {
       "command": "node tests/s0-catalog-static.mjs",
       "status": 0,
-      "duration_ms": 45,
+      "duration_ms": 43,
       "tail": "{\n  \"ok\": true,\n  \"source\": \"S0 RC34 compatible catalog\",\n  \"starterDecks\": 5,\n  \"deckHeroArt\": true\n}\n",
       "error": ""
     },
     {
       "command": "node tests/lobby-init.mjs",
       "status": 0,
-      "duration_ms": 38,
+      "duration_ms": 40,
       "tail": "PASS: lobby host exports initialize without deleted-function references\n",
       "error": ""
     },
     {
       "command": "node tests/http-static.mjs",
       "status": 0,
-      "duration_ms": 446,
+      "duration_ms": 476,
       "tail": "{\n  \"ok\": true,\n  \"contentEncodingBR\": \"br\",\n  \"originalBytes\": 7146054,\n  \"encodedBytes\": 123265,\n  \"etag304\": true,\n  \"sidecarsHidden\": true,\n  \"lobbyEngineFree\": true\n}\n",
       "error": ""
     },
     {
       "command": "node tests/privacy-presentation.mjs",
       "status": 0,
-      "duration_ms": 47,
+      "duration_ms": 38,
       "tail": "PASS viewer privacy + public Counter/Racial Trait event metadata\n",
       "error": ""
     },
     {
       "command": "node tests/intent-id-uniqueness.mjs",
       "status": 0,
-      "duration_ms": 42,
+      "duration_ms": 37,
       "tail": "PASS reconnect-safe action ids across two browser documents\n",
       "error": ""
     },
     {
       "command": "node tests/asset-integrity.mjs",
       "status": 0,
-      "duration_ms": 40,
-      "tail": "PASS required root + battlefield scripts/styles (35) and S0 card art (248)\n",
+      "duration_ms": 36,
+      "tail": "PASS required root + battlefield scripts/styles (36) and S0 card art (248)\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-engine-regression.cjs",
       "status": 0,
-      "duration_ms": 902,
+      "duration_ms": 759,
       "tail": " Movement Dodge draws one card with payment\nPASS F03 Shadow Switch dodge repositions to attack-facing lane\nPASS F03 AI Escape Arrow pays mandatory extra card or cannot dodge\nPASS F03 Primal Defense opens Binding Light counter after payment\nPASS F03 Binding Light counter window can PASS and finish Primal\nPASS F06 Legacy once key follows Hero after lane swap\nPASS F07 Stun prevents Bard/Maestro exchange, not Draw\nPASS F09 REFLECT-only response allowed under PIERCING at correct ranks\nPASS F10 Enrage stays active through first use, expires at End\nPASS F11 Sixth Sense distinguishes Defense from Tactical REACTION\nPASS F12 Legacy candidates include Skill just paid into Discard\nRESULT 20 / 20 passed\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-atomic-mana.cjs",
       "status": 0,
-      "duration_ms": 309,
+      "duration_ms": 269,
       "tail": "SETUP { pending: 'mana_shard_payment_choice', uidCount: 2, poolCount: 8 }\nRESULT {\"selected\":[\"MANA:PLAYER:0\",\"MANA:PLAYER:1\"],\"bad\":false,\"good\":true,\"afterPending\":\"card_search_choice\",\"discard\":[]}\nPASS RC34 atomic exact Mana Payment (positive + duplicate UID rejected)\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-seat2-payment-response.mjs",
       "status": 0,
-      "duration_ms": 1141,
-      "tail": "PASS RC34 seat 2 attack -> exact Mana PAY -> seat 1 Response PASS -> damage; retries=11\n",
+      "duration_ms": 803,
+      "tail": "PASS RC34 seat 2 attack -> exact Mana PAY -> seat 1 Response PASS -> damage; retries=8\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-deadlock-engine.mjs",
       "status": 0,
-      "duration_ms": 780,
+      "duration_ms": 633,
       "tail": "PASS DL-01/DL-03: 4 authoritative opening/turn/provoke continuation scenarios\n",
       "error": ""
     },
     {
       "command": "python3 tests/rc34-deadlock-ws.py",
       "status": 0,
-      "duration_ms": 12673,
+      "duration_ms": 12414,
       "tail": "{\n  \"ok\": true,\n  \"manualCoinAbort\": true,\n  \"coinOutcomeIdempotent\": true,\n  \"missingAckGrace\": true,\n  \"coinResultTimeoutRecovery\": true,\n  \"coinDisconnectRecovery\": true,\n  \"surrenderByNonActingSeatWithStaleRevision\": true,\n  \"idleWaitingSeatNotConceded\": true,\n  \"disconnectGraceForDecisionOwner\": true\n}\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-network-ack-race.mjs",
       "status": 0,
-      "duration_ms": 47,
+      "duration_ms": 38,
       "tail": "PASS DL-04/DL-06: stale ACK, unrelated error, timeout, second-action ownership, surrender during opponent turn/opening\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-opening-watchdog.mjs",
       "status": 0,
-      "duration_ms": 40,
+      "duration_ms": 34,
       "tail": "PASS DL-05: watchdog cleanup, masks removed, stale callback ignored, recovery wiring present\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-response-browser-gate.mjs",
       "status": 0,
-      "duration_ms": 1129,
-      "tail": "PASS RC3 real viewer-safe -> browser PASS -> authority -> ack (attacker=1, defender=2, search=5)\nPASS RC3 real viewer-safe -> browser PASS -> authority -> ack (attacker=2, defender=1, search=5)\n",
+      "duration_ms": 926,
+      "tail": "PASS RC3 real viewer-safe -> browser PASS -> authority -> ack (attacker=1, defender=2, search=2)\nPASS RC3 real viewer-safe -> browser PASS -> authority -> ack (attacker=2, defender=1, search=6)\n",
       "error": ""
     },
     {
       "command": "python3 tests/rc34-postmatch-cleanup.py",
       "status": 0,
-      "duration_ms": 2456,
+      "duration_ms": 2618,
       "tail": "PASS RC3 60-second server-owned cleanup (test accelerated 1.2 sec): both players return, deck/formation preserved, ready cleared\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-touch-static.mjs",
       "status": 0,
-      "duration_ms": 42,
+      "duration_ms": 35,
       "tail": "PASS RC36 native controls, no overlapping legacy touch dock; network Response and latency instrumentation kept\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-rc4-quickplay-tuneup.mjs",
       "status": 0,
-      "duration_ms": 535,
+      "duration_ms": 560,
       "tail": "PASS real RC39 Bard Rank II -> mandatory source Hero -> PAY -> atomic Tune Up 2 Notes\nPASS real RC39 Maestro Rank III -> mandatory source Hero -> PAY -> atomic Tune Up 2 Notes\nPASS mandatory Hero source stays selectable with one or multiple legal Heroes\nPASS seat 2 mirrored local PLAYER Tune Up -> Mana -> atomic Notes (owner check)\nPASS production PvP browser adapter: Tune Up selects locally and commits in one server RTT\n",
       "error": ""
     },
     {
       "command": "node tests/rc34-rc5-mana-transport.mjs",
       "status": 0,
-      "duration_ms": 422,
+      "duration_ms": 409,
       "tail": "PASS S0 Color values, exact UID swaps, Surge, no mutated engine state, revision reset\nPASS zero- and nonzero-Mana Response additional discard is drafted locally\nPASS production browser PvP seat 1 local Mana/Surge/Response drafts, PAY without animation gate, strict one-intent gate\nPASS production browser PvP seat 2 local Mana/Surge/Response drafts, PAY without animation gate, strict one-intent gate\nPASS REAL S0 RC34 engine: zero-Mana Response + one additional discard paid atomically\nPASS REAL RC34 Response choice -> confirmation in one network intent without skipping PAY\nPASS strict-inflight composite choices, no hidden queue dependency\n",
       "error": ""
     },
     {
       "command": "node tests/net-rc6-transport.mjs",
       "status": 0,
-      "duration_ms": 41,
+      "duration_ms": 38,
       "tail": "PASS NET RC6: 1 handshake snapshot, no extra resync, RTT pong, response-to-paint, direct PASS/ACK\n",
       "error": ""
     },
     {
       "command": "node tests/net-rc6-stage2-single-socket.mjs",
       "status": 0,
-      "duration_ms": 45,
+      "duration_ms": 34,
       "tail": "PASS Stage2 one parent socket across lobby, coin, battlefield, result, setup; origin-gated child intents and ACK relay\n",
       "error": ""
     },
     {
       "command": "node tests/net-rc6-stage2-battle-bridge.mjs",
       "status": 0,
-      "duration_ms": 40,
+      "duration_ms": 38,
       "tail": "PASS embedded battle transport: no second socket, one atomic Response packet, ACK updates board, origin filter and disconnect\n",
       "error": ""
     },
     {
       "command": "node tests/rc36-ui-hotfix.mjs",
       "status": 0,
-      "duration_ms": 84,
+      "duration_ms": 52,
       "tail": "PASS RC36 UI hotfix: donor review (55 cards), coin layout, opt-in music/SFX, safe boot, mobile, RFC6455 127-byte edge\n",
       "error": ""
     },
     {
       "command": "node tests/rc36-patch6-defense-source.mjs",
       "status": 0,
-      "duration_ms": 48,
+      "duration_ms": 39,
       "tail": "PASS RC36.8 -> PvP behavior-only: 2 Blessing source paths, Holy Barrier 2-stage, illegal source, subtree controls, Tribute and cache bust.\n",
       "error": ""
     },
     {
       "command": "node tests/rc36-mobile-waiting.mjs",
       "status": 0,
-      "duration_ms": 50,
+      "duration_ms": 44,
       "tail": "PASS RC36.8 mobile: full-body portrait transform, fixed portal geometry, inverse VFX coordinates and Response-wait visibility\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-combat-hotfix.mjs",
       "status": 0,
-      "duration_ms": 59,
+      "duration_ms": 44,
       "tail": "PASS RC38: ST legal lane; Area Attack parallel damage+Status after Responses; visible opponent Mana; hidden private Response\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-coin-turn.mjs",
       "status": 0,
-      "duration_ms": 733,
+      "duration_ms": 475,
       "tail": "PASS RC38 Coin Flip winner picks FIRST/SECOND (both seats); no Opening Coin Flip title (VS AI parity); RC6 lobby unchanged\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-lobby-batch1.mjs",
       "status": 0,
-      "duration_ms": 39,
+      "duration_ms": 32,
       "tail": "PASS RC38 lobby batch 1: retained card-review iframe, in-place card switch, memoized deck view, prefetch parity\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-startup-batch2.mjs",
       "status": 0,
-      "duration_ms": 441,
-      "tail": "{\"ok\":true,\"sourcesCompiledOnce\":6,\"precompiledMs\":190.4,\"match1ContextMs\":36.6,\"match2ContextMs\":29.4,\"isolatedMatches\":true}\n",
+      "duration_ms": 394,
+      "tail": "{\"ok\":true,\"sourcesCompiledOnce\":6,\"precompiledMs\":146.7,\"match1ContextMs\":84.2,\"match2ContextMs\":31.6,\"isolatedMatches\":true}\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-battle-warmframe-batch2.mjs",
       "status": 0,
-      "duration_ms": 45,
+      "duration_ms": 39,
       "tail": "PASS Batch2 warmframe: deferred load, invisible/no input, Coin reuse, cleanup, disconnect/error routing, low-memory guard, one WebSocket\n",
       "error": "[PvP] REQUEST_REJECTED A lobby error while READY\n"
     },
     {
       "command": "node tests/rc38-local-choice-batch3.mjs",
       "status": 0,
-      "duration_ms": 62,
+      "duration_ms": 57,
       "tail": "PASS RC38 Beta2 Batch3: local multi-choice, one exact server commit, invalid/foreign draft rejection, duplicate Crystal IDs, stale revision reset\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-local-draft-real-engine-batch3.mjs",
       "status": 0,
-      "duration_ms": 663,
+      "duration_ms": 445,
       "tail": "PASS real RC38 Rank Up: 2 selected EXP returned in one commit\nPASS real RC38 Crystal Ball: moved original deck-top cards in one commit\nPASS real RC38 Scouting EXP: opponent exp discard after one commit\nPASS real RC38 End Hand Limit: two Hand selections -> next turn in one commit\nPASS real RC38 Bard Draw: two Hand discards -> draw in one commit\nPASS real RC38 seat 2 mirrored local PLAYER choice (no opposite-seat control)\n",
       "error": ""
     },
     {
       "command": "node tests/rc38-batch4-mana-source-sync.mjs",
       "status": 0,
-      "duration_ms": 742,
+      "duration_ms": 677,
       "tail": "PASS Batch4: all five starter decks derive 12 Mana from selected Hero lineages on both seats\nPASS Batch4: v1.64 nested export ignores conflicting/off-Class/oversized Mana on both seats through Opening\nPASS Batch4: 3 hybrid packages yield 5 distinct Color Mana without artificial 3-color cap\nPASS Batch4: RC5 atomic Mana, RC6 single-socket lobby, Batch3 drafts and v3.2 Rank Up review preserved\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-batch5-rank-privacy.mjs",
       "status": 0,
-      "duration_ms": 358,
+      "duration_ms": 374,
       "tail": "PASS RC39: real Rank Up event, both seat projections, atomic post-Rank return, no hidden Hand leak, deferred simultaneous EXP VFX plan\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-batch5-mana-loss.mjs",
       "status": 0,
-      "duration_ms": 61,
+      "duration_ms": 50,
       "tail": "PASS RC39: resolved Mana Burn/Steal + class ability loss notices, only affected player, no physical UIDs or duplicate toast\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-latest-banner-qa.mjs",
       "status": 0,
-      "duration_ms": 55,
+      "duration_ms": 44,
       "tail": "PASS RC39 latest: committed English centered Mana queue, dedup/privacy, current donor provenance, RC6 transport unchanged\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-rc2-combat-ui.mjs",
       "status": 0,
-      "duration_ms": 54,
+      "duration_ms": 50,
       "tail": "PASS RC39 RC2: authoritative Area commit, nested privacy, both seat projections, HP/status hold, no replay, donor popup, manual Skill Hero, opening 5+5, favicon\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-rc3-ui-parity.mjs",
       "status": 0,
-      "duration_ms": 49,
+      "duration_ms": 41,
       "tail": "PASS RC39 RC3 UI: public EXP inspector, donor Purify chooser, atomic Rank Up Return EXP, RC41 audited network/headless fingerprints, privacy & 5+5 opening\n",
       "error": ""
     },
     {
       "command": "node tests/rc39-rc4-blind-mana-and-cancel.mjs",
       "status": 0,
-      "duration_ms": 421,
+      "duration_ms": 532,
       "tail": "PASS RC39 RC4 focused blind Mana (both seats) + Cancel ownership + silent wait: 2 server-engine scenarios\n",
       "error": ""
     },
     {
       "command": "node tests/rc8-vsai-parity-focused.mjs",
       "status": 0,
-      "duration_ms": 84,
+      "duration_ms": 69,
       "tail": "Hero name and owner-only identity\n  OK Repeated identical played card cannot inherit another action’s private discard\n  OK No incorrect fallback when identical played cards are indistinguishable\n  OK Status counters/target/Attack chain are derived from same combat commit\n  OK Damage banner is stable and hides lane/before-Response wording\n  OK Card Played includes linked Response and private DISCARDED tiles\n  OK No second socket/protocol, match-authority remains single WebSocket\n  OK Card Review readiness + reusable iframe ../public/pvp/db158-card-review.js\n  OK Card Review readiness + reusable iframe ../public/battle/shared-app/db158-card-review.js\nPASS RC8 VS AI adoption: 17 focused checks\n",
       "error": ""
     },
     {
       "command": "node tests/rc9-stage1-response.cjs",
       "status": 0,
-      "duration_ms": 390,
+      "duration_ms": 302,
       "tail": " target receives damage {\"leftHP\":100,\"rightHP\":100,\"returned\":true}\nPASS Intercept cancels entire Dual Arrow and returns Attack to source Hand {\"leftHP\":100,\"rightHP\":100,\"returned\":true}\nPASS Non-Thief target alone never makes Smoke Screen legal {}\nPASS Arbalest hybrid inherits Thief base skill and may use Smoke Screen {}\nPASS Area Attack can be fully negated by Smoke Screen when a Thief-line Hero is among affected {}\nPASS Passing first Response preserves second window and normal dual-hit resolution {\"leftHP\":70,\"rightHP\":70,\"attackDiscarded\":true}\nPASS PvP mirrored seat: responder AI owner can whole-negate both targets {\"responder\":\"AI\",\"returned\":\"S0-ARC-017\"}\nRC9 STAGE1 RESPONSE: 13/13\n",
       "error": ""
     },
     {
       "command": "node tests/rc9-stage2-match-history.mjs",
       "status": 0,
-      "duration_ms": 70,
+      "duration_ms": 55,
       "tail": "SS Multi-hit same Hero is aggregated, multi-target Heroes are separate\nPASS Runtime Area Attack subtype wins over stale printed Magical artwork label\nPASS Only committed Mana Steal may show real gain alongside recipient-only removal\nPASS Scouting EXP discard remains private to affected player and linked to exact action\nPASS Repeated identical cards never borrow another action private discard result\nPASS Same card movement is shown only once when matched by committed discard note\nPASS Damage banner: one formula; no printed fake 0; buffs use base -> modified\nPASS Stage3 preserves single-socket transport, local Mana and viewer-safe result projection\nRC9 Stage2 gameplay presentation: 11/11 PASS\n",
       "error": ""
     },
     {
       "command": "node tests/rc9-stage3-ui-legacy.mjs",
       "status": 0,
-      "duration_ms": 662,
+      "duration_ms": 715,
       "tail": "ket\nPASS Seat 1 lethal Poison opens mandatory Legacy with valid candidates\nPASS Seat 1 rejects cross-seat, stale choice and out-of-range without revision\nPASS Seat 1 confirms Legacy in one atomic revision; replay is denied\nPASS Seat 2 lethal Poison opens mandatory Legacy with valid candidates\nPASS Seat 2 rejects cross-seat, stale choice and out-of-range without revision\nPASS Seat 2 confirms Legacy in one atomic revision; replay is denied\nPASS Batch2 1v1 locks manual/effect swaps for both players and AI\nPASS Automatic 1v1 Center is allowed and remains protected afterwards\nPASS Reviving a Hero unlocks 2v1 swaps and relocks if back to 1v1\nRC9 Stage3 UI + donor Batch2 + 2-seat Legacy 18/18 PASS\n",
       "error": ""
     },
     {
       "command": "node tests/rc9-p3-hotfix.mjs",
       "status": 0,
-      "duration_ms": 85,
+      "duration_ms": 52,
       "tail": "BURN: attacker seat projection has no notification, target projection has one\nPASS Mana choice must resolve and face-up selected shard must fly BEFORE target toast\nPASS Attack consumed through opponent PASS is not a fake opponent DISCARDED event\nPASS Explicit opponent discard remains readable, tied to true card/zone/action\nPASS Neither unknown origin nor ordinary played-card custody yields DISCARDED tile\nPASS Card Played uses VS AI-style response trace & per-Hero breakdown (no fake zero damage)\nPASS Mana Burn type is visible only to target Card Played, attacker gets count only\nPASS Badge stroke removed, detail spacing compressed, network files unchanged\nRC9 Stage3 PvP UI follow-up: 8/8 PASS\n",
       "error": ""
     },
     {
       "command": "node tests/rc40-stage1-burn-pvp.cjs",
       "status": 0,
-      "duration_ms": 340,
+      "duration_ms": 300,
       "tail": "PASS Burn +10 precedes full 50 BLOCK, attack hits but loses no HP\nPASS Burn contributes before partial BLOCK, HP changes by actual amount\nPASS DODGE prevents Burn and any damage\nPASS Attack newly inflicting Burn does not amplify its own first hit\nPASS Correct RC40 Hero printed HP from canonical data\nPASS Poison Vial host lineage based on the new printed class requirement\nPASS Ancestral Focus gains 3 printed Mana Shards, from usable Racial Trait on PvP seat\nPASS Magic Compass Deck search excludes Ultimate Skill at the actual commit location\nRC40 PvP Stage1 Burn/HP/Item 8 / 8 PASS\n",
       "error": ""
     },
     {
       "command": "node tests/rc40-stage3-website-ui.mjs",
       "status": 0,
-      "duration_ms": 62,
+      "duration_ms": 55,
       "tail": "PASS Server/client single build ID and original single WS\nPASS Official Site hrefs in S1 PvP Lobby and logo\nPASS Responsive keyboard accessible Lobby navigation\nPASS RC40 Deck Builder 1.66 registry has 242 cards\nPASS Card Review uses DB166 in both Lobby and Battlefield with correct relative iframe base\nPASS Local artwork stays present and no cross-domain art URLs\nPASS No gameplay authority replacement from VS AI donor\nRC40 PATCH3 7/7 PASS\n",
       "error": ""
     },
     {
       "command": "node tests/rc40-p32-battlefield-hand-artwork.mjs",
       "status": 0,
-      "duration_ms": 48,
+      "duration_ms": 111,
       "tail": "{\"ok\":true,\"checks\":54,\"scenarios\":[\"standalone-own-Hand\",\"website-own-Hand\",\"fallback-main-legacy-mana\",\"stable-repaint\",\"opponent-privacy\",\"draw-hidden-and-reveal\",\"runtime-cache-bust\"]}\n",
       "error": ""
     },
     {
       "command": "node tests/rc40-item-arrow-paladin-regression.mjs",
       "status": 0,
-      "duration_ms": 54,
+      "duration_ms": 44,
       "tail": "PASS RC40 PvP Item Arrow: both seat perspectives, real Hero target, no private action leak\nPASS RC40 Paladin/Crusader: self-paid notice, correct text, no opponent leak, Mana Burn preserved\n",
       "error": ""
     },
     {
       "command": "node tests/rc40-standalone-smoke.mjs",
       "status": 0,
-      "duration_ms": 49,
+      "duration_ms": 44,
       "tail": "PASS standalone independence: 248/248 local artwork, same-origin /ws, lobby routes/nav, no CNAME\n",
       "error": ""
     }

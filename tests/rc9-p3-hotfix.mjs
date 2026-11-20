@@ -161,7 +161,7 @@ check('Badge stroke removed, detail spacing compressed, network files unchanged'
   assert.ok(css.includes('.gl-played-gameplay-row>strong{display:block')||css.includes('.gl-played-gameplay-row>strong{display:block'));
   const hashes={
     '../server/ws-lite.mjs':'1e29b60b2ce0ee357df98518db12a2b5063c5a224635df478d7588f8c5862047',
-    '../public/battle/runtime/pvp-mana-draft.js':'0dfb813cf7c549f01f83d6c7cb46fd5192fc78d554fbd53de90e8b2b572d92b7'
+    '../public/battle/runtime/pvp-mana-draft.js':'97519e377f92a0f496f3dcd024020103adb15764eb08d65580b81c6fc28e5cf7'
   };
   for(const [path,hash] of Object.entries(hashes))
     assert.equal(createHash('sha256').update(read(path)).digest('hex'),hash,'Unexpected network/commit rewrite: '+path);

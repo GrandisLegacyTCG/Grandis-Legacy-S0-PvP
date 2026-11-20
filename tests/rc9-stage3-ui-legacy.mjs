@@ -97,15 +97,20 @@ check('Legacy centered selection is local-only, modal suppression and CONFIRM av
 });
 check('Card Review reuses frame + lazy preloads styles without per-action fetch',()=>{
  const review=read('public/battle/shared-app/db158-card-review.js');
- assert.ok(runtime.includes('ready.glReviewVisualReady'));
- assert.ok(review.includes("if(existing.dataset.glReviewKey===key)return true"));
- assert.ok(review.includes('requestIdleCallback(warmStyles'));
+ // Latest donor F15 replaces the archived per-card SRCdoc lifecycle with
+ // one persistent iframe, renderer re-use, decoded-art readiness and timeout.
+ assert.ok(runtime.includes('gl-review-ready'));
+ assert.ok(runtime.includes('gl-review-emergency-art'));
+ assert.ok(review.includes('frame.__glPendingReview'));
+ assert.ok(review.includes('applyReviewToFrame(frame,c,lineage)'));
+ assert.ok(review.includes('requestIdleCallback(run'));
+ assert.ok(review.includes('Promise.race')&&review.includes('1600'));
  assert.ok(!/fetch\(['"]api\//.test(runtime));
 });
 check('Network architecture remains one socket, local draft is one confirmed packet',()=>{
  const sha=x=>createHash('sha256').update(x).digest('hex');
  assert.equal(sha(read('server/ws-lite.mjs')),'1e29b60b2ce0ee357df98518db12a2b5063c5a224635df478d7588f8c5862047');
- assert.equal(sha(read('public/battle/runtime/pvp-mana-draft.js')),'0dfb813cf7c549f01f83d6c7cb46fd5192fc78d554fbd53de90e8b2b572d92b7');
+ assert.equal(sha(read('public/battle/runtime/pvp-mana-draft.js')),'97519e377f92a0f496f3dcd024020103adb15764eb08d65580b81c6fc28e5cf7');
  assert.ok(server.includes("if (kind === 'legacy_defeat_choice')"));
  assert.ok(network.includes("name:'commitExactLocalChoiceDraft',args:[payload]"));
 });

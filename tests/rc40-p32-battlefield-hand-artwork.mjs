@@ -24,6 +24,7 @@ function segment(src,start,end){
 const functions=[
  segment(runtime,'function art(id){','\n// RC40 Patch 3.2: VS AI'),
  segment(runtime,'function glBindPlayerHandArtwork(','\nfunction shardArt('),
+ segment(runtime,'function glPvpGuardHandFace(','\nfunction glPvpWarmVisibleArtwork('),
  segment(runtime,'function renderHand(s){','\nfunction addAction('),
  segment(runtime,'function renderOpponentHand(s){','\nfunction renderPhase('),
 ].join('\n');
@@ -32,13 +33,25 @@ class Element{
  constructor(tag,base){
   this.tagName=tag.toUpperCase();this.base=base;this.style={};this.dataset={};
   this.children=[];this._src='';this.srcWrites=[];this.listeners=new Map();
-  this.classes=new Set();this.classList={add:(...x)=>x.forEach(v=>this.classes.add(v)),remove:(...x)=>x.forEach(v=>this.classes.delete(v)),contains:x=>this.classes.has(x)};
+  this.classes=new Set();this.classList={add:(...x)=>x.forEach(v=>this.classes.add(v)),remove:(...x)=>x.forEach(v=>this.classes.delete(v)),contains:x=>this.classes.has(x),toggle:(x,force)=>{const keep=force===undefined?!this.classes.has(x):!!force;keep?this.classes.add(x):this.classes.delete(x);return keep}};
  }
  set className(v){this.classes=new Set(String(v).split(/\s+/).filter(Boolean))}
  get className(){return [...this.classes].join(' ')}
  set innerHTML(v){if(v==='')this.children=[];this._innerHTML=v}
  get innerHTML(){return this._innerHTML||''}
- appendChild(el){this.children.push(el);el.parentElement=this;return el}
+ appendChild(el){if(el.parentElement)el.remove();this.children.push(el);el.parentElement=this;return el}
+ insertBefore(el,ref){if(el.parentElement)el.remove();const idx=ref?this.children.indexOf(ref):-1;this.children.splice(idx<0?this.children.length:idx,0,el);el.parentElement=this;return el}
+ replaceChildren(...els){this.children.forEach(x=>x.parentElement=null);this.children=[];els.forEach(x=>this.appendChild(x))}
+ remove(){if(this.parentElement){const a=this.parentElement.children;const i=a.indexOf(this);if(i>=0)a.splice(i,1);this.parentElement=null}}
+ querySelectorAll(selector){
+  if(selector===':scope > .hand-card[data-gl-hand-card-id]')return this.children.filter(c=>c.classes.has('hand-card')&&c.dataset.glHandCardId);
+  if(selector===':scope > .gl-draw-reservation-slot')return this.children.filter(c=>c.classes.has('gl-draw-reservation-slot'));
+  return [];
+ }
+ querySelector(selector){
+  if(selector===':scope > .card-actions')return this.children.find(c=>c.classes.has('card-actions'))||null;
+  return null;
+ }
  addEventListener(type,fn,opts){const arr=this.listeners.get(type)||[];arr.push({fn,once:!!opts?.once});this.listeners.set(type,arr)}
  emit(type){for(const h of [...(this.listeners.get(type)||[])]){h.fn({target:this});if(h.once)this.listeners.set(type,(this.listeners.get(type)||[]).filter(x=>x!==h))}}
  set src(v){this._src=String(v);this.srcWrites.push(this._src)}
@@ -56,6 +69,7 @@ function harness(site=false){
   cv:id=>({name:'Card '+id}),
   playerHandTrack:hand,oppHandTrack:opponent,
   glHiddenCommittedDrawSlots:hidden,glPendingDrawReservations:reservations,
+  glPvpArtworkDecoded:new Set(),glPvpPreloadArtwork:()=>new Promise(()=>{}),
   handRenderKey:'',opponentHandRenderKey:'',uiResponseSourceChoice:null,
   updateCommittedHandSlotVisibility:()=>{},
   discardSelectionState:()=>({selected:false}),

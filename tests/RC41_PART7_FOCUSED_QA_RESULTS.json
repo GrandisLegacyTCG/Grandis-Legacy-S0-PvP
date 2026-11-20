@@ -1,0 +1,179 @@
+{
+  "pass": 43,
+  "fail": 0,
+  "total": 43,
+  "checks": [
+    {
+      "label": "S0-ITM-012 Physical: center Archer, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Physical: center Thief, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Physical: center Warrior, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Physical: center Cleric, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Physical: center Mage, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Magical: center Archer, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Magical: center Thief, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Magical: center Warrior, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Magical: center Cleric, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012 Magical: center Mage, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016 Physical: center Archer, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016 Physical: center Thief, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016 Physical: center Warrior, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016 Physical: center Cleric, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016 Physical: center Mage, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007 Magical: center Archer, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007 Magical: center Thief, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007 Magical: center Warrior, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007 Magical: center Cleric, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007 Magical: center Mage, teammate Archer",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-012: separate Area window only for current Hero",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-016: separate Area window only for current Hero",
+      "ok": true
+    },
+    {
+      "label": "S0-ITM-007: separate Area window only for current Hero",
+      "ok": true
+    },
+    {
+      "label": "0 eligible sources cannot bypass Mage-only window",
+      "ok": true
+    },
+    {
+      "label": "Magic Ring cannot be used while its current Hero is Stunned",
+      "ok": true
+    },
+    {
+      "label": "Hook cannot Dodge while Freeze on current Hero",
+      "ok": true
+    },
+    {
+      "label": "Stale defense option rejected if Hero changed to Mage",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H002 Burn/Freeze +1",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H003 Burn/Freeze +1",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H005 Burn/Freeze +1",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H006 Burn/Freeze +1",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H003 +10 Magical",
+      "ok": true
+    },
+    {
+      "label": "S0-MAG-H006 +10 Magical",
+      "ok": true
+    },
+    {
+      "label": "Alden Rank III Rapid Chamber +10 Physical and Draw replacement",
+      "ok": true
+    },
+    {
+      "label": "Vanquisher Resolve name apostrophe supported",
+      "ok": true
+    },
+    {
+      "label": "Both apostrophe spellings parsed without touching original print",
+      "ok": true
+    },
+    {
+      "label": "Aldric Rank II actually inflicts Burn and Freeze for 2 turns (1 + passive)",
+      "ok": true
+    },
+    {
+      "label": "Aldric Rank III keeps +1 Burn and +10 Magical damage",
+      "ok": true
+    },
+    {
+      "label": "Poison Vial / Dazed / Freeze Bomb accept both apostrophe forms in source print",
+      "ok": true
+    },
+    {
+      "label": "Popup layer outranks attack connector and hides it while choice open",
+      "ok": true
+    },
+    {
+      "label": "Optional Swap buttons anchor to each partner Hero",
+      "ok": true
+    },
+    {
+      "label": "RC41 unchanged source version and hotfixed runtime cache keys",
+      "ok": true
+    },
+    {
+      "label": "Existing RC40 physical-discard regression adapted to current Hero window",
+      "ok": true
+    }
+  ]
+}

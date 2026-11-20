@@ -72,8 +72,10 @@
     "test:vsai-parity": "node tests/rc40-vsai-pvp-parity-20261116.mjs",
     "test:v34-mobile": "node tests/rc40-v34-mobile-donor-parity.cjs",
     "test:rc41-smoke": "node tests/rc41-headless-smoke.mjs",
-    "check:rc41": "npm run check:syntax && node tests/rc41-part5-release-audit.mjs && node tests/rc41-release-integrity.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-engine-regression.cjs && node tests/rc41-seat2-payment-response.mjs && node tests/rc41-seat-mirror-mana.mjs && python3 tests/rc41-ws-gate.py && python3 tests/rc41-net-rc6-live-ws.py",
-    "check:legacy-rc40": "echo \"RC40 frozen-hash and outdated R3.7 print fixtures are archival; run their individual tests only against RC40 baseline.\""
+    "check:rc41": "npm run check:syntax && node tests/rc41-part5-release-audit.mjs && node tests/rc41-release-integrity.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-engine-regression.cjs && node tests/rc41-seat2-payment-response.mjs && node tests/rc41-seat-mirror-mana.mjs && python3 tests/rc41-ws-gate.py && python3 tests/rc41-net-rc6-live-ws.py && npm run test:choice-network && npm run test:rc41-f15",
+    "check:legacy-rc40": "echo \"RC40 frozen-hash and outdated R3.7 print fixtures are archival; run their individual tests only against RC40 baseline.\"",
+    "test:choice-network": "node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-choice-authority-fixture.mjs",
+    "test:rc41-f15": "node tests/rc41-f15-four-interactions.cjs && node tests/rc41-f15-part7-donor-parity.cjs"
   },
   "engines": {
     "node": ">=18"

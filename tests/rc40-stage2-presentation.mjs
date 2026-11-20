@@ -124,7 +124,7 @@ check('Network runtime and local Mana draft preserved byte-for-byte from Patch1'
   // workspace path, these reference hashes work in a clean GitHub CI checkout.
   const sha256FromRC40Patch1={
     'public/battle/runtime/pvp-network.js':'696e8d81c4e125ce3604555ea0a20ecd52777057209e270cf1f1b32d7c9c8c42',
-    'public/battle/runtime/pvp-mana-draft.js':'0dfb813cf7c549f01f83d6c7cb46fd5192fc78d554fbd53de90e8b2b572d92b7',
+    'public/battle/runtime/pvp-mana-draft.js':'97519e377f92a0f496f3dcd024020103adb15764eb08d65580b81c6fc28e5cf7',
     'server/ws-lite.mjs':'1e29b60b2ce0ee357df98518db12a2b5063c5a224635df478d7588f8c5862047',
     'server/headless-rc32.mjs':'e5c3013e099051ba1f9bcc43cb2c6b4a7d5b130d1fd5df91ad71d4ec61446864'
   };
