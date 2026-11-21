@@ -11,7 +11,7 @@ const ctx={console,URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextDecod
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://example.test/',origin:'http://example.test'};
 ctx.navigator={userAgent:'RC40 v3.4 donor test'};ctx.document={readyState:'loading',addEventListener:()=>{},getElementById:()=>null,querySelector:()=>null,querySelectorAll:()=>[],body:null,documentElement:null};
 vm.createContext(ctx);
-for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,f),'utf8');
  if(f.endsWith('app.bundle.js')){
   src=src.replace('function showResult(){','function showResult(){if(SUPPRESS_RENDER)return;');

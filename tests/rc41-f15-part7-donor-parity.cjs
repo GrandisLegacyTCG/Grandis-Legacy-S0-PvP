@@ -5,7 +5,7 @@ const ctx={console,URL,Date,Math,Array,JSON,Map,Set,Promise,Uint8Array,TextDecod
 ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://audit.local/index.html',origin:'http://audit.local'};ctx.navigator={userAgent:'QA'};
 ctx.document={readyState:'loading',addEventListener(){},getElementById(){return null},querySelector(){return null},querySelectorAll(){return []},createElement(){return {style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
-for(const file of ['engine/js/static-data.js','assets/review-db158/js/db166-view-model.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+for(const file of ['engine/js/static-data.js','assets/review-db158/js/db166-view-model.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
 let code=fs.readFileSync(path.join(root,file),'utf8');
 if(file==='engine/shared-app/app.bundle.js'){
  const idx=code.lastIndexOf('})();');if(idx<0)throw Error('Missing engine IIFE');
@@ -104,7 +104,7 @@ ck('Optional Swap buttons anchor to each partner Hero',()=>{
 ck('RC41 unchanged source version and hotfixed runtime cache keys',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  for(const f of ['engine/shared-app/app.bundle.js','shared-app/app-runtime.js','shared-ui/battlefield-ui.css'])
-  assert(html.includes(f+'?v=gl-s0-pvp-rc41-r39-v34-part5-2026-11-19')&&
+  assert(html.includes(f+'?v=gl-s0-pvp-stage3-rc42-r394-20261122-a')&&
     html.includes('f15ui=20261121-03'),f+' was not cache-busted for PvP without changing buildId');
  assert(html.includes('RC41')&&html.includes('R3.9'), 'RC41 baseline unexpectedly changed');
 });

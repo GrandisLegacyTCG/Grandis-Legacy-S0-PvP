@@ -11,8 +11,8 @@ const doc=read('public/index.html');
 const artwork=path.join(root,'public/battle/card-art');
 const manifest=JSON.parse(read('public/battle/runtime/season0-generated/s0-asset-manifest-stage4.json'));
 const filenames=readdirSync(artwork).filter(x=>x.endsWith('.webp'));
-assert.equal(filenames.length,248,'Standalone must include all 248 artwork files');
-assert.equal(Object.keys(manifest.cards).length,248);
+assert.equal(filenames.length,250,'Standalone must include all 250 current artwork files');
+assert.equal(Object.keys(manifest.cards).length,248,'Archival stage4 asset manifest must remain immutable; active overlay adds 2 cards.');
 for(const [id,v] of Object.entries(manifest.cards)){
  assert.equal(v.local_full_path,`card-art/${id}.webp`);
  assert.equal(v.local_thumb_path,`card-art/${id}.webp`);
@@ -30,4 +30,4 @@ assert.match(host,/https:\/\/grandislegacytcg\.web\.id\/deck-builder\//);
 assert.match(server,/new WebSocketServer\(\{server,path:'\/ws'/);
 assert.ok(server.includes("if(rel==='/'||rel==='')rel='/index.html'"));
 assert.ok(!existsSync(path.join(root,'CNAME')),'Standalone must not take website CNAME');
-console.log('PASS standalone independence: 248/248 local artwork, same-origin /ws, lobby routes/nav, no CNAME');
+console.log('PASS standalone independence: 250/250 local artwork, same-origin /ws, lobby routes/nav, no CNAME');

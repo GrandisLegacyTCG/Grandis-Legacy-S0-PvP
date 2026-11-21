@@ -1,4 +1,4 @@
-name: Grandis Legacy PvP Season 0 RC41 - network RC6 and donor parity
+name: Grandis Legacy PvP - Stage 3 final network + donor + frontend release gates
 on:
   push:
   pull_request:
@@ -28,13 +28,25 @@ jobs:
         run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund
       - name: Build deterministic static compression
         run: npm run build:precompress
-      - name: RC41 donor parity, regression, multiplayer, privacy and HTTP
-        run: npm run check
+      # Keep three gates in independent processes. RC34's real-WS Python
+      # subprocess has a child Node server; nested long-running npm shells can
+      # retain pipe descriptors under local offline runners. Every gate must
+      # pass independently: no failure is suppressed.
+      - name: Historical network and gameplay regression (50/50 required)
+        run: node scripts/run-rc41-release-check.mjs
+      - name: Approved donor and choice-network parity checks
+        run: npm run check:rc41
+      - name: Stage 1 authoritative Mana continuation and negative controls
+        run: npm run test:stage1-network
+      - name: Stage 2 hybrid artwork, Card Review, Casting and lobby regression
+        run: npm run test:stage2
+      - name: Stage 3 official starter exports, donor provenance and website-only package
+        run: npm run test:stage3
       - name: Verify Docker image can build
         run: docker build --pull -t grandis-legacy-pvp-s0-net-rc6:ci .
       - name: Verify native ws transport in Docker
         run: |
           docker run -d --rm --name gl-pvp-net-rc6 -e PVP_ALLOWED_ORIGINS=https://grandislegacytcg.web.id -p 3066:3000 grandis-legacy-pvp-s0-net-rc6:ci
           sleep 5
-          node -e "fetch('http://127.0.0.1:3066/health').then(r=>r.json()).then(x=>{if(!x.ok||x.transport!=='ws'||x.version!=='S0-RC41-PVP-NET-RC6-STAGE2-INTEGRATION-1'||x.buildId!=='gl-s0-pvp-rc41-r39-v34-part5-2026-11-19')process.exit(1);console.log(x.transport,x.buildId)}).catch(()=>process.exit(1))"
+          node -e "fetch('http://127.0.0.1:3066/health').then(r=>r.json()).then(x=>{if(!x.ok||x.transport!=='ws'||x.version!=='S0-PVP-STAGE3-RC42-R394-20261122-A'||x.buildId!=='gl-s0-pvp-stage3-rc42-r394-20261122-a')process.exit(1);console.log(x.transport,x.buildId)}).catch(()=>process.exit(1))"
           docker stop gl-pvp-net-rc6

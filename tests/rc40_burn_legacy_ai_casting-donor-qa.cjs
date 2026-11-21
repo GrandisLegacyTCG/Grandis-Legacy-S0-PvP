@@ -9,7 +9,7 @@ ctx.document={readyState:'loading',addEventListener(){},getElementById(id){retur
 vm.createContext(ctx);
 const injection=`window.__GL_QA={initCards,card,buildInitialMatchState,addStatus,hasStatus,applyResolvedAttackDamage,aiIntermediateCastingTargetAllowed,chooseAIAction,getLegalActions,isCastingCard,isActiveHeroSlot,manaPoolCardsForSide,manaDeckForSide,syncManaCountForSide,
  setState:(s)=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true}};\n})();`;
-for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,file),'utf8');if(file.endsWith('app.bundle.js')){assert(/\n\}\)\(\);\s*$/.test(src),'Engine wrapper found');src=src.replace(/\n\}\)\(\);\s*$/,injection);}vm.runInContext(src,ctx,{filename:file,timeout:60000});
 }
 const q=ctx.__GL_QA;q.initCards();let total=0,failed=0;const results=[];

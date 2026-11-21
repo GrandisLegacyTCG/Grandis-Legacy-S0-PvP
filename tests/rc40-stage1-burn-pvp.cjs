@@ -8,7 +8,7 @@ ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://test/index.html',or
 ctx.document={readyState:'loading',addEventListener(){},getElementById(id){return fake[id]||null;},querySelector(){return null;},querySelectorAll(){return []},createElement(){return {style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
 const inject=`window.__QA={initCards,card,buildInitialMatchState,addStatus,applyResolvedAttackDamage,heroState,poisonVialHostEligible,racialActionFor,getActivatedRacialAbilities,resolveActivatedRacialAbility,manaPoolCardsForSide,manaDeckForSide,syncManaCountForSide,setState:s=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true;}};\n})();`;
-for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+for(const f of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,f),'utf8');if(f.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,inject);
  vm.runInContext(src,ctx,{filename:f,timeout:60000});
 }

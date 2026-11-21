@@ -6,7 +6,7 @@ import vm from 'node:vm';
 const cwd=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const f=(p)=>readFileSync(path.join(cwd,p),'utf8');
 const checks=[];function check(name,fn){try{fn();checks.push(name);console.log('PASS',name)}catch(e){console.error('FAIL',name,e);process.exitCode=1}}
-const build='gl-s0-pvp-rc41-r39-v34-part5-2026-11-19';
+const build='gl-s0-pvp-stage3-rc42-r394-20261122-a';
 check('Server/client single build ID and original single WS',()=>{
   assert.match(f('server.js'),new RegExp(build));
   assert.match(f('server.js'),/WebSocketServer\(\{server,path:'\/ws'/);
@@ -53,7 +53,7 @@ check('Card Review uses DB166 in both Lobby and Battlefield with correct relativ
 });
 check('Local artwork stays present and no cross-domain art URLs',()=>{
   const dir=path.join(cwd,'public/battle/card-art');
-  assert.equal(readdirSync(dir).filter(x=>x.endsWith('.webp')).length,248);
+  assert.equal(readdirSync(dir).filter(x=>x.endsWith('.webp')).length,250);
   assert.doesNotMatch(f('public/config.js'),/raw\.githubusercontent|github\.io\/card-art/);
 });
 check('No gameplay authority replacement from VS AI donor',()=>{

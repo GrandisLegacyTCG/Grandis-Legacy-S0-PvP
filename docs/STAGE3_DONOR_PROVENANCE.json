@@ -1,0 +1,26 @@
+{
+  "baseline": "Approved VS AI Season 0 RC42 donor game mechanics with official 5 Starter Decks",
+  "integration_policy": "Immutable gameplay source; PvP-only bridge contracts are reversible, adapter and networking source is separate",
+  "donor_bundle_sha256": "c9fd5a7119dfcbfd9424554da808d22cf396da4b71cce7d0b277217c50362bfb",
+  "pvp_integrated_bundle_sha256": "f252bf98601c60f381a6290526af936503d0c0369101357de34f54dd97720e4a",
+  "donor_immutable_files_sha256": {
+    "engine/js/static-data.js": "0bb58a4a1c8190eebb6669537dcc56c4a5a425b364e542f912da4486b7b0e73a",
+    "engine/js/runtime-authority.js": "74700775e8e91e5baa056a1a12a974658a12efa5a39e5113e31aaa892ad31344",
+    "engine/shared-app/active-starters.js": "192cebed119666d2e3abde4ee3e1b1fcf710cadb2369e30e0dd4587463f2a26e",
+    "runtime/season0-generated/rc41-approved-print-overrides.js": "5630e534b91f41c85f9fa98e7460273973674872b1aac4aa5a1c6ad96ba39582",
+    "runtime/season0-generated/rc42-main-deck-r394-overlay.js": "4f9b24a56ba961f990bf6be09e1ed776cff8f8d88e8df4e5494109e17748a83a",
+    "runtime/season0-generated/rc42-active-main-card-artwork-manifest.json": "19ad2bb4533e6de8fe4f03b3f645a432611791e13b2e403e2ac36bf2e8baac2e"
+  },
+  "official_starter_meta": "GL-ACTIVE-STARTERS-S0-R3.94-RULEBOOK-V3.5",
+  "starter_count": 5,
+  "local_artwork_count": 250,
+  "protected_pvp_abi": [
+    "seat-2 complete physical Mana mirror and turn stamps",
+    "recipient-only post-commit Mana notifications",
+    "Crusader/Paladin seat-2 Mana spend notice",
+    "exact Mana and Response payment APIs",
+    "public-only Card Played formatting",
+    "public Search/Return physical pickup action association and UID-free presentation"
+  ],
+  "source": "owner-provided Grandis_Legacy_VS_AI_Season0_RC42_2026-11-22.zip"
+}

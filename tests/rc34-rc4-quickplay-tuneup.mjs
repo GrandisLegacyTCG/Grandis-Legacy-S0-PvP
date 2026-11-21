@@ -12,7 +12,7 @@ function engineVm(){
  const document={readyState:'loading',body:null,addEventListener(){},getElementById(){return dummy},querySelector(){return null},querySelectorAll(){return []}};
  const ctx={console,Date,Math,URL,TextEncoder,TextDecoder,Uint8Array,crypto:webcrypto,document,location:{origin:'https://unit.invalid',href:'https://unit.invalid'},navigator:{userAgent:'RC4 QA'},performance:{now:()=>0},setTimeout(){return 0},clearTimeout(){},setInterval(){return 0},clearInterval(){},requestAnimationFrame(){return 0},cancelAnimationFrame(){},GL_APP_MODE:'PVP',GL_PVP_SHARED_BOARD_ACTIVE:true};
  ctx.window=ctx;ctx.globalThis=ctx;vm.createContext(ctx);
- for(const path of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+ for(const path of ['engine/js/static-data.js','runtime/overrides/grand-finale-designer-nerf.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
   let code=readFileSync(join(root,path),'utf8');
   if(path.endsWith('app.bundle.js')){
    const inject=`\nwindow.__RC4_TEST__={
@@ -56,7 +56,8 @@ for(const rank of [2,3]){
  bridge.applyServerIntent('commitExactManaPaymentChoice',[plan.plan.selected_shard_uids,false,null]);
  const p=env.pending();
  assert.equal(p?.type,'card_search_choice');assert.equal(p?.source_card_id,'S0-CLE-029');
- assert.equal(p?.required_count,2);
+ // Approved donor rule: Tune Up now searches 3 Notes instead of 2.
+ assert.equal(p?.required_count,3);
  const view=viewerSafeBoard(bridge.getCanonicalSnapshot(1),{seat:1,revision:100,secret:Buffer.alloc(32,7)});
  assertViewerSafeBoard(view);
  assert.equal(view.appState.pending.candidates.length,4);
@@ -65,13 +66,13 @@ for(const rank of [2,3]){
   assert.throws(()=>applyOptimizedPvpIntent({bridge,readPending:env.pending,name:'commitExactTuneUpChoice',args:bad}));
   assert.equal(env.pending().type,'card_search_choice');
  }
- applyOptimizedPvpIntent({bridge,readPending:env.pending,name:'commitExactTuneUpChoice',args:[[0,1],p.commit_token]});
+ applyOptimizedPvpIntent({bridge,readPending:env.pending,name:'commitExactTuneUpChoice',args:[[0,1,2],p.commit_token]});
  assert.equal(env.pending(),null,'Atomic choice resolves the search without another pending');
  const st=bridge.getCanonicalSnapshot(1).appState;
  assert.ok(st.playerHand.includes('S0-ARC-026'));
  assert.ok(st.playerHand.includes('S0-CLE-026'));
  assert.ok(st.playerDiscard.includes('S0-CLE-029'));
- console.log('PASS real RC39 '+(rank===2?'Bard Rank II':'Maestro Rank III')+' -> mandatory source Hero -> PAY -> atomic Tune Up 2 Notes');
+ console.log('PASS real RC39 '+(rank===2?'Bard Rank II':'Maestro Rank III')+' -> mandatory source Hero -> PAY -> atomic Tune Up 3 Notes');
 }
 
 // The single-legal-Hero shortcut was reported as a bug: every Skill with
@@ -108,7 +109,7 @@ const seat2Pending=mirroredEnv.bridge.getCanonicalSnapshot(1).appState.pending;
 assert.equal(seat2Pending?.type,'card_search_choice');
 applyOptimizedPvpIntent({bridge:mirroredEnv.bridge,
  readPending:()=>mirroredEnv.bridge.getCanonicalSnapshot(1).appState.pending,
- name:'commitExactTuneUpChoice',args:[[0,1],seat2Pending.commit_token]});
+ name:'commitExactTuneUpChoice',args:[[0,1,2],seat2Pending.commit_token]});
 assert.ok(mirroredEnv.bridge.getCanonicalSnapshot(1).appState.playerHand.includes('S0-ARC-026'));
 console.log('PASS seat 2 mirrored local PLAYER Tune Up -> Mana -> atomic Notes (owner check)');
 

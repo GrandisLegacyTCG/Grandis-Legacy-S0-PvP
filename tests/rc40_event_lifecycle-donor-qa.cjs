@@ -9,7 +9,7 @@ ctx.window=ctx;ctx.globalThis=ctx;ctx.location={href:'http://rc40test/index.html
 ctx.document={readyState:'loading',addEventListener(){},getElementById(){return null;},querySelector(){return null},querySelectorAll(){return []},createElement(){return {style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
 const exposure=`window.__QE={get state(){return appState},setState:s=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true;},initCards,card,heroState,buildInitialMatchState,getLegalActions,commitPlayedCard,executeAIAction,aiChooseAction:chooseAIAction,sourceShouldExhaust,coordinationAttackBonus,defensiveFormationBonus,expireEndPhaseAttachmentsForSide,responseOptionsFor,applyResolvedAttackDamage,attachmentPolicyForCard,heroIdFrom,manaPoolCardsForSide,drawManaCards};\n})();`;
-for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','engine/shared-app/app.bundle.js']){
+for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js','runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,file),'utf8');if(file.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,exposure);
  vm.runInContext(src,ctx,{filename:file,timeout:60000});
 }

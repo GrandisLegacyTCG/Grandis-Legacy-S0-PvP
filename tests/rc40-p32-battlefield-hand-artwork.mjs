@@ -12,7 +12,7 @@ import {fileURLToPath} from 'node:url';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const runtime=fs.readFileSync(path.join(repo,'public/battle/shared-app/app-runtime.js'),'utf8');
-const build='gl-s0-pvp-rc41-r39-v34-part5-2026-11-19';
+const build='gl-s0-pvp-stage3-rc42-r394-20261122-a';
 const html=fs.readFileSync(path.join(repo,'public/battle/index.html'),'utf8');
 let checks=0;
 function ok(test,message){assert.ok(test,message);checks++}
@@ -22,7 +22,7 @@ function segment(src,start,end){
  return src.slice(a,b);
 }
 const functions=[
- segment(runtime,'function art(id){','\n// RC40 Patch 3.2: VS AI'),
+ segment(runtime,'function art(id){','\n// The own Hand face is known'),
  segment(runtime,'function glBindPlayerHandArtwork(','\nfunction shardArt('),
  segment(runtime,'function glPvpGuardHandFace(','\nfunction glPvpWarmVisibleArtwork('),
  segment(runtime,'function renderHand(s){','\nfunction addAction('),
@@ -69,6 +69,14 @@ function harness(site=false){
   cv:id=>({name:'Card '+id}),
   playerHandTrack:hand,oppHandTrack:opponent,
   glHiddenCommittedDrawSlots:hidden,glPendingDrawReservations:reservations,
+  window:{GL_PVP_ARTWORK:{
+    thumb:id=>'data:image/webp;base64,EXACT_'+id,
+    bind(img,{cardId,src,priority}){
+      if(img.dataset.glPvpArtId===cardId)return true;
+      img.dataset.glPvpArtId=cardId;img.dataset.glPvpArtStage='thumb';
+      img.dataset.glPvpArtFull=src;img.src=this.thumb(cardId);return true;
+    }
+  }},
   glPvpArtworkDecoded:new Set(),glPvpPreloadArtwork:()=>new Promise(()=>{}),
   handRenderKey:'',opponentHandRenderKey:'',uiResponseSourceChoice:null,
   updateCommittedHandSlotVisibility:()=>{},
@@ -96,8 +104,8 @@ for(const site of [false,true]){
  for(let i=0;i<faces.length;i++){
   ok(!!faces[i],route+' Hand image element');
   const expect=(site?'/card-art/':'card-art/')+encodeURIComponent(t.state.playerHand[i])+'.webp';
-  ok(faces[i].getAttribute('src')===expect,route+' face artwork src '+i);
-  ok(faces[i].style.background.includes('back-'),route+' nonblank loading fallback '+i);
+  ok(faces[i].dataset.glPvpArtFull===expect,route+' canonical original artwork URL '+i);
+  ok(faces[i].getAttribute('src')==='data:image/webp;base64,EXACT_'+t.state.playerHand[i],route+' exact-card thumbnail initially '+i);
   ok(faces[i].srcWrites.length===1,route+' no initial duplicate src writes '+i);
  }
  t.render();
@@ -107,13 +115,13 @@ for(const site of [false,true]){
  ok(t.opponent.children.length===2,route+' opponent Hand count');
  ok(t.opponent.children.every(c=>c.children.find(x=>x.tagName==='IMG')?.getAttribute('src')===t.back),route+' opponent identity never assigned to image');
  const legacy=faces[1];legacy.emit('error');
- ok(legacy.getAttribute('src')==='assets/ui/back-legacy.webp',route+' missing Legacy hand art shows correct Back');
+ ok(legacy.getAttribute('src')==='data:image/webp;base64,EXACT_S0-WAR-L001',route+' Legacy keeps exact-card thumbnail on full-art failure');
  legacy.emit('error');
- ok(legacy.srcWrites.length===2,route+' one-shot fallback avoids loop');
+ ok(legacy.srcWrites.length===1,route+' no fallback loop or downgrade to Back');
  const main=faces[0];main.emit('error');
- ok(main.getAttribute('src')==='assets/ui/back-main.webp',route+' missing Main hand art shows correct Back');
+ ok(main.getAttribute('src')==='data:image/webp;base64,EXACT_S0-ARC-001',route+' Main keeps exact-card thumbnail on failure');
  const mana=new Element('img',t.base);t.bind(new Element('div',t.base),mana,'S0-MAN-001');mana.emit('error');
- ok(mana.getAttribute('src')==='assets/ui/back-shard.webp',route+' missing Mana art shows correct Back');
+ ok(mana.getAttribute('src')==='data:image/webp;base64,EXACT_S0-MAN-001',route+' Mana keeps exact-card thumbnail on failure');
  // Committed Draw slots remain hidden until the existing animation reveals them.
  t.hidden.PLAYER.set(0,'committed-draw');t.reservations.PLAYER.push({id:'draw-reserve'});t.render();
  ok(t.hand.children.length===4,route+' Draw reservation placeholder');
@@ -128,4 +136,4 @@ ok(runtimeRef,'production HTML loads patched renderer');
 const runtimeUrl=new URL(runtimeRef.replace(/&amp;/g,'&'),'https://test.invalid/battle/');
 ok(runtimeUrl.searchParams.get('v')===build,'exact Build ID remains in runtime query');
 ok(runtimeUrl.searchParams.get('hotfix')==='handart-20261115','hotfix cache bust does not alter Build ID');
-console.log(JSON.stringify({ok:true,checks,scenarios:['standalone-own-Hand','website-own-Hand','fallback-main-legacy-mana','stable-repaint','opponent-privacy','draw-hidden-and-reveal','runtime-cache-bust']}));
+console.log(JSON.stringify({ok:true,checks,scenarios:['standalone-own-Hand','website-own-Hand','exact-thumbnail-main-legacy-mana','stable-repaint','opponent-privacy','draw-hidden-and-reveal','runtime-cache-bust']}));

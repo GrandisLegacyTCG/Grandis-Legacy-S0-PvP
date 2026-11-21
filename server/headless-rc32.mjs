@@ -1,6 +1,72 @@
 import {PvpCombatPresentationLedger} from './combat-presentation.mjs';
 import {PvpDiscardPresentationLedger} from './discard-presentation.mjs';
 /**
+ * PvP-only adapter between donor engine return conventions and the server's
+ * transaction contract. Never change the donor's gameplay source for network
+ * semantics, and never infer success merely because the donor returned false.
+ *
+ * A donor Attack continuation may return false to mean "nothing else is
+ * pending" AFTER performing its final effect. In PvP this must count as an
+ * accepted commit when the authoritative post-state proves exact completion.
+ * All other negative engine outcomes remain rejections with rollback.
+ */
+const uidList = cards => Array.isArray(cards) ? cards.map(c => String(c?.uid ?? '')) : [];
+const same = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+
+export function normalizePvpEngineOutcome({bridge, readPending, name, args = []}) {
+  if (!bridge || typeof bridge.applyServerIntent !== 'function')
+    throw new Error('PvP gameplay engine is unavailable.');
+  const pending = name === 'commitOpponentManaSelection' ? readPending?.() : null;
+  const isAttackContinuation = pending?.type === 'opponent_mana_selection' &&
+    pending.decision_side === 'PLAYER' && pending.side === 'PLAYER' &&
+    pending.target_side === 'AI' && !!pending.continuation;
+  const before = isAttackContinuation ? bridge.getCanonicalSnapshot(1)?.appState : null;
+  const result = bridge.applyServerIntent(name, args);
+  if (result?.ok) return result;
+
+  // Normalize ONLY the one known, documented return-value mismatch. If the
+  // engine changes its error contract or a different effect fails, fail shut.
+  if (!isAttackContinuation ||
+      result?.error !== `Runtime action was not legal or no pending choice accepted: ${name}` ||
+      !before || !Array.isArray(pending.candidates) ||
+      !Array.isArray(pending.selected_indices))
+    throw new Error(String(result?.error || `Runtime rejected ${name}.`).slice(0,220));
+
+  const chosen = pending.selected_indices.map(i => pending.candidates[i]?.uid);
+  const required = Math.min(Number(pending.required_count), pending.candidates.length);
+  if (!Number.isInteger(required) || required < 1 || required > 12 ||
+      chosen.length !== required || chosen.some(x => typeof x !== 'string') ||
+      new Set(chosen).size !== required)
+    throw new Error('Donor returned false without a valid committed Mana choice.');
+
+  // The server tracks PHYSICAL shards, not color-weighted Mana values. The
+  // entire opponent pool must match the expected exact removal (no extra
+  // removals or reorder), and all chosen UIDs must return to the owner deck.
+  const beforePool = uidList(before.aiManaPoolCards);
+  const beforeDeck = uidList(before.aiManaDeck);
+  if (!chosen.every(uid => beforePool.includes(uid)) ||
+      new Set(beforePool).size !== beforePool.length)
+    throw new Error('Donor returned false with invalid pre-commit Mana state.');
+  const after = bridge.getCanonicalSnapshot(1)?.appState;
+  const afterPool = uidList(after?.aiManaPoolCards);
+  const afterDeck = uidList(after?.aiManaDeck);
+  if (!same(afterPool, beforePool.filter(uid => !chosen.includes(uid))) ||
+      afterDeck.length !== beforeDeck.length + required ||
+      !chosen.every(uid => !afterPool.includes(uid) && afterDeck.includes(uid)))
+    throw new Error('Donor returned false without exact authoritative Mana completion.');
+
+  // Some Attacks chain multiple Mana decisions or mandatory Legacy choices.
+  // They may open a NEW pending window; an unchanged original choice is not a
+  // successful commit. Never substitute an automatic answer to such choices.
+  const newPending = after?.pending;
+  if (newPending && same(newPending, pending))
+    throw new Error('Donor returned false without advancing the pending choice.');
+
+  return {ok:true, normalizedTerminalContinuation:true};
+}
+
+
+/**
  * Grandis Legacy PvP Season 0 — staged server-side runtime bootstrap.
  *
  * Boots the ACTUAL RC32 application engine in an isolated VM, using the same
@@ -191,11 +257,9 @@ export function applyExactLocalChoiceDraft({bridge, readPending, payload}) {
  */
 export function applyOptimizedPvpIntent({bridge, readPending, name, args}) {
   if (!bridge || typeof readPending !== 'function') throw new Error('PvP action bridge unavailable.');
-  const run = (intent, parameters) => {
-    const result = bridge.applyServerIntent(intent, parameters);
-    if (!result?.ok) throw new Error(String(result?.error || `Runtime rejected ${intent}.`).slice(0,220));
-    return result;
-  };
+  const run = (intent, parameters) => normalizePvpEngineOutcome({
+    bridge, readPending, name:intent, args:parameters
+  });
   if (name === 'commitExactOpponentManaSelectionIndices') {
     const p=readPending(),indices=args?.[0];
     if (!p||p.type!=='opponent_mana_selection'||p.decision_side!=='PLAYER')
@@ -326,9 +390,11 @@ export function applyOptimizedPvpIntent({bridge, readPending, name, args}) {
     }
     const selected = args?.[0];
     const token = String(args?.[1] || '');
-    const required = Number(p.required_count || 2);
+    const required = Number(p.required_count);
+    if (!Number.isInteger(required) || required < 1 || required > 50 ||
+        required > (p.candidates || []).length) throw new Error('Invalid server-declared Tune Up selection size.');
     if (!token || token !== String(p.commit_token || '') ||
-        !Array.isArray(selected) || required !== 2 || selected.length !== required ||
+        !Array.isArray(selected) || selected.length !== required ||
         !selected.every(n => Number.isInteger(n) && n >= 0 && n < (p.candidates || []).length) ||
         new Set(selected).size !== selected.length || (p.selected_indices || []).length) {
       throw new Error('Invalid or stale Tune Up selection.');
@@ -353,6 +419,7 @@ const RUNTIME_SOURCES = Object.freeze([
   'engine/js/runtime-authority.js',
   'engine/shared-app/active-starters.js',
   'runtime/season0-generated/rc41-approved-print-overrides.js',
+  'runtime/season0-generated/rc42-main-deck-r394-overlay.js',
   'engine/shared-app/app.bundle.js'
 ]);
 
@@ -481,7 +548,7 @@ export class Season0HeadlessAuthority {
       throw new Error('RC32 canonical PvP bridge contract is incomplete.');
     }
     const meta = ctx.GL_ACTIVE_STARTER_SET_META;
-    if (meta?.schema_version !== 'GL-ACTIVE-STARTERS-S0-R3.9-RULEBOOK-V3.4' ||
+    if (meta?.schema_version !== 'GL-ACTIVE-STARTERS-S0-R3.94-RULEBOOK-V3.5' ||
         meta.active_starter_count !== 5 || !Array.isArray(meta.ids) ||
         !meta.ids.every(id => STARTERS.has(id))) {
       throw new Error('Season 0 starter authority mismatch.');
@@ -559,6 +626,17 @@ export class Season0HeadlessAuthority {
   #settleServerContinuations() {
     for (let step = 0; step < 8; step++) {
       const s = this.#canonical?.appState;
+      // The donor's AI-facing End/Provoke path can advance the turn while
+      // leaving its timer flag set. In PvP the server has already executed the
+      // continuation synchronously; no timer may linger into a new turn.
+      // Clear only an objectively stale flag AFTER leaving End, then force a
+      // canonical reimport for any subsequent mirrored-seat action/view.
+      if (s && s.phase !== 'End' && s.autoEndTurnPending) {
+        s.autoEndTurnPending = false;
+        s.autoEndResumeScheduled = false;
+        this.#bridgeSeat = null;
+        this.#bridgeRevision = -1;
+      }
       if (!s || s.gameOver || s.pending || s.responseWindow) return;
       const drawReady = s.phase === 'Draw' &&
         s.drawPhaseResolvedFor === s.turn && !s.drawPresentationPending && !s.pvpTurnReady;

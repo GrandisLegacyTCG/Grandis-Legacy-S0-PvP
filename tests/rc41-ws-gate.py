@@ -13,7 +13,7 @@ try:
     except Exception: time.sleep(.08)
   else: raise AssertionError('Server did not start')
   assert meta['architecture']=='s0-rc41-pvp-authority-network-rc6', f'Unexpected authority: {meta}'
-  assert meta.get('ok') is True and meta.get('version')=='S0-RC41-PVP-NET-RC6-STAGE2-INTEGRATION-1', meta
+  assert meta.get('ok') is True and meta.get('version')=='S0-PVP-STAGE3-RC42-R394-20261122-A', meta
   assert meta['authoritySources']['engine/shared-app/app.bundle.js']==hashlib.sha256((ROOT/'public/battle/engine/shared-app/app.bundle.js').read_bytes()).hexdigest(), 'Server authority bundle differs from repository source'
   build=meta['buildId']
   lobby=(ROOT/'public/pvp/pvp-host.js').read_text()

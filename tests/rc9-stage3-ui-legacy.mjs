@@ -104,7 +104,8 @@ check('Card Review reuses frame + lazy preloads styles without per-action fetch'
  assert.ok(review.includes('frame.__glPendingReview'));
  assert.ok(review.includes('applyReviewToFrame(frame,c,lineage)'));
  assert.ok(review.includes('requestIdleCallback(run'));
- assert.ok(review.includes('Promise.race')&&review.includes('1600'));
+ assert.ok(review.includes('GL_PVP_ARTWORK?.bind')&&!review.includes('Promise.race'));
+ assert.ok(runtime.includes('gl-card-review-outer-close')); // CLOSE never waits on iframe
  assert.ok(!/fetch\(['"]api\//.test(runtime));
 });
 check('Network architecture remains one socket, local draft is one confirmed packet',()=>{
@@ -177,7 +178,7 @@ eCtx.document={readyState:'loading',addEventListener(){},getElementById(){return
 vm.createContext(eCtx);
 const engineInjection='window.__S3={initCards,buildInitialMatchState,heroIdFrom,heroState,positionLockedOneVsOne,activeNonLegacyLanes,manualRepositionAvailable,manualRepositionPairsForSide,repositionPairsForSide,sourceSwapOptions,soulBlastTargetSwapOptions,shadowSwitchCanReposition,swapBoardStateLanes,autoCenterOneVsOne,setState:(s)=>{appState=s;matchStarted=true;SUPPRESS_RENDER=true}};\n})();';
 for(const file of ['public/battle/engine/js/static-data.js','public/battle/engine/js/runtime-authority.js',
- 'public/battle/engine/shared-app/active-starters.js','public/battle/runtime/season0-generated/rc41-approved-print-overrides.js','public/battle/engine/shared-app/app.bundle.js']){
+ 'public/battle/engine/shared-app/active-starters.js','public/battle/runtime/season0-generated/rc41-approved-print-overrides.js','public/battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js','public/battle/engine/shared-app/app.bundle.js']){
  let src=read(file);if(file.endsWith('app.bundle.js'))src=src.replace(/\n\}\)\(\);\s*$/,engineInjection);
  vm.runInContext(src,eCtx,{filename:file,timeout:60000});
 }

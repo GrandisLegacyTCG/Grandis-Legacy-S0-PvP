@@ -1,4 +1,9 @@
-# CURRENT DEVELOPMENT: Season 0 PvP RC41 Part 5
+# CURRENT RELEASE CANDIDATE: Stage 3 standalone multiplayer and official Starter Decks
+
+**Active handoff:** `README_STAGE3_HANDOFF.md` and `docs/STAGE3_FINAL_QA.md`.
+Historical Stage 1/RC41/RC40 notes below are retained only for regression investigation.
+
+# ARCHIVE: Season 0 PvP RC41 Part 5
 
 See `README_RC41_INTEGRATION.md` and `docs/RC41_PART5_QA_REPORT.md`. The older RC40 material below is retained for history. The CURRENT Season 0 repository is **Grandis-Legacy-S0-PvP** (`main`), never Season 1. Archived notes below retain historical names.
 
