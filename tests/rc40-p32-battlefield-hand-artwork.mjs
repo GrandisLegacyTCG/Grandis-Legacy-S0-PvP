@@ -12,7 +12,7 @@ import {fileURLToPath} from 'node:url';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const runtime=fs.readFileSync(path.join(repo,'public/battle/shared-app/app-runtime.js'),'utf8');
-const build='gl-s0-pvp-stage3-rc42-r394-20261122-a';
+const build='gl-s0-pvp-rc42-r398-r40-20261124-a';
 const html=fs.readFileSync(path.join(repo,'public/battle/index.html'),'utf8');
 let checks=0;
 function ok(test,message){assert.ok(test,message);checks++}

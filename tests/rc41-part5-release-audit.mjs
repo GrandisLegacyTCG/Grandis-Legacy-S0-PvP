@@ -14,7 +14,7 @@ assert.ok(Object.keys(ctx.GL_RC41_R39_PRINT_OVERRIDES).length>=38);
 const art=readdirSync(join(root,'battle/card-art')).filter(s=>/^S0-.*\.webp$/.test(s));assert.equal(art.length,250);
 for (const name of art){const bytes=readFileSync(join(root,'battle/card-art',name));assert.ok(bytes.length>1000,name);}
 assert.equal(readdirSync(root).includes('card-art'),false,'No duplicate root card-art folder');
-const id='gl-s0-pvp-stage3-rc42-r394-20261122-a';assert.ok(read('index.html').includes(id));assert.ok(read('battle/index.html').includes(id));
+const id='gl-s0-pvp-rc42-r398-r40-20261124-a';assert.ok(read('index.html').includes(id));assert.ok(read('battle/index.html').includes(id));
 assert.ok(read('battle/index.html').includes('rc41-approved-print-overrides.js'));
 assert.ok(read('pvp/pvp-host.js').includes('https://grandislegacytcg.web.id/vs-ai/'));
 assert.ok(read('battle/engine/shared-app/app.bundle.js').includes('applyExactManaPayment:function'));

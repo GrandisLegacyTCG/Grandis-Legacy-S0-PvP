@@ -1,9 +1,9 @@
 {
-  "approvedWebsiteSourceName": "Grandis_Legacy_Website_FULL_REPO_NO_PVP_RC42_DB168_Rulebook35_2026-11-22.zip",
-  "artworkReferenceVerifiedAgainst": "Grandis_Legacy_VS_AI_Season0_RC42_2026-11-22.zip (all 250 byte-identical)",
+  "approvedWebsiteSourceName": "Grandis_Legacy_Website_FULL_REPO_NO_PVP_VSAI_RC42_DB168_R398_R40_2026-11-24.zip",
+  "artworkReferenceVerifiedAgainst": "VS AI Season 0 RC42 AI Conservation + Fire Flask (24 Nov 2026), 250 exact-byte matches with latest full website source",
   "contract": "Grandis Legacy Season 0 PvP website shared asset contract",
-  "deploymentRequirement": "Verify exact 250 artwork and 109 shared binary hashes against the latest FULL_REPO_NO_PVP source before deploy; do not use older GitHub main to infer current shared root contents.",
-  "notes": "The latest unpublished Website repository already contains 250 shared card-art files; the PvP-only overlay contains none. The exact unpublished complete Website ZIP is not mounted in this session, so byte-for-byte verification against the website ZIP is a separate deployment preflight. This lock is verified against 250 assets from the approved VS AI RC42 source.",
+  "deploymentRequirement": "The 250 artworks and 109 shared binary assets have been verified against the uploaded 24-Nov full website source; deploy exactly this matching website root.",
+  "notes": "Directly inspected supplied Grandis_Legacy_Website_FULL_REPO_NO_PVP_VSAI_RC42_DB168_R398_R40_2026-11-24.zip, and verified all 250 website-root artwork binary digests plus 109 shared assets. The PvP overlay contains only /pvp/ and no duplicate card-art; the backend remains self-contained.",
   "pvpOnlyArtwork": {},
   "sharedArtwork": {
     "S0-ARC-001": {
@@ -36,7 +36,7 @@
     },
     "S0-ARC-008": {
       "root": "/card-art/S0-ARC-008.webp",
-      "sha256": "1c17e902a478f9d4143380aaafa9c67410d58c72dae139c27efb0bbaae95c53f"
+      "sha256": "72f505aa4190bbc7931cae3d72583f788a8c8bfc11ddc8ef7c525a8317a21661"
     },
     "S0-ARC-009": {
       "root": "/card-art/S0-ARC-009.webp",
@@ -44,7 +44,7 @@
     },
     "S0-ARC-010": {
       "root": "/card-art/S0-ARC-010.webp",
-      "sha256": "5c0c7fbc14727f33da4c8ad3be4f4d5cbfec77c8c6a73bc1a2409de8edce3d92"
+      "sha256": "e4d447be7ed14af28a41f243ebe0ff46b1d7829871d8825ae665aeeddd4f00db"
     },
     "S0-ARC-011": {
       "root": "/card-art/S0-ARC-011.webp",
@@ -84,7 +84,7 @@
     },
     "S0-ARC-020": {
       "root": "/card-art/S0-ARC-020.webp",
-      "sha256": "b9339c3df952192cb2f56a5d273de172bf2a5d69c5b3296c882fb8039ea55a48"
+      "sha256": "017157193d419bea544c6e877877bd3bbbfdc98e869bcd5cf0b446d3f597d488"
     },
     "S0-ARC-021": {
       "root": "/card-art/S0-ARC-021.webp",
@@ -228,7 +228,7 @@
     },
     "S0-CLE-014": {
       "root": "/card-art/S0-CLE-014.webp",
-      "sha256": "d1a5a47cd0c62ad4062c491de9d5b8f94bce897e489eff04d5247db04ac83564"
+      "sha256": "bd448e92caba298b3d625c32094c38f56a5a04920c0cacb62c26904cb5bc264d"
     },
     "S0-CLE-015": {
       "root": "/card-art/S0-CLE-015.webp",
@@ -252,19 +252,19 @@
     },
     "S0-CLE-020": {
       "root": "/card-art/S0-CLE-020.webp",
-      "sha256": "981ab73cf38dbb6380670a952d1079f5b9e75ae0c16ef73dcf19a51a57fa52df"
+      "sha256": "6f79dff000f2ac7ac956fabf7b261b379cf0b120421222e7be5810f05a9146db"
     },
     "S0-CLE-021": {
       "root": "/card-art/S0-CLE-021.webp",
-      "sha256": "e532b31ddf239f700bfde253dd1aa1b2d2af71eba2f6eb51e531ca0028321ac7"
+      "sha256": "d47dd0005e7bf3b6d9861c34ec43c3a6e5edbb5307f91a7bc8e179968d1b6bf0"
     },
     "S0-CLE-022": {
       "root": "/card-art/S0-CLE-022.webp",
-      "sha256": "da985bd2758a17c6979306af5b1c1dc39deaf7d16f86a6829ed6addf1770db91"
+      "sha256": "847a753b2c40177fca56e653ff4af30b4b82f5f9693dc0263a54c3bd142fecce"
     },
     "S0-CLE-023": {
       "root": "/card-art/S0-CLE-023.webp",
-      "sha256": "b62a4e48ad4493f9e6babce2868ec09288fd539e1c08c411855a4f13f30a1a20"
+      "sha256": "686d6db95a57270c1513092b76778101d7e524d8c9f037a1e1541114902450cf"
     },
     "S0-CLE-024": {
       "root": "/card-art/S0-CLE-024.webp",
@@ -508,7 +508,7 @@
     },
     "S0-MAG-008": {
       "root": "/card-art/S0-MAG-008.webp",
-      "sha256": "edbfe36919c6aa1d1a7cbf1044f6e8857077e252d975e805e70d3b2693b781b4"
+      "sha256": "1bf64fc281c07aa0c252f5a5900faa12a87ed0818eb486852005d10506fccaac"
     },
     "S0-MAG-009": {
       "root": "/card-art/S0-MAG-009.webp",
@@ -544,7 +544,7 @@
     },
     "S0-MAG-017": {
       "root": "/card-art/S0-MAG-017.webp",
-      "sha256": "478a587d05584ac5b904e541179d15d7d8f750f849ebd35d63060beb6e183c67"
+      "sha256": "1ab3e1f8efdf276bd0706dcd23c9c561f82cf1699487aedda7df38b27c2f30dc"
     },
     "S0-MAG-018": {
       "root": "/card-art/S0-MAG-018.webp",
@@ -556,23 +556,23 @@
     },
     "S0-MAG-020": {
       "root": "/card-art/S0-MAG-020.webp",
-      "sha256": "b4fbbd9f06777d05f48ff9a5f9c00d25b1b4c8f4acc3c51202ae97b37e7c68dc"
+      "sha256": "d9ed9099f339e3d038bbf4bf68ee0edf0f671ccf19c067d655718351cc2b6fbc"
     },
     "S0-MAG-021": {
       "root": "/card-art/S0-MAG-021.webp",
-      "sha256": "80d207c235210aad5980db6913f5f47f7184be216f52f1d5e7138d1446877d9e"
+      "sha256": "78aa4d357012085e97e49ed6ca62daa47f6ba425232f6798a7a8e4af8ef857a2"
     },
     "S0-MAG-022": {
       "root": "/card-art/S0-MAG-022.webp",
-      "sha256": "ba246cdbf3f76f73e7e549bfa002ec309d5ed92316a02810afc309002403a018"
+      "sha256": "3353f8c442fd3e75c94dbed0d224e132f3b5b9b8350bf3315adc5a950e682c99"
     },
     "S0-MAG-023": {
       "root": "/card-art/S0-MAG-023.webp",
-      "sha256": "1835b5064c7e337914f89fd9908191a01c9369d5eebf3c8a4452c3616cc67789"
+      "sha256": "d1926f945740e0c4b1e633cf0212ec9b8ba625a3235c6bc9c8b748b6bbdad061"
     },
     "S0-MAG-024": {
       "root": "/card-art/S0-MAG-024.webp",
-      "sha256": "b8b9d8048feb8d64272c2db93df32db1e6ac7e07ba9a854cf89b764fbece47eb"
+      "sha256": "964decb0be04903efc0ad7ce53837c6835cbf5e5eef05dbca28bb20fb5a9821a"
     },
     "S0-MAG-025": {
       "root": "/card-art/S0-MAG-025.webp",
@@ -580,7 +580,7 @@
     },
     "S0-MAG-026": {
       "root": "/card-art/S0-MAG-026.webp",
-      "sha256": "a5449129dbd1cc6e0aee7e7cc46bfe8f5789eb658c3b77810ac9df0b823a47b9"
+      "sha256": "90e0026ed64339a6ed07d19b79278ad280e134eb50babdd161c76d7b627222d9"
     },
     "S0-MAG-027": {
       "root": "/card-art/S0-MAG-027.webp",
@@ -592,7 +592,7 @@
     },
     "S0-MAG-029": {
       "root": "/card-art/S0-MAG-029.webp",
-      "sha256": "e46aafafb2fc2764cb8417b17df96cba1400534e144b33341e3589c108edb72c"
+      "sha256": "816bc18b958fb3f2baea7a2d9b15788062767a84cc28a7e2decb61939435d5e8"
     },
     "S0-MAG-030": {
       "root": "/card-art/S0-MAG-030.webp",
@@ -672,171 +672,171 @@
     },
     "S0-THF-001": {
       "root": "/card-art/S0-THF-001.webp",
-      "sha256": "70d9f99dfec5d5e51facad5531c76aad8f5e67dc0030429bf45e3f2857457c1f"
+      "sha256": "a9847fca122af5a6431e80086f9417e16814fddb5b32896fbf6c9a33dae27e86"
     },
     "S0-THF-002": {
       "root": "/card-art/S0-THF-002.webp",
-      "sha256": "e5bd311b4efc6999ec5b0d9c5908c64229bfeb55c58d1d83746d1298f60546c4"
+      "sha256": "ff999bb4e1f711e85483b505302c2f8b30e282b7183d530e2391b083df082b65"
     },
     "S0-THF-003": {
       "root": "/card-art/S0-THF-003.webp",
-      "sha256": "290d9640e1585528bf1d8471de6d4d7432eced3649d60d5e9f4a5ecd5750e476"
+      "sha256": "67d12a03ca2e31677a1cbf56fc6d10d95a6e3119b475d362f65ecceb554b31e7"
     },
     "S0-THF-004": {
       "root": "/card-art/S0-THF-004.webp",
-      "sha256": "2ec3f0788cdc797333e9b9d05770887b01476d8bea0129bb5cf1f3724fd0b437"
+      "sha256": "c85e11e869f4da64ed9a81a2edc11ae68376fdd3d9d0ce32e86b5b277ae223e8"
     },
     "S0-THF-005": {
       "root": "/card-art/S0-THF-005.webp",
-      "sha256": "7cd5698ba746bb6f875ee0268aec62c25d832963023a3b1bde8f1a1e14831972"
+      "sha256": "2d562ff2584ddc4df5a3dd6df943edd9562088c8d1e471bdafde310c126ce591"
     },
     "S0-THF-006": {
       "root": "/card-art/S0-THF-006.webp",
-      "sha256": "bc4f6c5e4bbe84fc1b7149fa4ae2239d50143623b964ba3b344c626c2b91a4b2"
+      "sha256": "3daa617076a2a2a94fa6624023bada4675a4de8187dc9466d73471679b07ddc5"
     },
     "S0-THF-007": {
       "root": "/card-art/S0-THF-007.webp",
-      "sha256": "5fe57836252679599cf36d56c4c427344040d65805423495d9d657e99c2264a1"
+      "sha256": "82d0b0c9df9edb2addf891590ce7be6e717a46195f40be759a34cfa0d31ea458"
     },
     "S0-THF-008": {
       "root": "/card-art/S0-THF-008.webp",
-      "sha256": "9fa447a9cb31607fd75b2d597e9d7310ff0a84a6fe2906f568742fe9f384383f"
+      "sha256": "37b947192c0e68ff74d35b3e4dbff2f238db43edb214ae39cbccc70158d2ee3b"
     },
     "S0-THF-009": {
       "root": "/card-art/S0-THF-009.webp",
-      "sha256": "d215694bd2323c81a9527bce11dfb9efdff8c5cbe037c1b39f51fa6a061aed0c"
+      "sha256": "4138a743148aecf996b2158674806b3ced1f1ba0ecee07ae8ada659d4198d487"
     },
     "S0-THF-010": {
       "root": "/card-art/S0-THF-010.webp",
-      "sha256": "2ee45ec8405b1102184c7bb55d5b8b8596d00239c3fddcce7ea44bc836573144"
+      "sha256": "ec8c943d76dc6a4879dcb6cc2c5838e5c90a299c6b2dd684a3995ca39e2ff336"
     },
     "S0-THF-011": {
       "root": "/card-art/S0-THF-011.webp",
-      "sha256": "dd127e2d4e257288b4e2498947da5bedd35c607c083d9e057afa289cd52178f9"
+      "sha256": "eebfbc161a415d618ea40d159fa1aa1a2c7ff97f720f2b276fc47d7456d87a41"
     },
     "S0-THF-012": {
       "root": "/card-art/S0-THF-012.webp",
-      "sha256": "a25ed798066a2d89e42c2d061450116cd8dd0caaed26fa986a7e46b70d3c5f13"
+      "sha256": "66e2463937f038b7d86c08e787a761460dc29fda06c550e5101341cc623af51c"
     },
     "S0-THF-013": {
       "root": "/card-art/S0-THF-013.webp",
-      "sha256": "5cbdf58cf8591c66784888b1bdab0a5bc8bcd30090f37311ac9ae60dce7b8260"
+      "sha256": "20f348c2cdcce295ff68c71741468bb063828cd0048fffbbfce704d2539a5a5f"
     },
     "S0-THF-014": {
       "root": "/card-art/S0-THF-014.webp",
-      "sha256": "e03a41c0acbdf6270a6dd5d00b83f6e549a00dabc033b2ef9a8ddb0cafc4e7d3"
+      "sha256": "b34897e66a8878b97a076fb33b64710d2904b10696016592a53d6c8b83961899"
     },
     "S0-THF-015": {
       "root": "/card-art/S0-THF-015.webp",
-      "sha256": "9244e0ad0f89b5ab59925c86828c0c0d8b889f00c79cc2bf7363e5f5d00b7699"
+      "sha256": "d049c1be3c8a6b938cbed1807f95c6d78b1f89e6c54029529755aea32f15752f"
     },
     "S0-THF-016": {
       "root": "/card-art/S0-THF-016.webp",
-      "sha256": "551120d41a1f26a6b88f6c8f467c4b34a0ed47c71ef32f10f24173e269803385"
+      "sha256": "a5527073b362ae6fe335e3f15ab798560d4a2b02ec25c4c80a807e9ef2d54b7d"
     },
     "S0-THF-017": {
       "root": "/card-art/S0-THF-017.webp",
-      "sha256": "4ee6d315dba25fd9756ea751cea597e2a31563f97d057af669c6c141565a0b97"
+      "sha256": "4345324113a60975a3708cb981011aa3490522f4ff9be4be13ac4a4ab9e18d67"
     },
     "S0-THF-018": {
       "root": "/card-art/S0-THF-018.webp",
-      "sha256": "8b3ddef406fd3d16b7bd4b80c94d24d6b33d946425b56111f9fdc3fa6fdc0f85"
+      "sha256": "2f2e1bfbe21b8c52d8497ce157a770cae7f82adda328d38f63504a01c545eb92"
     },
     "S0-THF-019": {
       "root": "/card-art/S0-THF-019.webp",
-      "sha256": "1a6b633c6ed7ce02748f7f76020973a5bc3871e88b2a8f8e65b1a5c2b4132bdd"
+      "sha256": "90344249e4fa4ed4760584c2e1afdb39a616292f97ff9b79b4940ecb08bec89d"
     },
     "S0-THF-020": {
       "root": "/card-art/S0-THF-020.webp",
-      "sha256": "8d38976556b4443c4aca254844ee7f8fa7a26d6070b6cb82b4791ddb57fad8fb"
+      "sha256": "e9e655d5afbf7ab84e89571218411776b6cdd6234e2db9ed6bc8c96c12bc0298"
     },
     "S0-THF-021": {
       "root": "/card-art/S0-THF-021.webp",
-      "sha256": "52727b41a74109529ccfdb54db681df29e2ad184d5731186170f7e7b57a3a167"
+      "sha256": "93ed77441c6d605b3c94935f00061a80167f08ca1eabbe07456b3fe36fa1272f"
     },
     "S0-THF-022": {
       "root": "/card-art/S0-THF-022.webp",
-      "sha256": "e12f212b4e58a39d3e853e3fc1b6df1c14a8faf31a5da8c888044610436c22e1"
+      "sha256": "d0a659c42f1ee7d095aa9b95d31beede170aa3b220031615acd9d0f10deb2256"
     },
     "S0-THF-023": {
       "root": "/card-art/S0-THF-023.webp",
-      "sha256": "4117831b934573b1d416e594bdaadc5807faaca9c070adafc05b4900f5123428"
+      "sha256": "c50bae7fcd1396149eeef07e4d8daaae23fad2298377bd7a0ddcb8be5531c368"
     },
     "S0-THF-024": {
       "root": "/card-art/S0-THF-024.webp",
-      "sha256": "0efdec09c2bfa9eff91a20712f20357a7fb5a49276da333f135bc7ec8039759d"
+      "sha256": "8b4bd36aae694fc1f678797283ad3514e7381af7239017c8babda2915f74547f"
     },
     "S0-THF-025": {
       "root": "/card-art/S0-THF-025.webp",
-      "sha256": "8b05f0800c54bffb30424c493aae5e41a921eeee0ea81c16aafeb067100d2649"
+      "sha256": "d9fd3589eaba03151b6b7681a4496a2b3bbdbb459b3e222dbc34b60e2841cc60"
     },
     "S0-THF-026": {
       "root": "/card-art/S0-THF-026.webp",
-      "sha256": "510fe05f0a56fd3b1317ef342b7ebc68ad452aa63d5adaf4e409043e902b9811"
+      "sha256": "8ffa7e6fe0d681f3ddce9786b9b9b6b4a77a7afc869436c4af5c066b3a15115c"
     },
     "S0-THF-027": {
       "root": "/card-art/S0-THF-027.webp",
-      "sha256": "19753a9ba523c9396c6074353bb55de854dff494f7955550fdf2bace99342514"
+      "sha256": "58eb2e7922417d224f03e429ab9683f1b7a52604ea5217f5db52bab45565f361"
     },
     "S0-THF-028": {
       "root": "/card-art/S0-THF-028.webp",
-      "sha256": "3c2fba0755dda56a8356bcc66c0df93bb366589590ed8adb627e9d6375f81782"
+      "sha256": "6f8b3fd8aab5e016b4bad95ed57d3341e08e59d962c1c760a89de151e9e7f338"
     },
     "S0-THF-029": {
       "root": "/card-art/S0-THF-029.webp",
-      "sha256": "87d836af4e71d37e084c6786105e01404065d21ce8a4f3bee1503048ee0abaa8"
+      "sha256": "1046b313c1af9fb90461679fa81883743671b656dc33f378e87745fdb2268335"
     },
     "S0-THF-030": {
       "root": "/card-art/S0-THF-030.webp",
-      "sha256": "b41c91fd40922b7804522130e79ca0b54383adb6d2d0820a94bf889d23c9dc1b"
+      "sha256": "c8755d9fbacb8f714048f244eee60cc40ef28634c9c6b689bd36945eaecaa19c"
     },
     "S0-THF-031": {
       "root": "/card-art/S0-THF-031.webp",
-      "sha256": "7b6bb8c5bf5afd7e295c394c706227dc3e18443ac7523375a99c73bb6020145d"
+      "sha256": "9efcacc9504e10bd39b6b3ca1493d75a3e5f15c3956bb8fc8fdf8684493dc513"
     },
     "S0-THF-H001": {
       "root": "/card-art/S0-THF-H001.webp",
-      "sha256": "1dccfda1beb2213897a0ac288c9ec67c29139430bb9149784aa5cf1ae1b24eb7"
+      "sha256": "df7ae376fd1a0d7612268cbc8e19fff4001d9129bf308b5988128e1de8368a7d"
     },
     "S0-THF-H002": {
       "root": "/card-art/S0-THF-H002.webp",
-      "sha256": "23078977dd19df459efcc29592cf41ae3b52f4cfc59eb1d68790e2b5e12047fc"
+      "sha256": "ea69c44088047f6ad2ed8c21247bdedb31bfc07334e4d0f0eceaf07aea04c5fd"
     },
     "S0-THF-H003": {
       "root": "/card-art/S0-THF-H003.webp",
-      "sha256": "6cf249aea998168c9b524753af9352f9e458652904575651b959ee52b81e6a1e"
+      "sha256": "1a43401dc98b9d0d16a7ba8456ae4d6cb78c8b8405bc0bb1bd2ce6682bcd0e48"
     },
     "S0-THF-H004": {
       "root": "/card-art/S0-THF-H004.webp",
-      "sha256": "9737d8f8e97bc1a4069ab246d34c5ea15490085fa9b75233f2024f0d1ae685ea"
+      "sha256": "56dfba9dbfb7657be5dbb4212b960206173b63604f6021d70b8385062d47f38a"
     },
     "S0-THF-H005": {
       "root": "/card-art/S0-THF-H005.webp",
-      "sha256": "f205c245990ae1bd047e5462b1a19cd1162c4dfe77e7b4510a130575eaae8a99"
+      "sha256": "8cdcf5b364e8635dc0f45bef4f8a36f7e1884129aff4f8e2941d080baeaf2fc4"
     },
     "S0-THF-H006": {
       "root": "/card-art/S0-THF-H006.webp",
-      "sha256": "f7f0bfc294439936a0c43f05d2fc877f148607ff3226572555bc53fa3c602c4c"
+      "sha256": "5caa2a137ba7d6b5cd21ea0a9f66f57d62899f06a0aacfe72c2d11b629b4f12a"
     },
     "S0-THF-H007": {
       "root": "/card-art/S0-THF-H007.webp",
-      "sha256": "47b403a5be6070bd35237316610a4849ae13c1544081b686e64fd8ca683fff61"
+      "sha256": "bf2413f03db3d2cba92843ba5ded7283c9408729dd5b6882356bfed292a802f7"
     },
     "S0-THF-H008": {
       "root": "/card-art/S0-THF-H008.webp",
-      "sha256": "6f6eecd8273ccca512f964285dfe3bf9fb01068568afa3d3a89e3fc7583404f7"
+      "sha256": "bd6ffa1eca5f05206eb86d79132a6478e8a76a19169fc31db79b83407abfa5a1"
     },
     "S0-THF-H009": {
       "root": "/card-art/S0-THF-H009.webp",
-      "sha256": "f664e7c6bf9a5d3642e7a0d43750a4a9da1b8533fd4123f2844f4336cc41d1bf"
+      "sha256": "7a06fe890d4bd8c069f4c24febc5b8758b197a31234af3bf9da517f102548f53"
     },
     "S0-THF-L001": {
       "root": "/card-art/S0-THF-L001.webp",
-      "sha256": "6d778f8a8508140be919509ad3ba8c82f468ce51a90beadbf7c6cc4f36a7824c"
+      "sha256": "376e6350434858efe939f95d26db99d6513d619d03603fec6e2e2740d411d895"
     },
     "S0-THF-L002": {
       "root": "/card-art/S0-THF-L002.webp",
-      "sha256": "747b5f0fe32f4572bf2a968a998fbe8f0b7af0a1d9923b15088cc8369657c688"
+      "sha256": "94c642a568ea5370a269b46191e0964a9fb2f4a6090f1387e475cbf7596bc33b"
     },
     "S0-WAR-001": {
       "root": "/card-art/S0-WAR-001.webp",
@@ -924,7 +924,7 @@
     },
     "S0-WAR-022": {
       "root": "/card-art/S0-WAR-022.webp",
-      "sha256": "3cca56c741c5fa4432b0a51ac49a907eb0979bd212dbbf41717dc6b7215a20de"
+      "sha256": "ffa5ccee3cd5b9965f89286893306aa51f3c003bbdfdd27b9ef4c4dfe6757723"
     },
     "S0-WAR-023": {
       "root": "/card-art/S0-WAR-023.webp",
@@ -940,7 +940,7 @@
     },
     "S0-WAR-026": {
       "root": "/card-art/S0-WAR-026.webp",
-      "sha256": "7d7c7fd07f219656577f5e0aeced7d33e14808a4ba53b9a4f01e8a84584674b0"
+      "sha256": "cc5a530fc1ab9b68b4974b0a84e9faead17c00c38780db567f2af67e16cc7d13"
     },
     "S0-WAR-027": {
       "root": "/card-art/S0-WAR-027.webp",
@@ -1445,9 +1445,9 @@
       "sha256": "c62604a77d5307612c10e47a5eba0337d01b4bb1bb801d97dc4fe844208de8d0"
     }
   },
-  "sourceVerifiedAt": "2026-11-22",
+  "sourceVerifiedAt": "2026-11-24",
   "websiteBranch": "unpublished RC42/DB168 source, not GitHub main",
-  "websiteFullRepositoryDirectlyVerified": false,
+  "websiteFullRepositoryDirectlyVerified": true,
   "websiteOriginalAudit": "pvp/SHARED_ASSET_AUDIT.json",
   "websiteRepo": "GrandisLegacyTCG/Grandis-Legacy-S0-Website",
   "websiteRuntimeRequired": [

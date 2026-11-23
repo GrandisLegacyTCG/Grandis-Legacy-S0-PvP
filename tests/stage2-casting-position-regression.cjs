@@ -9,7 +9,7 @@ cx.navigator={userAgent:'Stage2 casting adapter QA'};
 cx.document={readyState:'loading',addEventListener(){},getElementById(){return null},querySelector(){return null},querySelectorAll(){return []},createElement(){return{style:{},appendChild(){},setAttribute(){}}},documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(cx);
 for(const file of ['engine/js/static-data.js','engine/js/runtime-authority.js','engine/shared-app/active-starters.js',
- 'runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r394-overlay.js','engine/shared-app/app.bundle.js']){
+ 'runtime/season0-generated/rc41-approved-print-overrides.js','runtime/season0-generated/rc42-main-deck-r398-overlay.js','engine/shared-app/app.bundle.js']){
  let src=fs.readFileSync(path.join(root,file),'utf8');
  if(file.endsWith('app.bundle.js')){
   assert.match(src,/\n\}\)\(\);\s*$/);

@@ -8,7 +8,7 @@ const sha=p=>createHash('sha256').update(readFileSync(join(root,p))).digest('hex
 let n=0;
 const check=(name,fn)=>{fn();console.log('PASS',name);n++};
 const networkFrozen={
- 'server.js':'c318a0e1f167658f4eb69d8001b0f51c036ca3886669e8bdc6a4d1822b25465b',
+ 'server.js':'60b9d9789f126044e5fa118d0c143015af08bc287fff442c5c2782ffd89f5d25',
  'server/headless-rc32.mjs':'5adb13c7da588989145c080dd822c6b8c6e029e30a273fd0cb012ba619cf7968',
  'server/viewer-safe.mjs':'a800ecdee30db78fbf4613b330c09e6030a3973f48fe009c0e4956c36eb34725',
  'public/battle/runtime/pvp-network.js':'3b3639e8464411def97620489842835052f7e1415b6bf93e1a472e22b91fd2f3',
@@ -68,7 +68,12 @@ check('optional Swap shows server-owned legal partners, Hero/Legacy preview, and
 check('lobby changes affect only header nav and Rank component, not PvP rules',()=>{
  const head=read('scripts/website-overlay/pvp/lobby/pvp-shared-header-20261120.css');
  const rank=read('public/pvp/s0-rc32-hero-setup.css');
- assert.match(head,/Stage 2: the PvP navigation must end at the same right-side gutter/);
+ assert.match(head,/left:calc\(50% - 50vw\)!important/,'header should occupy full visual viewport exactly once');
+ assert.match(head,/width:100vw!important/,'header must not be clipped by a centered lobby container');
+ assert.match(head,/padding-right:29px!important/,'navigation must match shared right gutter');
+ assert.match(head,/grid-template-columns:34px 84px 34px!important/,'rank style must retain VS AI track widths');
+ assert.match(head,/#pvpRankPrev::before/);
+ assert.match(head,/#pvpRankNext::before/);
  assert.match(head,/#pvpSetupOverlay \.pvp-v260-app-links\.gl-site-app-nav/);
  assert.match(head,/justify-self:end!important/);
  assert.match(rank,/grid-template-columns:34px 84px 34px/);

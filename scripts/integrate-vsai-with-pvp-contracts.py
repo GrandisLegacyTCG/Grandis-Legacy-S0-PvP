@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 COMPAT=ROOT/'server/compat'
 ENGINE=ROOT/'public/battle/engine/shared-app/app.bundle.js'
-DONOR_SHA='c9fd5a7119dfcbfd9424554da808d22cf396da4b71cce7d0b277217c50362bfb'
+DONOR_SHA='18b6e1d5af711ca8041968bdd5f6ebdef445d8edbae4c5f736ea1bde32dec67f'
 
 def load(name):
     path=COMPAT/name

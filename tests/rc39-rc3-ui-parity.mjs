@@ -55,8 +55,8 @@ assert.match(runtime,/function updateCommittedHandSlotVisibility\(side\)/);
 assert.match(runtime,/for\(let i=0;i<5;i\+\+\)groups\.push/);
 assert.doesNotMatch(runtime,/<h2 id="glCoinTitle">Opening Coin Flip<\/h2>/);
 assert.match(runtime,/aria-label="Coin flip"/);
-assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-stage3-rc42-r394-20261122-a/);
-assert.match(server,/const VERSION='S0-PVP-STAGE3-RC42-R394-20261122-A'/); // RC40 authoritative server identity
+assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc42-r398-r40-20261124-a/);
+assert.match(server,/const VERSION='S0-PVP-RC42-R398-R40-20261124-A'/); // RC40 authoritative server identity
 assert.doesNotMatch(runtime,/addAction\(actions,'WHY\?'/,'No PvP-only Tune Up button absent from donor UI');
 // Public EXP card IDs are visible to either seat, but hidden opposing Hand and
 // deck identities must remain masked. The inspector uses only public hero fields.

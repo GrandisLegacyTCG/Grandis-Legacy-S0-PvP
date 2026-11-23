@@ -19,8 +19,8 @@ with tempfile.TemporaryDirectory(prefix='grandis-pvp-website-stage3-') as temp:
     site = output / 'pvp'
     meta = json.loads((output / 'PVP_WEBSITE_MANIFEST.json').read_text())
     build = meta['build']
-    assert build['buildId'].startswith('gl-s0-pvp-stage3-rc42-r394-')
-    assert build['version'] == 'S0-PVP-STAGE3-RC42-R394-20261122-A'
+    assert build['buildId'] == 'gl-s0-pvp-rc42-r398-r40-20261124-a'
+    assert build['version'] == 'S0-PVP-RC42-R398-R40-20261124-A'
     assert build['buildId'] in (site / 'index.html').read_text()
     assert build['buildId'] in (site / 'battle/index.html').read_text()
     assert build['buildId'] in (site / 'build-meta.js').read_text()
@@ -51,7 +51,7 @@ with tempfile.TemporaryDirectory(prefix='grandis-pvp-website-stage3-') as temp:
         b = ROOT / 'public/battle' / f
         assert a.is_file(), str(a)
         assert hashlib.sha256(a.read_bytes()).digest() == hashlib.sha256(b.read_bytes()).digest(), f+' website divergence'
-    overlay_js=(site/'battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js').read_text()
+    overlay_js=(site/'battle/runtime/season0-generated/rc42-main-deck-r398-overlay.js').read_text()
     assert 'var local=window.GL_PVP_CARD_ART_URL(id);' in overlay_js
     assert "var local='card-art/'" not in overlay_js
     assert "image:'card-art/'" not in overlay_js

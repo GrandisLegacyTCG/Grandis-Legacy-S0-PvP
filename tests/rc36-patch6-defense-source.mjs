@@ -15,7 +15,7 @@ const between=(start,end)=>{
 const routeSource=between('const RESPONSE_ALLIED_SOURCE_CARDS=', 'function renderResponseRouteGuide(');
 const panelSource=between('  const tributePanelAction=', '  hc.ondblclick=');
 const buildId=readFileSync(new URL('../server.js',import.meta.url),'utf8').match(/const BUILD_ID='([^']+)'/)?.[1];
-assert.match(buildId||'',/^gl-s0-pvp-stage3-rc42-r394-20261122-a$/,'Only the approved RC41 PvP-Trial authority may be served');
+assert.match(buildId||'',/^gl-s0-pvp-rc42-r398-r40-20261124-a$/,'Only the approved RC41 PvP-Trial authority may be served');
 const runtimeRef=html.match(/src="(shared-app\/app-runtime\.js\?[^"\n]+)"/)?.[1];
 assert.ok(runtimeRef,'Browser must load its active PvP battlefield runtime');
 const runtimeSrc=new URL(runtimeRef.replace(/&amp;/g,'&'),'https://test.invalid/battle/');

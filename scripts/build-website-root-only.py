@@ -70,6 +70,10 @@ def build(output_root: Path):
 
     shutil.copytree(SOURCE, dest, ignore=ignore)
     shutil.copytree(SITE_ADDITIONS, dest, dirs_exist_ok=True)
+    # Historical R3.94 print data is retained for standalone audit only.
+    # Shipping its inactive overlay creates stale artwork URLs in /pvp/.
+    archived_overlay=dest/'battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js'
+    if archived_overlay.is_file(): archived_overlay.unlink()
     if len(list((dest / 'battle' / 'card-art').glob('S0-*.webp'))) != 250:
         raise RuntimeError('Website must contain all current artwork exclusively INSIDE /pvp/battle/card-art/')
 
@@ -95,7 +99,7 @@ def build(output_root: Path):
                             '<link rel="stylesheet" href="lobby/pvp-mobile-desktop.css', 1)
         insertion = ('<link rel="stylesheet" href="/assets/css/gl-site-brand.css">\n'
                      '<link rel="stylesheet" href="/assets/css/gl-site-navigation.css">\n'
-                     '<link rel="stylesheet" href="lobby/pvp-shared-header-20261120.css?v=20261120-smooth-1">\n'
+                     '<link rel="stylesheet" href="lobby/pvp-shared-header-20261120.css?v=20261124-r398-r40-navrank">\n'
                      '<script src="/assets/js/s0-artwork-fallback.js"></script>\n'
                      '<script defer src="/assets/js/gl-site-analytics.js?v=20261120-v1"></script>\n')
         return swap_once(html, '</head>', insertion+'</head>', 'website lobby head')
@@ -139,7 +143,7 @@ def build(output_root: Path):
     # Convert the result to the approved latest unpublished site-root assets
     # contract only AFTER all gameplay/frontend donor adaptations are applied.
     for f in ['pvp/pvp-host.js','battle/shared-app/app-runtime.js',
-              'battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js']:
+              'battle/runtime/season0-generated/rc42-main-deck-r398-overlay.js']:
         if 'card-art/' not in (dest/f).read_text():
             raise RuntimeError(f+' lost its card artwork route')
     host = (dest / 'pvp/pvp-host.js').read_text(encoding='utf-8')
@@ -158,7 +162,7 @@ def build(output_root: Path):
     info.update({'build': meta, 'rootOnly': '/pvp/', 'websiteRoot': str(output_root),
                  'siteWebSocket': SITE_WSS + '/ws'})
     (dest / 'docs').mkdir(exist_ok=True)
-    (dest / 'docs/WEBSITE_PVP_DEPLOYMENT.md').write_text('# Grandis Legacy — PvP Website Overlay Deployment\n\nThis ZIP contains ONLY `pvp/` to insert into the **latest unpublished full\nWebsite repo** (`Grandis_Legacy_Website_FULL_REPO_NO_PVP_RC42_DB168_Rulebook35_2026-11-22.zip`).\nIt does not contain or replace Homepage, Deck Builder, VS AI, or any\nshared website-root assets.\n\n- All **250** current card artworks resolve to `/card-art/S0-*.webp`.\n- The 109 pre-existing shared visual/font/audio copies resolve to root `/assets/`,\n  `/engine/assets/`, and `/deck-builder/assets/` paths, as specified in\n  `docs/SHARED_ASSETS_DEPLOYMENT.json` and backend\n  `scripts/website-shared-assets-lock.json`.\n- The /pvp/ overlay includes no card artwork files. The root website is expected\n  to already include all 250 card files, including Cheers! and Fire Flask.\n- No website root assets are modified by this package; existing website\n  directories must not be deleted to upload this overlay.\n- PvP backend is independently standalone and retains all 250 local artworks.\n- Build ID in `pvp/build-meta.js` must match the backend build. WSS endpoint\n  in `pvp/config.js` must point to the live backend instance.\n\nIMPORTANT: The full latest unpublished Website source ZIP was not mounted in the\nPvP build environment. Card images have instead been verified byte-for-byte\nagainst the 250-file VS AI RC42 donor. Run the included backend verification\nscript against the actual latest website source ZIP before publishing.\nIf the source ZIP differs, fix the shared asset map instead of deploying broken\nasset links. Two-browser production WSS gameplay QA remains required.\n', encoding='utf-8')
+    (dest / 'docs/WEBSITE_PVP_DEPLOYMENT.md').write_text('# Grandis Legacy — PvP Website Overlay Deployment\n\nThis ZIP contains ONLY `pvp/` to insert into the **latest unpublished full\nWebsite repo** (`Grandis_Legacy_Website_FULL_REPO_NO_PVP_VSAI_RC42_DB168_R398_R40_2026-11-24.zip`).\nIt does not contain or replace Homepage, Deck Builder, VS AI, or any\nshared website-root assets.\n\n- All **250** current card artworks resolve to `/card-art/S0-*.webp`.\n- The 109 pre-existing shared visual/font/audio copies resolve to root `/assets/`,\n  `/engine/assets/`, and `/deck-builder/assets/` paths, as specified in\n  `docs/SHARED_ASSETS_DEPLOYMENT.json` and backend\n  `scripts/website-shared-assets-lock.json`.\n- The /pvp/ overlay includes no card artwork files. The root website is expected\n  to already include all 250 card files, including Cheers! and Fire Flask.\n- No website root assets are modified by this package; existing website\n  directories must not be deleted to upload this overlay.\n- PvP backend is independently standalone and retains all 250 local artworks.\n- Build ID in `pvp/build-meta.js` must match the backend build. WSS endpoint\n  in `pvp/config.js` must point to the live backend instance.\n\nThe actual 24-Nov full Website root and VS AI donor have been verified\nbyte-for-byte for all 250 shared card arts and 109 shared other assets. Two-browser production WSS gameplay QA remains required.\n', encoding='utf-8')
     (output_root / 'PVP_WEBSITE_MANIFEST.json').write_text(json.dumps(info, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(info, indent=2))
 

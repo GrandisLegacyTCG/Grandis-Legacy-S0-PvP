@@ -101,12 +101,12 @@ ck('Optional Swap buttons anchor to each partner Hero',()=>{
  assert(ui.includes('btn.dataset.swapPartner=d.b'));
  assert(css.includes('.gl-swap-button[data-swap-partner]::after'));
 });
-ck('RC41 unchanged source version and hotfixed runtime cache keys',()=>{
+ck('Current donor version and preserved F15/F19 runtime cache keys',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  for(const f of ['engine/shared-app/app.bundle.js','shared-app/app-runtime.js','shared-ui/battlefield-ui.css'])
-  assert(html.includes(f+'?v=gl-s0-pvp-stage3-rc42-r394-20261122-a')&&
+  assert(html.includes(f+'?v=gl-s0-pvp-rc42-r398-r40-20261124-a')&&
     html.includes('f15ui=20261121-03'),f+' was not cache-busted for PvP without changing buildId');
- assert(html.includes('RC41')&&html.includes('R3.9'), 'RC41 baseline unexpectedly changed');
+ assert(html.includes('RC42')&&html.includes('R3.98')&&html.includes('R4.0'), 'Current donor identity R3.98 / R4.0 is missing');
 });
 ck('Existing RC40 physical-discard regression adapted to current Hero window',()=>{
  const r=ctx.GL_RC40_ITEM_DISCARD_VALIDATOR_QA_SELF_TEST();

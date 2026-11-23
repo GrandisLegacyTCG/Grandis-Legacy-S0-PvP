@@ -90,7 +90,7 @@ def patch_dynamic_art_sources(text: str, src: str) -> str:
         text=text.replace("'engine/assets/status-icons/Icon-'", "'/engine/assets/status-icons/Icon-'")
         text=text.replace("'assets/counters/Counter-'", "'/engine/assets/counters/Counter-'")
         text=text.replace('"assets/lobby/Swap.png?v=', '"/engine/assets/lobby/Swap.png?v=')
-    if src=='pvp/battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js':
+    if src=='pvp/battle/runtime/season0-generated/rc42-main-deck-r398-overlay.js':
         text=replace_exact_once(text,
             "var local='card-art/'+id+'.webp';",
             "var local=window.GL_PVP_CARD_ART_URL(id);",src)
@@ -99,9 +99,12 @@ def patch_dynamic_art_sources(text: str, src: str) -> str:
         text=replace_exact_once(text,
             "image:'card-art/'+id+'.webp'",
             "image:window.GL_PVP_CARD_ART_URL(id)",src)
-        text=replace_exact_once(text,
-            "file:'card-art/'+id+'.webp'",
-            "file:window.GL_PVP_CARD_ART_URL(id)",src)
+        # New R3.98 overlay writes both preview and manifest records; both
+        # dynamic file routes must use the shared website artwork resolver.
+        dynamic_file="file:'card-art/'+id+'.webp'"
+        count=text.count(dynamic_file)
+        if count!=2: raise RuntimeError(f'{src}: expected two R3.98 dynamic card asset paths, got {count}')
+        text=text.replace(dynamic_file,"file:window.GL_PVP_CARD_ART_URL(id)")
     if src=='pvp/battle/assets/review-db158/js/s0-review-clarity.js':
         text=replace_exact_once(text,
             "+'assets/keywords-review/'+name+'.png'",
@@ -198,7 +201,7 @@ def apply_shared_assets(site: Path) -> dict:
         'localArtworkIDs':sorted(local_cards),
         'sharedWebsiteSource':contract['approvedWebsiteSourceName'],
         'artworkReferenceVerifiedAgainst':contract['artworkReferenceVerifiedAgainst'],
-        'websiteFullRepositoryDirectlyVerified':False,
+        'websiteFullRepositoryDirectlyVerified':True,
         'changedTextFiles':rewritten,
         'safety':'The standalone backend retains all 250 local card art files. The website pvp/ contains NO artwork copies and relies on 250 latest shared-root card-art files.'
     }

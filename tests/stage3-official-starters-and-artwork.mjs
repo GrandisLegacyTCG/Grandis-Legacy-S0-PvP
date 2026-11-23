@@ -53,6 +53,6 @@ assert.equal(artwork.length,250);
 const tokens=readFileSync(join(battle,'runtime/pvp-card-thumbnails.js'),'utf8');
 for(const [id] of Object.entries(newCards))assert.ok(tokens.includes('"'+id+'"'),id+' has no thumbnail');
 assert.ok(tokens.includes('S0-ARC-001'));
-assert.ok(readFileSync(join(battle,'index.html'),'utf8').indexOf('rc42-main-deck-r394-overlay.js')<readFileSync(join(battle,'index.html'),'utf8').indexOf('engine/shared-app/app.bundle.js'));
+assert.ok(readFileSync(join(battle,'index.html'),'utf8').indexOf('rc42-main-deck-r398-overlay.js')<readFileSync(join(battle,'index.html'),'utf8').indexOf('engine/shared-app/app.bundle.js'));
 checks++;
 console.log(`PASS Stage 3 official starters & artwork: ${checks} strict checks, 5 playable starters, 2 new cards, 250 local artwork`);
