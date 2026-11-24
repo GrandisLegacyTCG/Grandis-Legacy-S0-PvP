@@ -36,5 +36,6 @@ jobs:
         run: |
           docker run -d --rm --name gl-pvp-net-rc6 -e PVP_ALLOWED_ORIGINS=https://grandislegacytcg.web.id -p 3066:3000 grandis-legacy-pvp-s0-net-rc6:ci
           sleep 5
-          node -e "fetch('http://127.0.0.1:3066/health').then(r=>r.json()).then(x=>{if(!x.ok||x.transport!=='ws'||x.version!=='S0-RC42-PVP-NET-RC6-STAGE2-INTEGRATION-1'||x.buildId!=='gl-s0-pvp-rc42-r398-r40-20261124-a')process.exit(1);console.log(x.transport,x.buildId)}).catch(()=>process.exit(1))"
+          node -e "fetch('http://127.0.0.1:3066/health').then(r=>r.json()).then(x=>{if(!x.ok||x.transport!=='ws'||x.version!=='S0-RC42-PVP-NET-RC6-STAGE2-INTEGRATION-1'||x.buildId!=='gl-s0-pvp-rc42-r398-r40-20261124-b')process.exit(1);console.log(x.transport,x.buildId)}).catch(()=>process.exit(1))"
+          GL_PVP_BACKEND_URL=http://127.0.0.1:3066 npm run smoke:northflank
           docker stop gl-pvp-net-rc6
