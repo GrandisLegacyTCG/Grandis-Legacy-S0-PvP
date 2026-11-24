@@ -24,7 +24,8 @@ if(site){
   'battle/runtime/pvp-mobile-all5.css','battle/engine/shared-app/app.bundle.js',
   'battle/engine/js/static-data.js','battle/shared-app/app-runtime.js',
   'battle/shared-ui/battlefield-ui.css','battle/shared-ui/pvp-mobile-preview-hold.js',
-  'assets/ui/back-main.webp','assets/ui/back-legacy.webp','assets/ui/back-shard.webp'];
+  'assets/ui/back-main.webp','assets/ui/back-legacy.webp','assets/ui/back-shard.webp',
+  'lobby/pvp-ui-sync.css','battle/runtime/pvp-ui-sync.css','battle/shared-app/db158-card-review.js'];
  for(const path of critical){
   assert.ok(existsSync(join(site,path)),'Missing Website '+path);
   assert.deepEqual(readFileSync(join(site,path)),readFileSync(join(standalone,path)),'Stand-alone and Website component drift: '+path);

@@ -1,3 +1,5 @@
+> **UI thumbnail sync 2026-11-25:** 250 latest VS AI self-contained miniatures guarantee first painted face-up art; responsive PASS/REPOSITION, Import Deck dark-gold style, mobile counters; no network/engine changes. See `docs/UI_SYNC_2026-11-25.md`.
+
 # Grandis Legacy PvP S0 — RC42 STEP 3 final paired QA candidate
 
 **Build:** `gl-s0-pvp-rc42-r398-r40-20261124-s3` — **LOCAL QA CANDIDATE, NOT PRODUCTION STABLE**.

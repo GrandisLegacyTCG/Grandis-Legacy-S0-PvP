@@ -81,7 +81,8 @@
     "check:rc42": "npm run check:syntax && node tests/rc42-part6-integration.mjs && node tests/rc42-two-seat-ws.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/privacy-presentation.mjs && node tests/net-rc6-stage2-single-socket.mjs && node tests/net-rc6-stage2-battle-bridge.mjs && node tests/rc41-f15-four-interactions.cjs && node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-search-to-hand-card-played.mjs && node tests/rc42b-hf1-import-confirmation.mjs && node tests/rc42-mobile-followup-contract.mjs",
     "test:step1": "node tests/step1-mana-continuation.mjs && node tests/step1-websocket-authority.mjs && node tests/rc34-deadlock-engine.mjs && node tests/rc39-rc4-blind-mana-and-cancel.mjs && node tests/rc41-seat2-payment-response.mjs && node tests/rc41-choice-authority-fixture.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/rc41-search-to-hand-card-played.mjs && npm run test:ws-gate && npm run test:ack-race && npm run test:deadlock-ws && npm run test:net-rc6-live",
     "test:step2": "node tests/step2-mobile-vsai-parity.mjs",
-    "test:step3": "node tests/step3-on-demand-artwork.mjs && node tests/step3-decode-budget.mjs && node tests/step3-mobile-prewarm.mjs && node tests/step3-http-assets.mjs && node tests/step3-lifecycle-soak.mjs && node tests/step3-paired-package.mjs"
+    "test:step3": "node tests/step3-on-demand-artwork.mjs && node tests/step3-decode-budget.mjs && node tests/step3-mobile-prewarm.mjs && node tests/step3-http-assets.mjs && node tests/step3-lifecycle-soak.mjs && node tests/step3-paired-package.mjs && npm run test:ui-sync",
+    "test:ui-sync": "node tests/ui-sync-thumbnails.mjs"
   },
   "engines": {
     "node": ">=18"
