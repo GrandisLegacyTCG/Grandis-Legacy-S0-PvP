@@ -9,6 +9,6 @@ const meta=context.GL_ACTIVE_STARTER_SET_META;
 const catalog=structuredClone(context.GL_ACTIVE_STARTER_DECKS||{});
 if(meta?.schema_version!=='GL-ACTIVE-STARTERS-S0-R3.94-RULEBOOK-V3.5'||Object.keys(catalog).length!==5||
    !Object.entries(catalog).every(([k,v])=>k.startsWith('s0_starter_')&&v?.deck?.main_deck_count===50&&v?.deck?.legacy_deck_expanded?.length===12)){
-  throw new Error('S0 RC32 starter catalog integrity/format rejected.');
+  throw new Error('S0 RC42 starter catalog integrity/format rejected.');
 }
 export const season0StarterCatalog=Object.freeze(catalog);

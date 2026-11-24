@@ -23,7 +23,7 @@ function browserHarness(pending){
     addEventListener(n,fn){this._listeners[n]=fn}, getElementById(){return null},
     createElement(){return {setAttribute(){},style:{},textContent:'',hidden:false}}};
   const window={GL_LOCAL_AI_BRIDGE:bridge,GL_GAME_ENGINE:{},GL_AUTHORITY_ADAPTER:{register(){},use(){}},
-    GL_PVP_BUILD_META:{buildId:'gl-s0-pvp-rc42-r398-r40-20261124-a'},
+    GL_PVP_BUILD_META:{buildId:'gl-s0-pvp-rc41-r39-v34-part5-2026-11-19'},
     GL_GAME_UI:{render(){uiRender.count++},renderLocalChoiceDraft(){uiRender.count++}},
     GL_APP_MODE:'PVP',parent:null,addEventListener(){},dispatchEvent(){}};
   window.parent=window;

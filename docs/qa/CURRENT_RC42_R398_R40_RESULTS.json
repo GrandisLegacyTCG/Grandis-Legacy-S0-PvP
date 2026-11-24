@@ -1,9 +1,0 @@
-{
-  "suite": "RC42_R398_R40_REGRESSION",
-  "mode": "REAL_ENGINE_NODE_VM_NO_BROWSER",
-  "executed": 27,
-  "passed": 27,
-  "failed": 0,
-  "failures": [],
-  "date": "2026-11-23"
-}

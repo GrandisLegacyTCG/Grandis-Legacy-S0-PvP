@@ -1,14 +1,14 @@
 {
-  "name": "grandis-legacy-s0-pvp-standalone",
-  "version": "1.0.0-rc42-r398-r40-20261124",
+  "name": "grandis-legacy-pvp-s0-rc42",
+  "version": "1.0.0-rc42-part6",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js && node --check public/battle/runtime/pvp-card-thumbnails.js && node --check public/battle/runtime/pvp-artwork-loader.js && node --check public/battle/shared-app/db158-card-review.js",
+    "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js",
     "test:transition": "npm run test:ws-gate",
     "check:parity": "node tests/s1-source-parity.mjs",
-    "check": "npm run check:current",
+    "check": "npm run check:rc42",
     "test:s0-catalog": "npm run check:catalog",
     "check:catalog": "node tests/s0-catalog-static.mjs",
     "test:ws-gate": "python3 tests/ws-gate.py",
@@ -77,20 +77,12 @@
     "test:choice-network": "node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-choice-authority-fixture.mjs",
     "test:rc41-f15": "node tests/rc41-f15-four-interactions.cjs && node tests/rc41-f15-part7-donor-parity.cjs",
     "test:rc41-f19-network": "node tests/rc41-f19-network-parity.cjs && node tests/rc41-search-to-hand-card-played.mjs && node tests/rc41-f19-authoritative-swap.mjs",
-    "test:stage1-network": "node tests/stage1-outcome-boundary.mjs && node tests/stage1-mana-continuation-regression.mjs",
-    "check:stage1": "node scripts/run-rc41-release-check.mjs && npm run check:rc41 && npm run test:stage1-network",
-    "test:stage2": "node tests/stage2-artwork-loader.mjs && node tests/stage2-frontend-locks.mjs && node tests/stage2-casting-position-regression.cjs && node tests/rc40-p32-battlefield-hand-artwork.mjs",
-    "check:stage2": "npm run check:stage1 && npm run test:stage2",
-    "build:website-root-only": "python3 scripts/build-website-root-only.py",
-    "test:stage3": "node tests/stage3-official-starters-and-artwork.mjs && node tests/rc41-release-integrity.mjs && python3 scripts/verify-stage3-website-only.py",
-    "check:stage3": "npm run check:stage2 && npm run test:stage3",
-    "test:rc42-r398": "node tests/donor-rc42-r398/RC42_R398_R40_REGRESSION_QA.cjs && node tests/donor-rc42-r398/RC42_R398_GENERAL_RULES_QA.cjs && node tests/donor-rc42-r398/RC42_R398_STARTER_CASTING_QA.cjs",
-    "check:current": "npm run check:syntax && npm run test:stage1-network && npm run test:stage2 && npm run test:stage3 && npm run test:rc42-r398"
+    "check:rc42": "npm run check:syntax && node tests/rc42-part6-integration.mjs && node tests/rc42-two-seat-ws.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/privacy-presentation.mjs && node tests/net-rc6-stage2-single-socket.mjs && node tests/net-rc6-stage2-battle-bridge.mjs && node tests/rc41-f15-four-interactions.cjs && node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-search-to-hand-card-played.mjs"
   },
   "engines": {
     "node": ">=18"
   },
-  "description": "Grandis Legacy Season 0 standalone server-authoritative PvP backend, RC42 Main R3.98 / Legacy R4.0, PvP adapter regression locks.",
+  "description": "Grandis Legacy Season 0 RC42 PvP with server-authoritative two-seat gameplay, R3.98/R4.0 and mobile all-five.",
   "dependencies": {
     "ws": "8.21.0"
   }

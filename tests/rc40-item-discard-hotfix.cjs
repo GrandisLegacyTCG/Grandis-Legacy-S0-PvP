@@ -19,7 +19,7 @@ ctx.document={readyState:'loading',addEventListener(){},getElementById(id){retur
  querySelector(){return null},querySelectorAll(){return []},createElement(){return fakeEl()},
  documentElement:{classList:{toggle(){}}},body:{appendChild(){}}};
 vm.createContext(ctx);
-for(const file of ['public/battle/engine/js/static-data.js','public/battle/engine/js/runtime-authority.js','public/battle/engine/shared-app/active-starters.js','public/battle/runtime/season0-generated/rc41-approved-print-overrides.js','public/battle/runtime/season0-generated/rc42-main-deck-r394-overlay.js','public/battle/engine/shared-app/app.bundle.js']){
+for(const file of ['public/battle/engine/js/static-data.js','public/battle/engine/js/runtime-authority.js','public/battle/engine/shared-app/active-starters.js','public/battle/runtime/season0-generated/rc41-approved-print-overrides.js','public/battle/engine/shared-app/app.bundle.js']){
  const src=fs.readFileSync(path.join(root,file),'utf8');
  vm.runInContext(src,ctx,{filename:file,timeout:60000});
 }

@@ -173,11 +173,11 @@ for(const file of ['../public/pvp/db158-card-review.js','../public/battle/shared
     assert.match(html,/s0-review-clarity\.js/);
     for(const script of inline)new vm.Script(script,{filename:file+' (inline)'});
     if(file.includes('/battle/shared-app/')){
-      // Stage 2: persistent iframe with immediate content, no blocking decode guard.
+      // Current donor F15: persistent iframe and art/font decode guard.
       assert.match(js,/frame\.__glPendingReview/);
       assert.match(js,/frame\.addEventListener\('load'/);
-      assert.match(js,/GL_PVP_ARTWORK\?\.bind/);
-      assert.doesNotMatch(js,/Promise\.race\(\[Promise\.all/);
+      assert.match(js,/Promise\.race/);
+      assert.match(js,/1600/);
       assert.match(js,/function scheduleWarmReview\(/);
     }else{
       // The PvP lobby's independent card preview keeps its original lifecycle.

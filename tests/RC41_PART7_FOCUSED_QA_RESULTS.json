@@ -1,6 +1,6 @@
 {
-  "pass": 43,
-  "fail": 0,
+  "pass": 42,
+  "fail": 1,
   "total": 43,
   "checks": [
     {
@@ -168,8 +168,9 @@
       "ok": true
     },
     {
-      "label": "Current donor version and preserved F15/F19 runtime cache keys",
-      "ok": true
+      "label": "RC41 unchanged source version and hotfixed runtime cache keys",
+      "ok": false,
+      "error": "engine/shared-app/app.bundle.js was not cache-busted for PvP without changing buildId"
     },
     {
       "label": "Existing RC40 physical-discard regression adapted to current Hero window",

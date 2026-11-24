@@ -1,5 +1,5 @@
-# Single-process PvP server: HTTP static files + room state + S1 native ws.
-# Production installs the pinned ws dependency; no browser framework/runtime is needed.
+# Single-process PvP server: HTTP static files + authoritative Season 0 room state + native ws.
+# Production installs pinned ws; no browser framework/runtime is needed.
 FROM node:22-alpine
 WORKDIR /app
 ENV NODE_ENV=production \

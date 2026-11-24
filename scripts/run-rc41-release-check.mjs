@@ -1,6 +1,6 @@
 // Release gate: tests current RC41 source and surviving PvP network/visual regressions.
 // Historical RC40 SHA and R3.7 card-print fixtures are kept, not repurposed as RC41.
-import {spawn} from 'node:child_process';
+import {spawnSync} from 'node:child_process';
 import {writeFileSync} from 'node:fs';
 const checks=[
  'node tests/rc41-seat-mirror-mana.mjs',
@@ -54,47 +54,16 @@ const checks=[
  'node tests/rc40-item-arrow-paladin-regression.mjs',
  'node tests/rc40-standalone-smoke.mjs'
 ];
-// Avoid spawnSync's pipe/descendant deadlock: a timed-out Python test may
-// start a child server which retains OS pipe descriptors after its parent exits.
-// The historical set and 45-second per-case watchdog remain unchanged.
-function runCommand(command){
- return new Promise(resolve=>{
-  const [binary,...args]=command.split(' '),started=Date.now();
-  const child=spawn(binary,args,{cwd:process.cwd(),stdio:['ignore','pipe','pipe'],detached:true});
-  let stdout='',stderr='',finished=false,timedOut=false,overflow=false;
-  const finish=(status)=>{
-   if(finished)return;finished=true;clearTimeout(watchdog);
-   child.stdout?.destroy();child.stderr?.destroy();
-   resolve({command,status,duration_ms:Date.now()-started,
-     tail:stdout.slice(-700),error:stderr.slice(-600)});
-  };
-  function capture(stream,isErr){
-   stream.on('data',chunk=>{
-    const s=String(chunk);
-    if((isErr?stderr:stdout).length+s.length>8*1024*1024){
-     overflow=true;try{process.kill(-child.pid,'SIGKILL')}catch{};
-     finish('OUTPUT_TOO_LARGE');return;
-    }
-    if(isErr)stderr+=s;else stdout+=s;
-   });
-  }
-  capture(child.stdout,false);capture(child.stderr,true);
-  child.once('error',err=>{stderr+='\n'+String(err);finish('SPAWN_ERROR')});
-  // `exit` resolves on the process itself; `close` can hang on inherited FDs.
-  child.once('exit',(code,signal)=>finish(timedOut?'TIMEOUT':(overflow?'OUTPUT_TOO_LARGE':(signal||code))));
-  const watchdog=setTimeout(()=>{
-   timedOut=true;
-   try{process.kill(-child.pid,'SIGKILL')}catch{try{child.kill('SIGKILL')}catch{}}
-   finish('TIMEOUT');
-  },45000);
- });
-}
 const results=[];
 for(const [i,command] of checks.entries()){
- const result=await runCommand(command);
- results.push(result);
- console.log(`[${i+1}/${checks.length}] ${result.status===0?'PASS':'FAIL'} ${command} (${result.duration_ms}ms)`);
- if(result.status!==0){console.error(result.tail,result.error);break;}
+ const [binary,...args]=command.split(' ');
+ const started=Date.now();
+ const r=spawnSync(binary,args,{cwd:process.cwd(),encoding:'utf8',timeout:45000,maxBuffer:8*1024*1024});
+ const status=r.error?.code==='ETIMEDOUT'?'TIMEOUT':r.status;
+ const duration=Date.now()-started;
+ results.push({command,status,duration_ms:duration,tail:String(r.stdout||'').slice(-700),error:String(r.stderr||'').slice(-600)});
+ console.log(`[${i+1}/${checks.length}] ${status===0?'PASS':'FAIL'} ${command} (${duration}ms)`);
+ if(status!==0){console.error(results.at(-1).tail,results.at(-1).error);break;}
 }
 writeFileSync('docs/RC41_RELEASE_GATE_RESULTS.json',JSON.stringify({count:results.length,total:checks.length,pass:results.every(r=>r.status===0)&&results.length===checks.length,results},null,2)+'\n');
 if(!results.every(r=>r.status===0)||results.length!==checks.length){process.exitCode=1;}

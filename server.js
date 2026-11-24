@@ -25,11 +25,11 @@ const BASE=path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC=path.join(BASE,'public');
 const PORT=Number(process.env.PORT||3000);
 const HOST=String(process.env.HOST||'0.0.0.0').trim()||'0.0.0.0';
-const VERSION='S0-PVP-RC42-R398-R40-20261124-A';
-const BUILD_ID='gl-s0-pvp-rc42-r398-r40-20261124-a';
-const BUILD_LABEL=`Grandis Legacy PvP | Season 0 | RC42 | Main R3.98 / Legacy R4.0 | Multiplayer Candidate`;
+const VERSION='S0-RC42-PVP-NET-RC6-STAGE2-INTEGRATION-1';
+const BUILD_ID='gl-s0-pvp-rc42-r398-r40-20261124-b';
+const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC42 · Main R3.98 / Legacy R4.0 · Rulebook v3.5 · Network RC6 Stage 2`;
 const AUTHORITY_BUNDLE_SHA256=createHash('sha256').update(readFileSync(path.join(PUBLIC,'battle/engine/shared-app/app.bundle.js'))).digest('hex');
-// Parse the immutable RC40 engine BEFORE the server accepts players. This
+// Parse the approved Season 0 RC42 engine BEFORE the server accepts players. This
 // removes script reads + JS compilation from the synchronous START MATCH path.
 // Each match still runs those scripts in its OWN vm.createContext.
 primeSeason0Runtime(path.join(PUBLIC,'battle'));
@@ -121,22 +121,63 @@ function validateFormation(deck,formation){
 // Keep S1 room/ready lifecycle, but RC32 S0 owns coin UI, opening and battle.
 function setupStarters(){return season0StarterCatalog}
 
+function normalizeIncomingSeason0Deck(raw){
+  const input=raw?.deck&&typeof raw.deck==='object'&&!Array.isArray(raw.deck)?raw.deck:raw;
+  if(!input||typeof input!=='object'||Array.isArray(input))throw new Error('Invalid Season 0 deck.');
+  if(String(raw.season||input.season||'S0').toUpperCase()!=='S0')throw new Error('Only Season 0 decks may be imported.');
+  if(raw.deck&&Array.isArray(raw.main_deck)&&Array.isArray(input.main_deck)&&
+     JSON.stringify(raw.main_deck)!==JSON.stringify(input.main_deck))
+    throw new Error('Conflicting Main Deck values in imported deck.');
+  let expanded=Array.isArray(input.legacy_deck_expanded)?clone(input.legacy_deck_expanded):null;
+  if(!expanded&&Array.isArray(raw.legacy_deck_expanded))expanded=clone(raw.legacy_deck_expanded);
+  const packages=Array.isArray(input.legacy_packages)?input.legacy_packages:[];
+  if(!expanded&&packages.length){
+    expanded=[];
+    packages.forEach((pkg,i)=>{
+      const id='S0-CUSTOM-'+i;const heroIds=pkg.hero_rank_ids||[];
+      for(const card_id of heroIds)expanded.push({card_id,card_type:'Hero',package_id:id,package_name:id});
+      if(pkg.legacy_card_id)expanded.push({card_id:pkg.legacy_card_id,card_type:'Legacy',package_id:id,package_name:id});
+    });
+  }
+  const main=Array.isArray(input.main_deck)?clone(input.main_deck):[];
+  const mana=Array.isArray(input.mana_deck)?clone(input.mana_deck):
+    Array.isArray(input.shard_deck)?clone(input.shard_deck):Array.isArray(raw.mana_deck)?clone(raw.mana_deck):[];
+  const inferredFormation=packages.length===3?{
+    LEFT:packages[0]?.hero_rank_ids?.[0],CENTER:packages[1]?.hero_rank_ids?.[0],RIGHT:packages[2]?.hero_rank_ids?.[0]}:null;
+  const formation=clone(raw.default_formation||input.default_formation||inferredFormation);
+  const deck={...clone(input),season:'S0',main_deck:main,mana_deck:mana,
+    legacy_deck_expanded:expanded||[],default_formation:formation,
+    main_deck_count:main.reduce((n,row)=>n+Number(row?.quantity||0),0)};
+  if(deck.main_deck_count!==50||main.some(row=>!Number.isInteger(Number(row?.quantity))||Number(row.quantity)<1))
+    throw new Error('Season 0 Main Deck must contain exactly 50 cards.');
+  if(input.main_deck_count!=null&&Number(input.main_deck_count)!==50)throw new Error('Imported Main Deck count disagrees with the card list.');
+  if(deck.legacy_deck_expanded.length!==12)throw new Error('Season 0 Legacy Deck must contain exactly 12 cards.');
+  if([...(deck.main_deck||[]),...deck.legacy_deck_expanded].some(c=>!String(c?.card_id||'').startsWith('S0-')))
+    throw new Error('Only Season 0 card IDs are supported.');
+  if(raw.is_valid===false||input.is_valid===false)throw new Error('Imported deck is marked invalid.');
+  validateFormation(deck,deck.default_formation); // validate input shape before mutating a player.
+  return deck;
+}
 function setDeckFast(client,msg){
   if(room.match.status!=='setup')throw new Error('Deck selection is locked after match start.');
+  let nextDeckKey=null,nextCustomDeck=null,nextDeckName='',nextFormation=null;
   if(msg.customDeck){
-    const raw=clone(msg.customDeck);const json=JSON.stringify(raw);if(json.length>800000)throw new Error('Imported deck is too large.');
-    const input=raw?.deck&&typeof raw.deck==='object'?raw.deck:raw;
-    const cards=[...(Array.isArray(input.main_deck)?input.main_deck:[]),...(Array.isArray(input.legacy_deck_expanded)?input.legacy_deck_expanded:[])];
-    if(raw.season&&String(raw.season).toUpperCase()!=='S0')throw new Error('Only Season 0 decks may be imported.');
-    if(!cards.length||cards.some(x=>x?.card_id&&!String(x.card_id).startsWith('S0-')))throw new Error('Only Season 0 card IDs are supported.');
-    if(input.main_deck_count!=null&&Number(input.main_deck_count)!==50)throw new Error('Season 0 Main Deck must contain 50 cards.');
-    client.customDeck=raw;client.deckKey=null;client.deckName=safeText(msg.deckName||raw.deck_name||'Imported Deck',100);
-    client.formation=validateFormation(raw,msg.formation||raw.default_formation)||clone(raw.default_formation||null);
+    const raw=clone(msg.customDeck);
+    if(JSON.stringify(raw).length>800000)throw new Error('Imported deck is too large.');
+    nextCustomDeck=normalizeIncomingSeason0Deck(raw);
+    nextDeckName=safeText(msg.deckName||raw.deck_name||'Imported Deck',100);
+    nextFormation=validateFormation(nextCustomDeck,msg.formation||nextCustomDeck.default_formation)
+      ||clone(nextCustomDeck.default_formation);
   }else{
-    const key=safeText(msg.deckKey,120),opt=setupStarters()[key];if(!opt?.deck)throw new Error('Unknown starter deck.');
-    client.deckKey=key;client.customDeck=null;client.deckName=opt.label||key;client.formation=validateFormation(opt.deck,msg.formation||opt.deck.default_formation)||clone(opt.deck.default_formation||null);
+    const key=safeText(msg.deckKey,120),opt=setupStarters()[key];
+    if(!opt?.deck)throw new Error('Unknown starter deck.');
+    nextDeckKey=key;nextDeckName=opt.label||key;
+    nextFormation=validateFormation(opt.deck,msg.formation||opt.deck.default_formation)
+      ||clone(opt.deck.default_formation);
   }
-  client.ready=false;
+  // All possible errors above leave the old selection and READY state intact.
+  Object.assign(client,{deckKey:nextDeckKey,customDeck:nextCustomDeck,deckName:nextDeckName,
+    formation:nextFormation,ready:false});
 }
 
 // S1 owns UI/room/ready lifecycle. RC32 S0 owns coin UI, opening
@@ -441,9 +482,10 @@ const server=http.createServer(async(req,res)=>{
     }
     if(url.pathname==='/health'||url.pathname==='/pvp/health'){
       res.writeHead(200,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});
-      res.end(JSON.stringify({ok:true,version:VERSION,buildId:BUILD_ID,architecture:'s0-rc41-pvp-authority-network-rc6',transport:WS_BACKEND,authoritySources:{'engine/shared-app/app.bundle.js':AUTHORITY_BUNDLE_SHA256}}));return;
+      res.end(JSON.stringify({ok:true,version:VERSION,buildId:BUILD_ID,architecture:'s0-rc42-pvp-authority-network-rc6',transport:WS_BACKEND,authoritySources:{'engine/shared-app/app.bundle.js':AUTHORITY_BUNDLE_SHA256}}));return;
     }
-    let rel=decodeURIComponent(url.pathname);if(rel==='/pvp'||rel==='/pvp/')rel='/index.html';else if(rel.startsWith('/pvp/'))rel=rel.slice(4);if(rel==='/'||rel==='')rel='/index.html';if(rel==='/battle'||rel==='/battle/')rel='/battle/index.html';
+    let rel=decodeURIComponent(url.pathname);if(rel==='/pvp'||rel==='/pvp/')rel='/index.html';else if(rel.startsWith('/pvp/'))rel=rel.slice(4);if(rel.startsWith('/card-art/'))rel='/battle'+rel;
+    if(rel==='/'||rel==='')rel='/index.html';if(rel==='/battle'||rel==='/battle/')rel='/battle/index.html';
     rel=path.posix.normalize(rel).replace(/^\.\.(\/|$)/g,'');const file=path.resolve(PUBLIC,'.'+rel);
     if(!file.startsWith(PUBLIC+path.sep)&&file!==PUBLIC){res.writeHead(403);res.end('Forbidden');return}
     // HTTP delivery is independent of gameplay authority. Keep the RC38 donor data intact.

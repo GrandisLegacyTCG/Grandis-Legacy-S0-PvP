@@ -22,7 +22,7 @@ for(const layer of ['gl-vsai-choice-overlay','gl-card-review-overlay','gl-animat
 assert.match(runtime,/function pvpLandscapeStage\(\)/);
 assert.match(runtime,/\.map\(\(\[x,y\]\)=>new DOMPoint\(x,y\)\.matrixTransform\(inv\)\)/);
 assert.match(runtime,/function uiViewportSize\(\)\{return pvpLandscapeStage\(\)\?\{width:1600,height:747\}/);
-assert.match(server,/const BUILD_ID='gl-s0-pvp-rc42-r398-r40-20261124-a'/,'RC41 build metadata must be current');
+assert.match(server,/const BUILD_ID='gl-s0-pvp-rc41-r39-v34-part5-2026-11-19'/,'RC41 build metadata must be current');
 assert.match(network,/updateOpponentResponseNotice\(board\)/);
 assert.match(network,/updateOpponentResponseNotice\(null\)/);
 const start=network.indexOf('function updateOpponentResponseNotice(');

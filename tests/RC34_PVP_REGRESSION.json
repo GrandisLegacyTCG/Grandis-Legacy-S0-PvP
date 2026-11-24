@@ -1,35 +1,14 @@
 {
   "build": "VS AI Season 0 RC34 Patch Candidate",
-  "date": "2026-11-23T20:55:43.178Z",
-  "passed": 20,
-  "failed": 0,
+  "date": "2026-11-24T00:20:39.523Z",
+  "passed": 2,
+  "failed": 18,
   "tests": [
     {
       "id": "F08",
       "title": "all five official starter decks accepted",
-      "ok": true,
-      "details": {
-        "s0_starter_01_blue_red": {
-          "ok": true,
-          "errors": []
-        },
-        "s0_starter_02_yellow_blue": {
-          "ok": true,
-          "errors": []
-        },
-        "s0_starter_03_red_white": {
-          "ok": true,
-          "errors": []
-        },
-        "s0_starter_04_green_yellow": {
-          "ok": true,
-          "errors": []
-        },
-        "s0_starter_05_white_green": {
-          "ok": true,
-          "errors": []
-        }
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: s0_starter_03_red_white: Deck validation failed: unknown card_id S0-EVT-013.\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:38:87\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:36:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)"
     },
     {
       "id": "F08",
@@ -37,188 +16,124 @@
       "ok": true,
       "details": {
         "mainHero": [
-          "Deck validation failed: Main Deck may contain only Skill, Item, or Event. Invalid S0-WAR-H001."
+          "Deck validation failed: Main Deck may contain only Skill, Item, or Event. Invalid S0-WAR-H001.",
+          "Deck validation failed: unknown card_id S0-EVT-013."
         ],
         "mainLegacy": [
-          "Deck validation failed: Main Deck may contain only Skill, Item, or Event. Invalid S0-WAR-L001."
+          "Deck validation failed: Main Deck may contain only Skill, Item, or Event. Invalid S0-WAR-L001.",
+          "Deck validation failed: unknown card_id S0-EVT-013."
         ],
         "rankIIIStarter": [
           "Deck validation failed: LEFT starter must be a Rank I Hero, not S0-WAR-H006.",
-          "Deck validation failed: LEFT starter must match its Legacy package Rank I Hero."
+          "Deck validation failed: LEFT starter must match its Legacy package Rank I Hero.",
+          "Deck validation failed: unknown card_id S0-EVT-013."
         ],
         "itemStarter": [
           "Deck validation failed: LEFT starter must be a Rank I Hero, not S0-ITM-001.",
-          "Deck validation failed: LEFT starter must match its Legacy package Rank I Hero."
+          "Deck validation failed: LEFT starter must match its Legacy package Rank I Hero.",
+          "Deck validation failed: unknown card_id S0-EVT-013."
         ],
         "fakeLegacyExpanded": [
-          "Deck validation failed: Legacy Deck must contain exactly three complete Rank I-III + Legacy packages."
+          "Deck validation failed: Legacy Deck must contain exactly three complete Rank I-III + Legacy packages.",
+          "Deck validation failed: unknown card_id S0-EVT-013."
         ]
       }
     },
     {
       "id": "ruling-F04",
-      "title": "Stun blocks Chain Mail BLOCK while ordinary Items remain legal",
-      "ok": true,
-      "details": {
-        "item": "S0-ITM-016",
-        "stunned": true,
-        "blockResponseAvailable": false
-      }
+      "title": "Stun forbids Chain Mail BLOCK while ordinary Items remain legal",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:55:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:54:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F01",
       "title": "lethal Poison pauses at Stoneblood before next lane",
-      "ok": true,
-      "details": {
-        "hpLeft": 30,
-        "hpCenter": 0,
-        "racial": 1,
-        "poisonTicksLeft": 1,
-        "pending": "legacy_defeat_choice"
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:65:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:64:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F01",
       "title": "lethal Poison opens Legacy first and queues Dwarf next",
-      "ok": true,
-      "details": {
-        "pending": "legacy_defeat_choice",
-        "otherHeroHP": 10
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:76:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:75:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F01",
       "title": "single Poison tick 10 and fixed-duration expiry",
-      "ok": true,
-      "details": {
-        "hp": 20
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:81:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:80:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F01",
       "title": "real auto-End pauses for Stoneblood and resumes to Legacy",
-      "ok": true,
-      "details": {
-        "afterStonebloodHP": 30,
-        "racialRemaining": 1,
-        "centerLegacy": true,
-        "leftTicks": 1,
-        "pending": null,
-        "phase": "Deploy",
-        "turn": "PLAYER"
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:87:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:86:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F02",
       "title": "two ready AI Tornado wait for each Response",
-      "ok": true,
-      "details": {
-        "leftHp": 30,
-        "centerHp": 30,
-        "remainingCasting": 0
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:106:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:105:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "Holy Barrier BLOCK uses Priest source not protected Hero",
-      "ok": true,
-      "details": {
-        "hp": 100,
-        "hand": 0
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:120:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:119:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "Swift Movement Dodge draws one card with payment",
-      "ok": true,
-      "details": {
-        "hand": [
-          "S0-WAR-002"
-        ],
-        "deck": [
-          "S0-CLE-026",
-          "S0-WAR-001"
-        ]
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:126:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:125:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "Shadow Switch dodge repositions to attack-facing lane",
-      "ok": true,
-      "details": {
-        "left": "S0-THF-H008",
-        "center": "S0-WAR-H001"
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:131:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:130:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "AI Escape Arrow pays mandatory extra card or cannot dodge",
-      "ok": true,
-      "details": {
-        "remainingHand": 0,
-        "discard": [
-          "S0-WAR-001",
-          "S0-ARC-003"
-        ]
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:136:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:135:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "Primal Defense opens Binding Light counter after payment",
-      "ok": true,
-      "details": {
-        "kind": "incoming_card",
-        "options": [
-          "S0-CLE-012"
-        ]
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:142:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:141:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F03",
       "title": "Binding Light counter window can PASS and finish Primal",
-      "ok": true,
-      "details": {
-        "hp": 100,
-        "hand": [
-          "S0-CLE-012"
-        ]
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:150:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:149:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F06",
       "title": "Legacy once key follows Hero after lane swap",
-      "ok": true,
-      "details": {
-        "key": "PLAYER|S0-WAR-L001|warrior_relic|PLAYER|2"
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:164:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:163:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F07",
       "title": "Stun prevents Bard/Maestro exchange, not Draw",
-      "ok": true,
-      "details": {
-        "bardId": "S0-CLE-H008"
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:169:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:168:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F09",
       "title": "REFLECT-only response allowed under PIERCING at correct ranks",
-      "ok": true,
-      "details": {
-        "high": [
-          "S0-WAR-029"
-        ],
-        "low": []
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:175:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:174:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F10",
       "title": "Enrage stays active through first use, expires at End",
-      "ok": true,
-      "details": {
-        "attachments": 0,
-        "expiredAtEnd": true
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:181:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:180:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     },
     {
       "id": "F11",
@@ -232,15 +147,8 @@
     {
       "id": "F12",
       "title": "Legacy candidates include Skill just paid into Discard",
-      "ok": true,
-      "details": {
-        "choices": [
-          {
-            "card_id": "S0-ARC-001",
-            "discard_index": 0
-          }
-        ]
-      }
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: startLocalMatch: {\"ok\":false,\"error\":\"Deck validation failed: unknown card_id S0-EVT-013.\"}\n    at newGame (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:25:42)\n    at /mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:188:10\n    at t (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:22:43)\n    at Object.<anonymous> (/mnt/data/pvp_work/release/tests/rc41-engine-regression.cjs:187:1)\n    at Module._compile (node:internal/modules/cjs/loader:1730:14)\n    at Object..js (node:internal/modules/cjs/loader:1895:10)\n    at Module.load (node:internal/modules/cjs/loader:1465:32)\n    at Function._load (node:internal/modules/cjs/loader:1282:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)"
     }
   ]
 }

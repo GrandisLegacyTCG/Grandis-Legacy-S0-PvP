@@ -55,8 +55,8 @@ assert.match(runtime,/function updateCommittedHandSlotVisibility\(side\)/);
 assert.match(runtime,/for\(let i=0;i<5;i\+\+\)groups\.push/);
 assert.doesNotMatch(runtime,/<h2 id="glCoinTitle">Opening Coin Flip<\/h2>/);
 assert.match(runtime,/aria-label="Coin flip"/);
-assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc42-r398-r40-20261124-a/);
-assert.match(server,/const VERSION='S0-PVP-RC42-R398-R40-20261124-A'/); // RC40 authoritative server identity
+assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc41-r39-v34-part5-2026-11-19/);
+assert.match(server,/const VERSION='S0-RC41-PVP-NET-RC6-STAGE2-INTEGRATION-1'/); // RC40 authoritative server identity
 assert.doesNotMatch(runtime,/addAction\(actions,'WHY\?'/,'No PvP-only Tune Up button absent from donor UI');
 // Public EXP card IDs are visible to either seat, but hidden opposing Hand and
 // deck identities must remain masked. The inspector uses only public hero fields.
@@ -84,9 +84,9 @@ assert.equal(view.appState.presentationEvents[0].card_id,'S0-ARC-002');
 // reviewed frontend-only baseline; continue byte-guarding runtime/network/headless.
 const fingerprints={
  'public/pvp/pvp-host.js':'5a0521ef7f6b13d3c9e3bc983783f3539efadb5b0886d89eb13840cd23f99113',
- 'public/battle/runtime/pvp-network.js':'3b3639e8464411def97620489842835052f7e1415b6bf93e1a472e22b91fd2f3',
+ 'public/battle/runtime/pvp-network.js':'5b7c889528c95666f412f731deb797f193c58e2181e9b610fa22847b8527cff3',
  'public/battle/runtime/pvp-mana-draft.js':'97519e377f92a0f496f3dcd024020103adb15764eb08d65580b81c6fc28e5cf7',
- 'server/headless-rc32.mjs':'5adb13c7da588989145c080dd822c6b8c6e029e30a273fd0cb012ba619cf7968'
+ 'server/headless-rc32.mjs':'d89733639259e105d826b19c42110d2e92abb0e689cb5bd43cdabb50d8384425'
 };
 for(const [p,expected] of Object.entries(fingerprints)){
  const got=createHash('sha256').update(readFileSync(new URL('../'+p,import.meta.url))).digest('hex');

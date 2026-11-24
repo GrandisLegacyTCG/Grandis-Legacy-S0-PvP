@@ -1,5 +1,5 @@
-@font-face{font-family:"Noto Sans";src:url("../assets/fonts/noto-sans/NotoSans-Variable.woff2") format("woff2");font-style:normal;font-weight:100 900;font-stretch:62.5% 100%;font-display:swap}
-@font-face{font-family:"Noto Sans";src:url("../assets/fonts/noto-sans/NotoSans-Italic-Variable.woff2") format("woff2");font-style:italic;font-weight:100 900;font-stretch:62.5% 100%;font-display:swap}
+@font-face{font-family:"Noto Sans";src:url("/engine/assets/fonts/noto-sans/NotoSans-Variable.woff2") format("woff2");font-style:normal;font-weight:100 900;font-stretch:62.5% 100%;font-display:swap}
+@font-face{font-family:"Noto Sans";src:url("/engine/assets/fonts/noto-sans/NotoSans-Italic-Variable.woff2") format("woff2");font-style:italic;font-weight:100 900;font-stretch:62.5% 100%;font-display:swap}
 
 /* Grandis Legacy v5.58 / PvP v2.6.15 — Noto Sans asset-hook typography. */
 html,body,body *{font-family:"Noto Sans"!important}
@@ -39,7 +39,7 @@ html,body,body *{font-family:"Noto Sans"!important}
 #previewOverlay{z-index:1200}
 
 /* Packaging parity: preserve v2.0.0 field/playmat assets while retaining RUNTIME_UI_FLOW UI v1.4 layout. */
-.center-board{background-image:linear-gradient(rgba(5,8,13,.72),rgba(5,8,13,.72)),url('../assets/Field.png');background-size:cover;background-position:center;border-radius:16px;padding:4px}
+.center-board{background-image:linear-gradient(rgba(5,8,13,.72),rgba(5,8,13,.72)),url('/engine/assets/Field.png');background-size:cover;background-position:center;border-radius:16px;padding:4px}
 .choice-footer-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.choice-footer-buttons .primary{background:#11341f;border:1px solid #2c8f55;color:#caffd9;border-radius:9px;padding:8px 12px;cursor:pointer}
 
 /* Runtime UI Flow v1.4 Deck Setup Fix — full-screen startup setup and tighter board flow. */
@@ -2798,7 +2798,7 @@ body:has(.overlay.open) .hover-card-zoom:not(.is-modal-zoom){display:none!import
 
 /* Local AI v5.11 — clean field, field background, Legacy label, and card-play border. */
 html,body{
-  background:#07111c url("../assets/Background.png") center center/cover fixed no-repeat!important;
+  background:#07111c url("/engine/assets/Background.png") center center/cover fixed no-repeat!important;
 }
 body::before{display:none!important}
 .app,.battlefield-app,.v94-app,.v96-app,.v96-app .gl-app{background:transparent!important}
@@ -2857,7 +2857,7 @@ body::before{display:none!important}
 /* Local AI v5.18 — battlefield background and Legacy defeated-Hero information. */
 .v96-app .main-stage{
   background-color:#07111c!important;
-  background-image:url("../assets/Background.png")!important;
+  background-image:url("/engine/assets/Background.png")!important;
   background-size:cover!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
@@ -4261,12 +4261,12 @@ body::before{display:none!important}
 /* Shared Grandis blue theme. Visible black/green setup surfaces are replaced
    by navy tones sampled from the approved Grandis illustrated background. */
 body.deck-setup-active{
-  background:#151f32 url('../assets/Background.png') center/cover fixed!important;
+  background:#151f32 url('/engine/assets/Background.png') center/cover fixed!important;
 }
 .deck-setup-screen.runtime-ui-v14-setup{
   background:
     linear-gradient(rgba(7,13,23,.54),rgba(7,13,23,.72)),
-    url('../assets/Background.png') center/cover fixed!important;
+    url('/engine/assets/Background.png') center/cover fixed!important;
 }
 .deck-setup-screen.runtime-ui-v14-setup .deck-setup-top,
 .deck-setup-screen.runtime-ui-v14-setup .deck-setup-shell,
@@ -5467,7 +5467,7 @@ body.deck-setup-active{
 /* ========================================================================== */
 body.deck-setup-active{background:#02060b!important}
 .deck-setup-screen.runtime-ui-v14-setup{
-  background:linear-gradient(180deg,rgba(3,8,14,.72),rgba(6,13,23,.45)),url('../assets/lobby/background.webp') center/cover fixed no-repeat!important;
+  background:linear-gradient(180deg,rgba(3,8,14,.72),rgba(6,13,23,.45)),url('/engine/assets/lobby/background.webp') center/cover fixed no-repeat!important;
   grid-template-rows:auto minmax(0,1fr)!important;gap:12px!important;padding:0 14px 14px!important
 }
 .ai-lobby-topbar{min-height:108px;display:grid;grid-template-columns:220px minmax(0,1fr) auto;align-items:center;gap:26px;padding:16px 24px;border:0;border-bottom:1px solid rgba(64,92,121,.28);background:rgba(7,16,28,.90);box-shadow:0 10px 30px rgba(0,0,0,.26)}
@@ -5749,7 +5749,7 @@ body.deck-setup-active #previewOverlay{z-index:10060!important}
 body.deck-setup-active{
   min-width:0!important;
   overflow-x:hidden!important;
-  background:#07111f url('../assets/lobby/background.webp') center/cover fixed no-repeat!important;
+  background:#07111f url('/engine/assets/lobby/background.webp') center/cover fixed no-repeat!important;
 }
 .deck-setup-screen.runtime-ui-v14-setup{
   min-height:100vh!important;
@@ -6270,7 +6270,7 @@ html.gl-active-vs-match,body.gl-active-vs-match{overscroll-behavior-y:contain}
   transform:translate(-50%,-50%)!important;
   transform-origin:center center!important;
   background-color:transparent!important;
-  background-image:url("../assets/exp/Stack 100-200EXP.png")!important;
+  background-image:url("/engine/assets/exp/Stack 100-200EXP.png")!important;
   background-repeat:no-repeat!important;
   background-size:200% 100%!important;
   background-position:left center!important;

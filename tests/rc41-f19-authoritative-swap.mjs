@@ -22,8 +22,8 @@ for (const seat of [1,2]){
   const before=Object.fromEntries(['LEFT','CENTER','RIGHT'].map(l=>[l,s[pfx+'Heroes'][l].instance_id]));
   assert(before.CENTER&&before.LEFT&&before.RIGHT);
   s.turn=side;s.phase='Battle';s.round=3;s.gameOver=false;s.responseWindow=null;
-  s.pending={type:'optional_swap',decision_side:side,source_side:side,source_lane:'CENTER',target_lane:'LEFT',card_id:'S0-THF-024',
-    swap_lane:'LEFT',swap_options:['LEFT'],commit_token:'qa-F19-'+seat+'-'+decide,next_pending:null};
+  s.pending={type:'optional_swap',decision_side:side,source_side:side,source_lane:'CENTER',card_id:'S0-THF-024',
+    swap_lane:'LEFT',swap_options:['LEFT','RIGHT'],commit_token:'qa-F19-'+seat+'-'+decide,next_pending:null};
   a.injectFixtureForF19(snapshot);
   const rev=a.revision;
   const ownerView=viewerSafeBoard(a._viewForMaskingOnly(seat),{seat,revision:rev,secret:Buffer.alloc(32)});
@@ -43,7 +43,7 @@ for (const seat of [1,2]){
   console.log('PASS F19 optional Swap authoritative',decide,'Seat',seat,'revision',a.revision);
  }
 }
-// An optional opponent target Swap is public as a board change, but its extra toast is
+// A mandatory target Swap is public as a board change, but its extra toast is
 // recipient-only. Confirm the mirror/projection does not leak the notice.
 {
  const a=new Authority(root);a.start({player1DeckKey:'s0_starter_03_red_white',player2DeckKey:'s0_starter_01_blue_red'});
@@ -56,5 +56,5 @@ for (const seat of [1,2]){
  assert.equal(owner.appState.cardSwapNotices.length,1,'victim must see their Swap result');
  assert.equal(opponent.appState.cardSwapNotices.length,0,'attacker must not get opponent-only Swap notice');
 }
-console.log('PASS F19 recipient-only optional target Swap notification respects both seat projections');
+console.log('PASS F19 recipient-only mandatory Swap notification respects both seat projections');
 console.log('PASS F19 optional choices release pending for both seats, snapshot remains private');
