@@ -1,5 +1,5 @@
 """PvP RC34 RC2 coin recovery, idempotency, surrender and idle ownership (real WS)."""
-import json,os,random,subprocess,time,urllib.request
+import json,os,random,subprocess,time,urllib.request,tempfile
 from pathlib import Path
 import websocket
 
@@ -9,13 +9,21 @@ env={**os.environ,'PORT':str(PORT),'IDLE_SWEEP_MS':'200',
      'COIN_ACK_GRACE_MS':'800','COIN_CHOICE_TIMEOUT_MS':'4000',
      'COIN_RESULT_TIMEOUT_MS':'4000','COIN_DISCONNECT_GRACE_MS':'1000',
      'MATCH_IDLE_MS':'1800','MATCH_DISCONNECT_GRACE_MS':'1100'}
-p=subprocess.Popen(['node','server.js'],cwd=ROOT,env=env,stdout=subprocess.DEVNULL,stderr=subprocess.STDOUT)
+# Keep server boot errors visible to QA; previously EADDRINUSE and startup
+# failures were silently masked as a generic 40s health timeout.
+_boot_log=tempfile.TemporaryFile(mode='w+t')
+p=subprocess.Popen(['node','server.js'],cwd=ROOT,env=env,stdout=_boot_log,stderr=subprocess.STDOUT)
 sockets=[]
 try:
  for _ in range(100):
   try: meta=json.load(urllib.request.urlopen(f'http://127.0.0.1:{PORT}/health',timeout=.4));break
-  except Exception:time.sleep(.08)
- else:raise AssertionError('Server not ready')
+  except Exception:
+   if p.poll() is not None:break
+   time.sleep(.08)
+ else: pass
+ if 'meta' not in locals():
+  _boot_log.seek(0)
+  raise AssertionError(f'Server not ready (exit={p.poll()}, port={PORT}): '+_boot_log.read()[-2000:])
  bid=meta['buildId']
  def connect(label,seat_token=''):
   ws=websocket.create_connection(f'ws://127.0.0.1:{PORT}/ws?client={label}&name={label}&role=player&buildId={bid}'+('&seatToken='+seat_token if seat_token else ''),timeout=.55)
@@ -121,3 +129,4 @@ finally:
  p.terminate()
  try:p.wait(timeout=4)
  except subprocess.TimeoutExpired:p.kill()
+ _boot_log.close()

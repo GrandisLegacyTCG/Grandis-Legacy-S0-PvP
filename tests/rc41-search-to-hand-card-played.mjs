@@ -10,6 +10,8 @@ assert(src.includes(anchor));
 const source=src
  .replace("import {PvpCombatPresentationLedger} from './combat-presentation.mjs';",`import {PvpCombatPresentationLedger} from '${pathToFileURL(resolve('server/combat-presentation.mjs')).href}';`)
  .replace("import {PvpDiscardPresentationLedger} from './discard-presentation.mjs';",`import {PvpDiscardPresentationLedger} from '${pathToFileURL(resolve('server/discard-presentation.mjs')).href}';`)
+ .replace("import {isCompletedOpponentManaContinuation} from './commit-semantics.mjs';",
+   `import {isCompletedOpponentManaContinuation} from '${pathToFileURL(resolve('server/commit-semantics.mjs')).href}';`)
  .replace(anchor,`  injectFixtureForChoiceQA(snapshot){this.#canonical=structuredClone(snapshot);this.#bridgeSeat=null;this.#bridgeRevision=-1;}\n${anchor}`);
 const {Season0HeadlessAuthority:Authority}=await import('data:text/javascript;charset=utf-8,'+encodeURIComponent(source));
 const hide='__HIDDEN_CARD_BACK__';

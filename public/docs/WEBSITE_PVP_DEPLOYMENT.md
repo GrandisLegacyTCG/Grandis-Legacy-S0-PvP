@@ -50,6 +50,6 @@ PvP's three unique backs and two unique P.Attack/P.Defense sound files are
 served from `/pvp/` to avoid accidentally using byte-different website assets.
 The browser-side gesture adapter uses the actual portrait-axis scale.
 
-The new release protocol build ID is `gl-s0-pvp-rc42-r398-r40-20261124-b`. Deploy the standalone
+The new release protocol build ID is `gl-s0-pvp-rc42-r398-r40-20261124-s3`. Deploy the standalone
 backend and website `/pvp/` folder as a matched pair. Live WSS and physical
 mobile acceptance remain required.

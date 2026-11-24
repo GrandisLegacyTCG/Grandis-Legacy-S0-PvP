@@ -26,8 +26,8 @@ const PUBLIC=path.join(BASE,'public');
 const PORT=Number(process.env.PORT||3000);
 const HOST=String(process.env.HOST||'0.0.0.0').trim()||'0.0.0.0';
 const VERSION='S0-RC42-PVP-NET-RC6-STAGE2-INTEGRATION-1';
-const BUILD_ID='gl-s0-pvp-rc42-r398-r40-20261124-b';
-const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC42 · Main R3.98 / Legacy R4.0 · Rulebook v3.5 · Network RC6 Stage 2`;
+const BUILD_ID='gl-s0-pvp-rc42-r398-r40-20261124-s3';
+const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC42 · Main R3.98 / Legacy R4.0 · Rulebook v3.5 · Network RC6 Stage 2 · STEP 3 QA Candidate`;
 const AUTHORITY_BUNDLE_SHA256=createHash('sha256').update(readFileSync(path.join(PUBLIC,'battle/engine/shared-app/app.bundle.js'))).digest('hex');
 // Parse the approved Season 0 RC42 engine BEFORE the server accepts players. This
 // removes script reads + JS compilation from the synchronous START MATCH path.
@@ -339,12 +339,25 @@ function confirmCoin(client){
 function applyIntent(client,msg,batch=false){
   const actionStartedAt=process.hrtime.bigint();
   if(client.role!=='player')throw new Error('Spectators are read-only.');
-  if(room.match.status!=='started')throw new Error('Gameplay is not ready.');
-  const actionId=safeText(msg.clientActionId,160);
-  if(actionId&&room.ledger.has(actionId)){
-    const prior=room.ledger.get(actionId);if(prior?.clientId!==client.clientId)throw new Error('Duplicate action id belongs to another client.');
-    intentResult(client,{clientActionId:actionId,ok:true,appliedRevision:Number(prior?.revision||room.authority.revision)});return;
+  // Every mutating message MUST have a stable ID. Without one the old
+  // server committed the action, skipped the actor ACK, and left that tab stale.
+  const rawActionId=msg.clientActionId;
+  const actionId=typeof rawActionId==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,159}$/.test(rawActionId)?rawActionId:'';
+  if(!actionId)throw Object.assign(new Error('Every gameplay action requires a valid clientActionId.'),{code:'MISSING_ACTION_ID'});
+  const fingerprint=createHash('sha256').update(JSON.stringify({
+    type:batch?'runtime-intent-batch':'runtime-intent',
+    baseRevision:msg.baseRevision,intent:batch?null:String(msg.intent||''),
+    args:batch?null:msg.args||[],steps:batch?msg.steps||[]:null
+  })).digest('hex');
+  if(room.ledger.has(actionId)){
+    const prior=room.ledger.get(actionId);
+    if(prior?.clientId!==client.clientId)throw Object.assign(new Error('Action ID belongs to another client.'),{code:'DUPLICATE_ACTION_ID'});
+    if(prior?.fingerprint!==fingerprint)throw Object.assign(new Error('Action ID reused with different payload.'),{code:'ACTION_ID_CONFLICT'});
+    intentResult(client,{clientActionId:actionId,ok:true,appliedRevision:Number(prior.revision)});return;
   }
+  // A lost ACK can be retried even after the match moved to FINISHED.
+  // Newly submitted actions must still be rejected outside STARTED.
+  if(room.match.status!=='started')throw new Error('Gameplay is not ready.');
   // A verified player may concede even if an opponent decision advanced the
   // revision while the local tab was suspended or reconnecting.
   const isSurrender=!batch&&String(msg.intent)==='executeConfirmedSurrender';
@@ -359,7 +372,7 @@ function applyIntent(client,msg,batch=false){
   room.match.lastProgressAt=Date.now();
   if(room.authority.canonical?.appState?.gameOver){room.match.status='finished';room.match.finishedAt=now()}
   if(actionId){
-    room.ledger.set(actionId,{revision:room.authority.revision,clientId:client.clientId,at:Date.now()});
+    room.ledger.set(actionId,{revision:room.authority.revision,clientId:client.clientId,fingerprint,at:Date.now()});
     if(room.ledger.size>512){const first=room.ledger.keys().next().value;room.ledger.delete(first)}
     // Complete the originating browser action atomically: result + the exact viewer-safe
     // authoritative snapshot produced by that action. The normal room broadcast follows for
@@ -564,7 +577,7 @@ wss.on('connection',(ws,req)=>{
       if(room.spectators.size>=MAX_SPECTATORS)throw new Error('Spectator capacity reached.');client={clientId,name,role:'spectator',ready:false,connected:true,ws,lastActivityAt:Date.now()};room.spectators.set(clientId,client);
     }
     send(ws,{...viewFor(client),forceImport:true});broadcast(client);
-    ws.on('message',raw=>{let msg=null;try{msg=JSON.parse(String(raw));const changed=handle(client,msg);if(changed){const gameplay=['runtime-intent','runtime-intent-batch','surrender-match'].includes(String(msg?.type||''));broadcast(gameplay?client:null)}}catch(err){
+    ws.on('message',raw=>{if(!client||client.ws!==ws)return;let msg=null;try{msg=JSON.parse(String(raw));const changed=handle(client,msg);if(changed){const gameplay=['runtime-intent','runtime-intent-batch','surrender-match'].includes(String(msg?.type||''));broadcast(gameplay?client:null)}}catch(err){
       const code=err?.code||'REQUEST_REJECTED',actionId=safeText(msg?.clientActionId,160),isGameplay=!!actionId&&['runtime-intent','runtime-intent-batch','surrender-match'].includes(String(msg?.type||''));
       if(isGameplay)intentResult(client,{clientActionId:actionId,ok:false,code,message:String(err?.message||err),appliedRevision:room.authority?.revision||0});
       else fail(client,err?.message||err,code);

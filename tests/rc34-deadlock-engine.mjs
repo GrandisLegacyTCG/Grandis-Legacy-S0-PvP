@@ -57,6 +57,8 @@ const testCode=code.replace("import {PvpCombatPresentationLedger} from './combat
   `import {PvpCombatPresentationLedger} from '${pathToFileURL(resolve('server/combat-presentation.mjs')).href}';`)
   .replace("import {PvpDiscardPresentationLedger} from './discard-presentation.mjs';",
     `import {PvpDiscardPresentationLedger} from '${pathToFileURL(resolve('server/discard-presentation.mjs')).href}';`)
+    .replace("import {isCompletedOpponentManaContinuation} from './commit-semantics.mjs';",
+      `import {isCompletedOpponentManaContinuation} from '${pathToFileURL(resolve('server/commit-semantics.mjs')).href}';`)
   .replace(marker,`  injectFixtureForQA(snapshot) {
     this.#canonical=clone(snapshot);
     this.#bridgeSeat=null;

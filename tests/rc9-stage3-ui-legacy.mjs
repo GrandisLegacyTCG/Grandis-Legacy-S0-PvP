@@ -124,6 +124,8 @@ const inject=raw.replace("import {PvpCombatPresentationLedger} from './combat-pr
   `import {PvpCombatPresentationLedger} from '${pathToFileURL(resolve('server/combat-presentation.mjs')).href}';`)
  .replace("import {PvpDiscardPresentationLedger} from './discard-presentation.mjs';",
   `import {PvpDiscardPresentationLedger} from '${pathToFileURL(resolve('server/discard-presentation.mjs')).href}';`)
+  .replace("import {isCompletedOpponentManaContinuation} from './commit-semantics.mjs';",
+    `import {isCompletedOpponentManaContinuation} from '${pathToFileURL(resolve('server/commit-semantics.mjs')).href}';`)
  .replace(injectMark,`  injectFixtureForQA(snapshot) {this.#canonical=clone(snapshot);this.#bridgeSeat=null;this.#bridgeRevision=-1;}\n${injectMark}`);
 assert.ok(inject.includes('injectFixtureForQA(snapshot)'));
 const {Season0HeadlessAuthority}=await import('data:text/javascript;charset=utf-8,'+encodeURIComponent(inject));

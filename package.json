@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js && node --check public/battle/shared-ui/pvp-mobile-preview-hold.js",
+    "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js && node --check public/battle/shared-ui/pvp-mobile-preview-hold.js && node --check server/commit-semantics.mjs && node --check tests/step1-mana-continuation.mjs && node --check tests/step1-websocket-authority.mjs && node --check tests/step2-mobile-vsai-parity.mjs",
     "test:transition": "npm run test:ws-gate",
     "check:parity": "node tests/s1-source-parity.mjs",
-    "check": "npm run check:rc42",
+    "check": "npm run check:rc42 && npm run test:step1 && npm run test:step2 && npm run test:step3",
     "test:s0-catalog": "npm run check:catalog",
     "check:catalog": "node tests/s0-catalog-static.mjs",
     "test:ws-gate": "python3 tests/ws-gate.py",
@@ -78,7 +78,10 @@
     "test:choice-network": "node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-choice-authority-fixture.mjs",
     "test:rc41-f15": "node tests/rc41-f15-four-interactions.cjs && node tests/rc41-f15-part7-donor-parity.cjs",
     "test:rc41-f19-network": "node tests/rc41-f19-network-parity.cjs && node tests/rc41-search-to-hand-card-played.mjs && node tests/rc41-f19-authoritative-swap.mjs",
-    "check:rc42": "npm run check:syntax && node tests/rc42-part6-integration.mjs && node tests/rc42-two-seat-ws.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/privacy-presentation.mjs && node tests/net-rc6-stage2-single-socket.mjs && node tests/net-rc6-stage2-battle-bridge.mjs && node tests/rc41-f15-four-interactions.cjs && node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-search-to-hand-card-played.mjs && node tests/rc42b-hf1-import-confirmation.mjs && node tests/rc42-mobile-followup-contract.mjs"
+    "check:rc42": "npm run check:syntax && node tests/rc42-part6-integration.mjs && node tests/rc42-two-seat-ws.mjs && node tests/rc41-headless-smoke.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/privacy-presentation.mjs && node tests/net-rc6-stage2-single-socket.mjs && node tests/net-rc6-stage2-battle-bridge.mjs && node tests/rc41-f15-four-interactions.cjs && node tests/rc41-choice-network-deterministic.mjs && node tests/rc41-search-to-hand-card-played.mjs && node tests/rc42b-hf1-import-confirmation.mjs && node tests/rc42-mobile-followup-contract.mjs",
+    "test:step1": "node tests/step1-mana-continuation.mjs && node tests/step1-websocket-authority.mjs && node tests/rc34-deadlock-engine.mjs && node tests/rc39-rc4-blind-mana-and-cancel.mjs && node tests/rc41-seat2-payment-response.mjs && node tests/rc41-choice-authority-fixture.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/rc41-search-to-hand-card-played.mjs && npm run test:ws-gate && npm run test:ack-race && npm run test:deadlock-ws && npm run test:net-rc6-live",
+    "test:step2": "node tests/step2-mobile-vsai-parity.mjs",
+    "test:step3": "node tests/step3-on-demand-artwork.mjs && node tests/step3-decode-budget.mjs && node tests/step3-mobile-prewarm.mjs && node tests/step3-http-assets.mjs && node tests/step3-lifecycle-soak.mjs && node tests/step3-paired-package.mjs"
   },
   "engines": {
     "node": ">=18"

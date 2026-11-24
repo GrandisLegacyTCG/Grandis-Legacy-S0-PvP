@@ -9,7 +9,7 @@ import {season0StarterCatalog} from '../server/s0-pregame-catalog.mjs';
 import {viewerSafeBoard,assertViewerSafeBoard} from '../server/viewer-safe.mjs';
 
 const root=process.cwd(), battle=join(root,'public/battle');
-const buildId='gl-s0-pvp-rc42-r398-r40-20261124-b';
+const buildId='gl-s0-pvp-rc42-r398-r40-20261124-s3';
 const starter=Object.keys(season0StarterCatalog);
 assert.equal(starter.length,5);
 for(const key of starter){

@@ -1,5 +1,6 @@
 import {PvpCombatPresentationLedger} from './combat-presentation.mjs';
 import {PvpDiscardPresentationLedger} from './discard-presentation.mjs';
+import {isCompletedOpponentManaContinuation} from './commit-semantics.mjs';
 /**
  * Grandis Legacy PvP Season 0 — staged server-side runtime bootstrap.
  *
@@ -192,7 +193,20 @@ export function applyExactLocalChoiceDraft({bridge, readPending, payload}) {
 export function applyOptimizedPvpIntent({bridge, readPending, name, args}) {
   if (!bridge || typeof readPending !== 'function') throw new Error('PvP action bridge unavailable.');
   const run = (intent, parameters) => {
+    // The donor may return false AFTER completing a queued post-Attack
+    // Mana Burn/Steal. Only accept that terminal result when the *physical*
+    // Shards removed from the server-owned pool match the validated choice.
+    const prior = intent === 'commitOpponentManaSelection'
+      ? bridge.getCanonicalSnapshot(1)?.appState : null;
     const result = bridge.applyServerIntent(intent, parameters);
+    if (!result?.ok && prior?.pending?.continuation &&
+        isCompletedOpponentManaContinuation({
+          pending:prior.pending, before:prior,
+          after:result?.snapshot?.appState || bridge.getCanonicalSnapshot(1)?.appState,
+          error:result?.error
+        })) {
+      return {ok:true, terminalContinuation:true, snapshot:result.snapshot};
+    }
     if (!result?.ok) throw new Error(String(result?.error || `Runtime rejected ${intent}.`).slice(0,220));
     return result;
   };
@@ -560,7 +574,18 @@ export class Season0HeadlessAuthority {
   #settleServerContinuations() {
     for (let step = 0; step < 8; step++) {
       const s = this.#canonical?.appState;
-      if (!s || s.gameOver || s.pending || s.responseWindow) return;
+      if (!s) return;
+      // Headless PvP can finish a queued Provoke End from either mirrored seat
+      // without the VS AI timer. A stale autoEndTurnPending flag on the NEXT
+      // player's Draw/Deploy must not survive into a later action or reconnect.
+      // This is a PvP bridge lifecycle normalization, not a donor rules patch.
+      if (s.phase !== 'End' && !s.pending && !s.responseWindow &&
+          (s.autoEndTurnPending || s.autoEndResumeScheduled)) {
+        s.autoEndTurnPending = false;
+        s.autoEndResumeScheduled = false;
+        this.#bridgeSeat = null; this.#bridgeRevision = -1;
+      }
+      if (s.gameOver || s.pending || s.responseWindow) return;
       const drawReady = s.phase === 'Draw' &&
         s.drawPhaseResolvedFor === s.turn && !s.drawPresentationPending && !s.pvpTurnReady;
       const endReady = s.phase === 'End' && !!s.autoEndTurnPending;
