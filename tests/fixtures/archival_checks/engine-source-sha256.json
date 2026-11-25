@@ -1,0 +1,8 @@
+{
+  "donor_clean_files": {
+    "engine/js/runtime-authority.js": "74700775e8e91e5baa056a1a12a974658a12efa5a39e5113e31aaa892ad31344",
+    "engine/js/static-data.js": "0bb58a4a1c8190eebb6669537dcc56c4a5a425b364e542f912da4486b7b0e73a",
+    "engine/shared-app/active-starters.js": "cc58f5155bfd04ebf5dfee97b61ad7ff16f91bcfbff29fed463f33865225b711"
+  },
+  "patched_bundle_sha256": "f7c36579450b267bfb400ca4d759278518fdea1f9fe131a010c2b7113f8bfd30"
+}

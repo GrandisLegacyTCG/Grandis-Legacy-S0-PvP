@@ -3,7 +3,7 @@ import {readFileSync,statSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 const root=process.cwd();
-const meta=JSON.parse(readFileSync(join(root,'docs/RC41_DONOR_SOURCE_AUDIT.json'),'utf8'));
+const meta=JSON.parse(readFileSync(join(root,'tests/fixtures/archival_checks/engine-source-sha256.json'),'utf8'));
 const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
 for(const [file,sha] of Object.entries(meta.donor_clean_files)){
  const path=join(root,'public/battle',file);

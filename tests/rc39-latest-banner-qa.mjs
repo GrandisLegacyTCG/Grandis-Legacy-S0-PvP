@@ -35,7 +35,7 @@ assert.equal(messages.length,1,'No opponent/preview/zero-count popup');
 context.presentPvpManaLossNotice({...evt,source_side:'PLAYER',effect_name:'Paladin Shield',removed_count:1,removed_shards:[{kind:'CLASS',class_name:'Cleric'}]});
 assert.equal(messages.length,1,'Own Mana payment must not trigger opponent-only Mana loss receipt');
 assert.equal(JSON.stringify(messages).includes('physical-shard-uid'),false);
-const buildInfo=JSON.parse(read('docs/donor-rc39/RC39_BUILD_INFO.json'));
+const buildInfo=JSON.parse(read('tests/fixtures/archival_checks/historical-rule-fixture.json'));
 assert.equal(buildInfo.rc39_delta.intermediate_ai_aura_combo_guard_changed,true);
 assert.equal(buildInfo.rc39_delta.mana_loss_notice_changed,true);
 assert.equal(buildInfo.rc39_delta.pvp_donor_adapter_changed_in_aura_hotfix,false);

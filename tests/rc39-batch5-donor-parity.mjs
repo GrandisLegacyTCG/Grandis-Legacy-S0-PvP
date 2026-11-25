@@ -4,7 +4,7 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 const root=process.cwd(),battle=join(root,'public/battle');
-const expected=JSON.parse(readFileSync(join(root,'docs/RC40_APPROVED_ART_HASHES.json'),'utf8'));
+const expected=JSON.parse(readFileSync(join(root,'tests/fixtures/archival_checks/art-sha256.json'),'utf8'));
 const digest=b=>createHash('sha256').update(b).digest('hex');
 const art=readdirSync(join(battle,'card-art')).filter(x=>/^S0-[A-Z0-9-]+\.webp$/.test(x));
 assert.equal(art.length,248);
@@ -33,5 +33,5 @@ assert.match(html,/app-runtime\.js\?v=gl-s0-pvp-rc40-v34-mobile-parity-2026-11-1
 assert.match(html,/gl-mana-loss-notice/);
 assert.match(runtime,/gl-pvp-opponent-response-notice|pvpPendingAttackVisual/);
 assert.match(readFileSync(join(battle,'runtime/pvp-mobile-landscape-fix.css'),'utf8'),/gl-pvp-mobile-gameplay/);
-assert.equal(readFileSync(join(root,'docs/donor-rc39/RC39_PVP_DONOR_ADOPTION_CONTRACT.md'),'utf8').includes('Local only:'),true);
+assert.match(network,/commitExactLocalChoiceDraft/,'PvP must retain local drafting before authoritative commit');
 console.log('PASS RC40: 248/248 approved artwork hash parity, preserved RC39 network donor modules, RC6 lobby, local drafts, mobile, Coin Flip and animation integration retained');

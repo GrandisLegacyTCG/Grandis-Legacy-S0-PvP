@@ -1,20 +1,41 @@
-> **Latest standalone VS AI UI sync (25 Nov 2026):** Presentation-only adaptation of universal Action Popup sizing (desktop 100% Hero, mobile 89%), mobile Hand auto-fit, Hero HP/Status scaling, tap-to-read Status, portrait scroll, review layout and Card Played 6/9 responsive slots. All PvP server authority, WebSocket/ACK/reconnect, gameplay engine and exact-card thumbnail pipeline are byte-identical to the validated S3 UI Sync 1 base. Standalone binary dedup remains active (102 aliases, hydrated by `npm start` / Dockerfile). Run `npm run test:vsai-ui` for synthetic UI source/browser gates. See `docs/VS_AI_STANDALONE_UI_SYNC2_2026-11-25.md`; not a claim of real Android or Northflank validation.
+# Grandis Legacy — Season 0 PvP Standalone
 
-> **Standalone binary dedup (25 Nov 2026):** ZIP source omits 102 byte-identical duplicated binary assets, with an SHA-256 manifest. `npm start` and the Dockerfile restore all old public URLs with local hardlinks (copy fallback) **before serving**; do not run raw `node server.js` directly on an unprepared extraction. Run `npm run prepare:assets` and `npm run verify:assets` when inspecting the extracted source. PvP networking, game engine and Website `/pvp/` are unchanged. See `docs/ASSET_DEDUP_AND_SOURCE_WORKFLOW_2026-11-25.md`.
+**Status:** Local QA Candidate. This source is not a claim of production stability.  
+**Standalone UI donor reference:** **VS AI RC43 Standalone** (presentation reference only). This reference does **not** assert that the PvP gameplay engine has adopted every RC43 rules change.  
+**Network ownership:** Independent PvP server-authoritative multiplayer. It must not be overwritten by VS AI integration.
 
-> **UI thumbnail sync 2026-11-25:** 250 latest VS AI self-contained miniatures guarantee first painted face-up art; responsive PASS/REPOSITION, Import Deck dark-gold style, mobile counters; no network/engine changes. See `docs/UI_SYNC_2026-11-25.md`.
+## What this repository contains
 
-# Grandis Legacy PvP S0 — RC42 STEP 3 final paired QA candidate
+- A complete standalone PvP server, authoritative gameplay adapter and two-seat WebSocket implementation.
+- Self-contained Lobby, Battlefield, card artwork, thumbnail-first loading, static UI and local assets.
+- Automated gameplay/network/privacy regression tests and public network engineering rules.
 
-**Build:** `gl-s0-pvp-rc42-r398-r40-20261124-s3` — **LOCAL QA CANDIDATE, NOT PRODUCTION STABLE**.
+Private development notes, donor change histories, internal handoffs, QA screenshots/logs and internal release incident reports are intentionally **not included**. Network behavior and mandatory engineering rules remain public in [`docs/NETWORK_RULES.md`](docs/NETWORK_RULES.md).
 
-- Rules/game engine: approved VS AI RC42 donor + Season 0 cards R3.98/R4.0; PvP-specific authority integration remains separate.
-- Network: independent PvP RC40-derived WebSocket/authority/ACK/reconnect; S1 stability fixes retained. VS AI networking is not imported.
-- UI: VS AI RC42 mobile Batch 2 parity adapted for PvP; uniform stage scale; approved Main/Legacy/Mana backs.
-- STEP 3: lazy exact-card thumbnails, adaptive full-image decode budget, disable second hidden game VM on mobile/constrained devices, READY-only desktop warming, smaller bootstrap prefetch on constrained devices.
+## Install and run
 
-**Run:** `npm ci --omit=dev --ignore-scripts --no-audit --no-fund`, `npm start`, `npm run check`. Standalone serves `/`, `/pvp/`, `/battle/`, `/pvp/battle/`, `/ws` and `/health`. Native production mode requires `ws@8.21.0` with `PVP_REQUIRE_WS=1` and Node 22; provided Dockerfile handles this. One replica / one active in-memory room. Site package merges ONLY `pvp/` to Website root and expects existing `/card-art/` and shared assets.
+Requires Node.js 22. In this standalone package, the static binary duplicate-asset aliases are restored before the server starts.
 
-**Full audit, known gaps, precise local evidence and production deployment:** `docs/step3/FINAL_RELEASE_QA_AND_PERFORMANCE_2026-11-24.md`. This supersedes older STEP 1 release-facing README text, but the historical documentation remains intact under `docs/`.
+```bash
+npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+npm start
+```
 
-**No GitHub commit or Northflank deployment performed.**
+**Always use `npm start` for the extracted ZIP**, or run `npm run prepare:assets` before using `node server.js` directly. `npm run verify:assets` checks that original public asset paths have been restored. `npm run check` runs the active local regression suite; `npm run check:publication` verifies public-repo documentation hygiene.
+
+The server serves the Lobby at `/`, Battlefield at `/battle/`, WebSocket at `/ws`, and health information at `/health`. The included Dockerfile installs the required native WebSocket implementation, hydrates local binary aliases and precompresses static files.
+
+## Production requirements
+
+- Use secure HTTPS/WSS behind an appropriate reverse proxy and configure allowed browser origins (`PVP_ALLOWED_ORIGINS`).
+- Set `PVP_REQUIRE_WS=1` to enforce native WebSocket transport in production.
+- Deploy **one replica** while match state is held in memory; multiple independent replicas would split room authority.
+- Treat reconnect tokens as secrets; do not hardcode credentials, session tokens or privileged debugging data into this public repository.
+- Validate `/health` and the build/protocol compatibility of the separately deployed website client.
+- Run real two-browser, both-seat and reconnect acceptance before promoting any release to **Stable**.
+
+## Deployment pairing
+
+The separate Website package contains only a `pvp/` subtree. It uses root-owned Website artwork/assets where appropriate, while **this standalone package is self-contained**. Website and Standalone clients must use the same compatible build and protocol; the Website uses the approved remote `wss://` endpoint, whereas Standalone uses same-origin `/ws`.
+
+**Do not import AI autoplay, local gameplay authority or a donor network implementation into PvP.** Do not auto-upload or deploy on behalf of the owner.

@@ -11,8 +11,8 @@ const scroll=String(file('public/battle/shared-ui/pvp-mobile-card-list-scroll.js
 const review=String(file('public/battle/shared-app/db158-card-review.js'));
 const lobbyReview=String(file('public/pvp/db158-card-review.js'));
 assert.match(battle,/pvp-vsai-followup-20261125\.css\?v=pvp-ui-sync2/);
-assert.match(battle,/pvp-mobile-card-list-scroll\.js\?v=20261125-pvp-popup-scroll-sync2/);
-assert.match(battle,/app-runtime\.js\?v=20261125-uisync2/);
+assert.match(battle,/pvp-mobile-card-list-scroll\.js\?v=20261126-rc43-collection-scroll/);
+assert.match(battle,/app-runtime\.js\?v=20261126-rc43-ui/);
 assert.ok(lobby.includes('pvp-ui-sync.css?v=20261125-ui-sync1'));
 for(const part of ['function directActionNormalWidth(stage)','function fitCenterActionCards()','function fitSwapActionCards()', 'mobile ? .89 : 1','centerChoiceStage.dataset.glActionPopup=\'1\'', 'function layoutAdaptiveHand(track,side)','function playedCardCapacity()', 'const capacity=playedCardCapacity()','const draw=(host,arr,slots=0)', 'i<slots', 'function updateMobileStatusTip()', 'closeMobileStatusTip()', 'updateMobileStatusTip();queuePvpSwapNotices(s)'])assert.ok(s.includes(part),'Missing runtime contract: '+part);
 for(const part of ['.gl-center-choice-cards>.gl-center-choice-card','--gl-action-card-w', '.gl-hp-overlay', '--gl-hero-ui-unit', '.gl-mobile-status-tip.open','.hand .hand-track.gl-hand-dense','.played[data-gl-played-rows="3"]', 'var(--gl-stage-logical-w,1600px)'])assert.ok(css.includes(part),'Missing CSS contract: '+part);

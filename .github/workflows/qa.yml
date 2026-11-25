@@ -1,4 +1,4 @@
-name: Grandis Legacy PvP Season 0 RC42 - Part 6 authoritative two-seat QA
+name: Grandis Legacy PvP Season 0 - mandatory network and package QA
 on:
   push:
   pull_request:
@@ -28,7 +28,7 @@ jobs:
         run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund
       - name: Build deterministic static compression
         run: npm run build:precompress
-      - name: RC42 integration, two-seat network, privacy and HTTP
+      - name: Public-package hygiene, two-seat network, privacy and UI regression
         run: npm run check
       - name: Verify Docker image can build
         run: docker build --pull -t grandis-legacy-pvp-s0-net-rc6:ci .

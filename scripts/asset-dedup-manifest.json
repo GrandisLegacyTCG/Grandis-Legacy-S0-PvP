@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "deduplication": "byte-identical static binary assets only; no game, WebSocket or content mutation",
-  "replacedAssetFiles": 102,
-  "savedRawBytes": 31194412,
+  "deduplication": "byte-identical static binary URL aliases required by the active standalone PvP runtime only; exclude unused site showcase or legacy aliases",
+  "replacedAssetFiles": 96,
+  "savedRawBytes": 27856716,
   "groups": [
     {
       "canonical": "battle/assets/keywords-review/all-opponents.png",
@@ -414,30 +414,6 @@
       ]
     },
     {
-      "canonical": "battle/card-art/S0-ARC-H001.webp",
-      "sha256": "fe20725d2e837860b6171c4d45fc371e3727a0854760008e0338d8e6aff2ec4e",
-      "bytes": 84732,
-      "aliases": [
-        "assets/site/web-s0/S0-ARC-H001.webp"
-      ]
-    },
-    {
-      "canonical": "battle/card-art/S0-ARC-H002.webp",
-      "sha256": "8c1ac609e4c520f1d597a25fd171852b6990efe8846ca0716d96010e0dd05a6e",
-      "bytes": 89160,
-      "aliases": [
-        "assets/site/web-s0/S0-ARC-H002.webp"
-      ]
-    },
-    {
-      "canonical": "battle/card-art/S0-ARC-H003.webp",
-      "sha256": "735a0d03d16f599f729dbb68337b764775e04c51487f7d210e3b36462a4c6a59",
-      "bytes": 95588,
-      "aliases": [
-        "assets/site/web-s0/S0-ARC-H003.webp"
-      ]
-    },
-    {
       "canonical": "battle/engine/assets/Background.png",
       "sha256": "03bd71e201ddad36c9d044b00ded9589eb0e8054a9324aacb68f3668584d2df5",
       "bytes": 2333666,
@@ -646,7 +622,6 @@
       "bytes": 888276,
       "aliases": [
         "battle/assets/fonts/NotoSans-Variable.woff2",
-        "assets/site/web-s0/NotoSans-Variable.woff2",
         "assets/fonts/NotoSans-Variable.woff2",
         "engine/assets/fonts/noto-sans/NotoSans-Variable.woff2"
       ]
@@ -656,8 +631,6 @@
       "sha256": "b9e181e1fc207a223f2fb615ed0dc851812ef93acfedb6088a5e5b8714e9034f",
       "bytes": 1089970,
       "aliases": [
-        "battle/assets/lobby/swap.png",
-        "assets/lobby/swap.png",
         "engine/assets/lobby/Swap.png"
       ]
     },

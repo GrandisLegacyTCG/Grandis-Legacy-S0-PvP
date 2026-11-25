@@ -1,7 +1,7 @@
 // Release gate: tests current RC41 source and surviving PvP network/visual regressions.
 // Historical RC40 SHA and R3.7 card-print fixtures are kept, not repurposed as RC41.
 import {spawnSync} from 'node:child_process';
-import {writeFileSync} from 'node:fs';
+import {writeFileSync,mkdirSync} from 'node:fs';
 const checks=[
  'node tests/rc41-seat-mirror-mana.mjs',
  'node tests/s1-source-parity.mjs',
@@ -65,6 +65,7 @@ for(const [i,command] of checks.entries()){
  console.log(`[${i+1}/${checks.length}] ${status===0?'PASS':'FAIL'} ${command} (${duration}ms)`);
  if(status!==0){console.error(results.at(-1).tail,results.at(-1).error);break;}
 }
-writeFileSync('docs/RC41_RELEASE_GATE_RESULTS.json',JSON.stringify({count:results.length,total:checks.length,pass:results.every(r=>r.status===0)&&results.length===checks.length,results},null,2)+'\n');
+mkdirSync('tests/.generated',{recursive:true});
+writeFileSync('tests/.generated/release-gate-results.json',JSON.stringify({count:results.length,total:checks.length,pass:results.every(r=>r.status===0)&&results.length===checks.length,results},null,2)+'\n');
 if(!results.every(r=>r.status===0)||results.length!==checks.length){process.exitCode=1;}
 else console.log(`PASS RC41 multiplayer/historical compatibility release gate: ${results.length}/${checks.length} independent tests`);
