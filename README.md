@@ -1,3 +1,7 @@
+> **Latest standalone VS AI UI sync (25 Nov 2026):** Presentation-only adaptation of universal Action Popup sizing (desktop 100% Hero, mobile 89%), mobile Hand auto-fit, Hero HP/Status scaling, tap-to-read Status, portrait scroll, review layout and Card Played 6/9 responsive slots. All PvP server authority, WebSocket/ACK/reconnect, gameplay engine and exact-card thumbnail pipeline are byte-identical to the validated S3 UI Sync 1 base. Standalone binary dedup remains active (102 aliases, hydrated by `npm start` / Dockerfile). Run `npm run test:vsai-ui` for synthetic UI source/browser gates. See `docs/VS_AI_STANDALONE_UI_SYNC2_2026-11-25.md`; not a claim of real Android or Northflank validation.
+
+> **Standalone binary dedup (25 Nov 2026):** ZIP source omits 102 byte-identical duplicated binary assets, with an SHA-256 manifest. `npm start` and the Dockerfile restore all old public URLs with local hardlinks (copy fallback) **before serving**; do not run raw `node server.js` directly on an unprepared extraction. Run `npm run prepare:assets` and `npm run verify:assets` when inspecting the extracted source. PvP networking, game engine and Website `/pvp/` are unchanged. See `docs/ASSET_DEDUP_AND_SOURCE_WORKFLOW_2026-11-25.md`.
+
 > **UI thumbnail sync 2026-11-25:** 250 latest VS AI self-contained miniatures guarantee first painted face-up art; responsive PASS/REPOSITION, Import Deck dark-gold style, mobile counters; no network/engine changes. See `docs/UI_SYNC_2026-11-25.md`.
 
 # Grandis Legacy PvP S0 — RC42 STEP 3 final paired QA candidate

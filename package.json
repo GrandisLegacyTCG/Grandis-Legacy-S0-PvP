@@ -8,7 +8,7 @@
     "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js && node --check public/battle/shared-ui/pvp-mobile-preview-hold.js && node --check server/commit-semantics.mjs && node --check tests/step1-mana-continuation.mjs && node --check tests/step1-websocket-authority.mjs && node --check tests/step2-mobile-vsai-parity.mjs",
     "test:transition": "npm run test:ws-gate",
     "check:parity": "node tests/s1-source-parity.mjs",
-    "check": "npm run check:rc42 && npm run test:step1 && npm run test:step2 && npm run test:step3",
+    "check": "npm run check:rc42 && npm run test:step1 && npm run test:step2 && npm run test:step3 && npm run test:vsai-ui",
     "test:s0-catalog": "npm run check:catalog",
     "check:catalog": "node tests/s0-catalog-static.mjs",
     "test:ws-gate": "python3 tests/ws-gate.py",
@@ -82,7 +82,15 @@
     "test:step1": "node tests/step1-mana-continuation.mjs && node tests/step1-websocket-authority.mjs && node tests/rc34-deadlock-engine.mjs && node tests/rc39-rc4-blind-mana-and-cancel.mjs && node tests/rc41-seat2-payment-response.mjs && node tests/rc41-choice-authority-fixture.mjs && node tests/rc41-seat-mirror-mana.mjs && node tests/rc41-search-to-hand-card-played.mjs && npm run test:ws-gate && npm run test:ack-race && npm run test:deadlock-ws && npm run test:net-rc6-live",
     "test:step2": "node tests/step2-mobile-vsai-parity.mjs",
     "test:step3": "node tests/step3-on-demand-artwork.mjs && node tests/step3-decode-budget.mjs && node tests/step3-mobile-prewarm.mjs && node tests/step3-http-assets.mjs && node tests/step3-lifecycle-soak.mjs && node tests/step3-paired-package.mjs && npm run test:ui-sync",
-    "test:ui-sync": "node tests/ui-sync-thumbnails.mjs"
+    "test:ui-sync": "node tests/ui-sync-thumbnails.mjs",
+    "prepare:assets": "node scripts/hydrate-duplicate-assets.mjs",
+    "verify:assets": "node scripts/hydrate-duplicate-assets.mjs --verify",
+    "prestart": "npm run prepare:assets",
+    "precheck": "npm run prepare:assets",
+    "pretest:assets": "npm run prepare:assets",
+    "test:dedup": "node scripts/hydrate-duplicate-assets.mjs --verify",
+    "test:dedup-http": "node tests/asset-dedup-http.mjs",
+    "test:vsai-ui": "node tests/vsai-ui-followup-contract.mjs && python3 tests/ui-followup-synthetic.py && python3 tests/vsai-followup-stage-qa.py"
   },
   "engines": {
     "node": ">=18"

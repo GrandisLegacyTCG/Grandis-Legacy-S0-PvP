@@ -1,0 +1,726 @@
+{
+  "schema": 1,
+  "deduplication": "byte-identical static binary assets only; no game, WebSocket or content mutation",
+  "replacedAssetFiles": 102,
+  "savedRawBytes": 31194412,
+  "groups": [
+    {
+      "canonical": "battle/assets/keywords-review/all-opponents.png",
+      "sha256": "fdfd317fae96ca5207b44c500e8dfaf4df0353ef79ed55be3da88c01745b7392",
+      "bytes": 3887,
+      "aliases": [
+        "assets/keywords-review/all-opponents.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/block.png",
+      "sha256": "6a03e0c5f5c1a401bda2b9e101fe781a8d34b00516c1523a4689cdc3cb403309",
+      "bytes": 2142,
+      "aliases": [
+        "assets/keywords-review/block.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/buff.png",
+      "sha256": "58a4754d0ff185a9090c043dbb286bda5ec915565b31a79e5c357ec923a4ba77",
+      "bytes": 1555,
+      "aliases": [
+        "assets/keywords-review/buff.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/condition.png",
+      "sha256": "e878886ce139c0a783560fe75ecd7ab21092bc060e1780d6dd032730a0db00c6",
+      "bytes": 2905,
+      "aliases": [
+        "assets/keywords-review/condition.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/dodge.png",
+      "sha256": "7322f75e2caf6253dcf722b9a12c16b96674093f25a65e0eceade6150283111d",
+      "bytes": 2140,
+      "aliases": [
+        "assets/keywords-review/dodge.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/heal.png",
+      "sha256": "bb81b7aaee7e4ff6886f76ed5756c2479e861fc784cf2439a708d8b82408bd2d",
+      "bytes": 1394,
+      "aliases": [
+        "assets/keywords-review/heal.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/invincible.png",
+      "sha256": "0afa3ac6651784e69d54e4fc870fb512ed65209218e6d39746f99706a2865494",
+      "bytes": 2867,
+      "aliases": [
+        "assets/keywords-review/invincible.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/mana-burn.png",
+      "sha256": "f49ae433d39d2ad7fbf4f25249359a71312046275e57fafe953f040a443ffdb4",
+      "bytes": 2808,
+      "aliases": [
+        "assets/keywords-review/mana-burn.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/mana-cost-1.png",
+      "sha256": "384ad0d2e0460173d346b0879e9c4aabcb3819568f752cda5bfefe9cc386c8ec",
+      "bytes": 3214,
+      "aliases": [
+        "assets/keywords-review/mana-cost-1.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/mana-cost-2.png",
+      "sha256": "33f7c59f9389f54a5123b46fe98004d4484d95b09a4c6dc3112c214d78f22d6d",
+      "bytes": 3374,
+      "aliases": [
+        "assets/keywords-review/mana-cost-2.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/mana-steal.png",
+      "sha256": "3d707c820532cc166e99d05112f820ee8c35177cd17049b944298dbbcce5f768",
+      "bytes": 2787,
+      "aliases": [
+        "assets/keywords-review/mana-steal.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/melee.png",
+      "sha256": "b6b24d8279ecd9f1ba7cc41281f9e869e297cb9684643d421ddf7a1a7cdfbbbc",
+      "bytes": 1617,
+      "aliases": [
+        "assets/keywords-review/melee.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/piercing.png",
+      "sha256": "28c54473a942d79489142d88ff6a86dba5756e4fe882d170ffce407af882c052",
+      "bytes": 2802,
+      "aliases": [
+        "assets/keywords-review/piercing.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/range.png",
+      "sha256": "188835d736d2c2410693512a9b0f27f670cf059b23935c2cc98d5ca8fb95bd68",
+      "bytes": 2196,
+      "aliases": [
+        "assets/keywords-review/range.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/reaction.png",
+      "sha256": "2a50117e88eba665227e66083fee9dc5571d58b0d19b1542095e13f402d1c514",
+      "bytes": 2846,
+      "aliases": [
+        "assets/keywords-review/reaction.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/reflect.png",
+      "sha256": "a2e2ccf27d46c64f81937f24f2c7eb52c500d9deb537b35b212f87f7de42d96f",
+      "bytes": 2048,
+      "aliases": [
+        "assets/keywords-review/reflect.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/revive.png",
+      "sha256": "05e7484884c00dfdec7ad4218c554e9767c4349cdce37a09ba813d716944737b",
+      "bytes": 1890,
+      "aliases": [
+        "assets/keywords-review/revive.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords-review/sure-hit.png",
+      "sha256": "3f56bcfcfa8252b9a4bec44a2567e40ba1d9f8c54680a12cee6401a9fb4b1dd7",
+      "bytes": 2376,
+      "aliases": [
+        "assets/keywords-review/sure-hit.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/all-opponents.png",
+      "sha256": "ab581fd817b6e2b3918819d60f0f5e0e34611adfbbf9fda30e8fbcf2a17d139f",
+      "bytes": 3981,
+      "aliases": [
+        "assets/keywords/all-opponents.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/block.png",
+      "sha256": "1056d15b3c8045cae0f9cfcb46128954c7f75e9b7657a390fb5e40a54ccdc3d2",
+      "bytes": 2193,
+      "aliases": [
+        "assets/keywords/block.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/buff.png",
+      "sha256": "913c2d781b6b54f4979e91c0a3c306d2c8d4da841279a17039bf07d398a9ad40",
+      "bytes": 1598,
+      "aliases": [
+        "assets/keywords/buff.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/condition.png",
+      "sha256": "0ebc958347ff3df2a236dfccc37490c61a8dc31585368473772a248f020ebbbd",
+      "bytes": 3019,
+      "aliases": [
+        "assets/keywords/condition.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/dodge.png",
+      "sha256": "312fffdc7aec5475bece697651c2e8e7fc5d32f232613679066e29f84988889a",
+      "bytes": 2241,
+      "aliases": [
+        "assets/keywords/dodge.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/heal.png",
+      "sha256": "ff004f443adef4d9900b996dc1f72a332d5c6e65978694447dd0f52ba02900a5",
+      "bytes": 1454,
+      "aliases": [
+        "assets/keywords/heal.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/invincible.png",
+      "sha256": "ec24b3bf6e73dcdbd2cc9d5cea4b18d9a713492571f1499247efe48da1392528",
+      "bytes": 2928,
+      "aliases": [
+        "assets/keywords/invincible.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/mana-burn.png",
+      "sha256": "18537ee26f9dd9be0308efca4f9980dbc9a3572d60e60a8652f5deb0a0c028b7",
+      "bytes": 3056,
+      "aliases": [
+        "assets/keywords/mana-burn.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/mana-cost-1.png",
+      "sha256": "3ca5ed3eb42c161a0cd4822f73e5e361af6cd6146ba66aeabfd9b77e432d1156",
+      "bytes": 3487,
+      "aliases": [
+        "assets/keywords/mana-cost-1.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/mana-cost-2.png",
+      "sha256": "0468e3b91351067628e3712dfd92e1bce06630665742fcc3e9a80549f683b8d1",
+      "bytes": 3555,
+      "aliases": [
+        "assets/keywords/mana-cost-2.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/mana-steal.png",
+      "sha256": "978afaf3aec392fca4900cec13ce889f0d53473b77ba4245b55ad28f1f258b40",
+      "bytes": 2951,
+      "aliases": [
+        "assets/keywords/mana-steal.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/melee.png",
+      "sha256": "efffee2e76cf90d8efe7206dd3bf77263554d5ec1067e882f180e17c3c61a6ea",
+      "bytes": 1671,
+      "aliases": [
+        "assets/keywords/melee.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/piercing.png",
+      "sha256": "6407dad7d6977357147cd0d7e6075b9e8f0178599123e860bed0ab0aea513105",
+      "bytes": 2921,
+      "aliases": [
+        "assets/keywords/piercing.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/range.png",
+      "sha256": "17f3520ff6b9d00cf8c544e30ac890083976b9b4e89cfa00c7727042dad55cc0",
+      "bytes": 2268,
+      "aliases": [
+        "assets/keywords/range.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/reaction.png",
+      "sha256": "0370e03c8e463ce589da4196697baa4a63552237883836bbefb6073f73082456",
+      "bytes": 2903,
+      "aliases": [
+        "assets/keywords/reaction.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/reflect.png",
+      "sha256": "f134bbefeeb5a1d3eb54ed8296aa59c812e3c874a8b438f63492602edd2dba29",
+      "bytes": 2111,
+      "aliases": [
+        "assets/keywords/reflect.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/revive.png",
+      "sha256": "292d12a23ffd87cad3cdfe06fb8b8a0b10b46c77566a9713d9904688b95fa09f",
+      "bytes": 1930,
+      "aliases": [
+        "assets/keywords/revive.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/keywords/sure-hit.png",
+      "sha256": "4810358f02da4d2b42e85efd6916dff1c646b692e07eaf56995ac0c432d9e9f7",
+      "bytes": 2463,
+      "aliases": [
+        "assets/keywords/sure-hit.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/lobby/chevron-down.png",
+      "sha256": "ffb2be69858295e8dc51841c035a6d0f717447e786394f43edf9aa6abf938fac",
+      "bytes": 319,
+      "aliases": [
+        "assets/lobby/chevron-down.png",
+        "assets/review-db158/assets/ui/chevron-down.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/lobby/exit.png",
+      "sha256": "7ab49d201942b7334867609ad6152e894b25a46fac465c461faccd177ed3bd46",
+      "bytes": 439,
+      "aliases": [
+        "assets/lobby/exit.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/Racial-Token-Head.webp",
+      "sha256": "b1d2653653393c60fd00e5b769df0e8cddb26ccb063de4cf888c1d39dc7657ae",
+      "bytes": 76930,
+      "aliases": [
+        "assets/ui/Racial-Token-Head.webp"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/Racial-Token-Tail.webp",
+      "sha256": "867e6c6d1d330ddf7b28e87e31375a8c5a71aa46bb54d054b965e8c5d72b110c",
+      "bytes": 61782,
+      "aliases": [
+        "assets/ui/Racial-Token-Tail.webp"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/back-legacy.webp",
+      "sha256": "1e1d7bda105c566426a75b8cd6d8e5c33025ff88486ca33ca7289ec47010ab86",
+      "bytes": 65098,
+      "aliases": [
+        "assets/ui/back-legacy.webp"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/back-main.webp",
+      "sha256": "09b116c862d7e4214ceee0e9df478bca825be673cc38a8f763d0217c36f97d9f",
+      "bytes": 58512,
+      "aliases": [
+        "assets/ui/back-main.webp"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/back-shard.webp",
+      "sha256": "817b05bd2642020bebd0b7365fa44e46fffc05ad2e0616dc3cec53f1bc8efbe3",
+      "bytes": 66566,
+      "aliases": [
+        "assets/ui/back-shard.webp"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Beastman Button.png",
+      "sha256": "bd54c646bb7309aeeb2af996a16c7fd5de6000719ff47e5da08d28dae7b2e5f4",
+      "bytes": 14472,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Beastman Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Dragonborn Button.png",
+      "sha256": "fd4657ce307c0fb1aee3ee1589e27f99e488b6184e3c40f1079fd8049eb8a0f6",
+      "bytes": 13994,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Dragonborn Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Dwarf Button.png",
+      "sha256": "2ee4b4896c5f1b5e5b889eb095d29ca6233f2324dfd20478f23c26f841af3c00",
+      "bytes": 13117,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Dwarf Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Elf Button.png",
+      "sha256": "ee24baffe1b1f4b8f50ab312ea60ac06a8b3f0c52ffa1ad15287d9882f2b5da8",
+      "bytes": 12259,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Elf Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Halfling Button.png",
+      "sha256": "a9a56634b8731e40ba052876dd5cd8a328146a1628ea6121802dd8e25855d2d7",
+      "bytes": 11776,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Halfling Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Human Button.png",
+      "sha256": "97f0f8a0bf5120a2cce680776baa8f025d47ef732ef6e801e27c3d61080cfd54",
+      "bytes": 12201,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Human Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Racial Legacy Button.png",
+      "sha256": "d2f0ee673311bf109ff142a70a8229e1bd71d16cff068643e829d4343dd4117e",
+      "bytes": 5030,
+      "aliases": [
+        "assets/ui/hero-actions/Racial Legacy Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/assets/ui/hero-actions/Support Button.png",
+      "sha256": "a0156691fe4e4f21d3f0c6dce8c2df221a76ac903758585cf2a900f705bce319",
+      "bytes": 5581,
+      "aliases": [
+        "assets/ui/hero-actions/Support Button.png"
+      ]
+    },
+    {
+      "canonical": "battle/card-art/S0-ARC-H001.webp",
+      "sha256": "fe20725d2e837860b6171c4d45fc371e3727a0854760008e0338d8e6aff2ec4e",
+      "bytes": 84732,
+      "aliases": [
+        "assets/site/web-s0/S0-ARC-H001.webp"
+      ]
+    },
+    {
+      "canonical": "battle/card-art/S0-ARC-H002.webp",
+      "sha256": "8c1ac609e4c520f1d597a25fd171852b6990efe8846ca0716d96010e0dd05a6e",
+      "bytes": 89160,
+      "aliases": [
+        "assets/site/web-s0/S0-ARC-H002.webp"
+      ]
+    },
+    {
+      "canonical": "battle/card-art/S0-ARC-H003.webp",
+      "sha256": "735a0d03d16f599f729dbb68337b764775e04c51487f7d210e3b36462a4c6a59",
+      "bytes": 95588,
+      "aliases": [
+        "assets/site/web-s0/S0-ARC-H003.webp"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/Background.png",
+      "sha256": "03bd71e201ddad36c9d044b00ded9589eb0e8054a9324aacb68f3668584d2df5",
+      "bytes": 2333666,
+      "aliases": [
+        "battle/assets/ui/Background.png",
+        "assets/ui/Background.png",
+        "engine/assets/Background.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/Field.png",
+      "sha256": "c50d530c7ad4b812b2b6bba3bbbd6d0f084a4f3e3a2ccee2a796168265d3fabe",
+      "bytes": 28868,
+      "aliases": [
+        "engine/assets/Field.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/Card Sound.mp3",
+      "sha256": "1c04e41918b392a643c22d6c02ef34eeab0341c70d46b7d517078725b79d8ee4",
+      "bytes": 30929,
+      "aliases": [
+        "engine/assets/audio/Card Sound.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/Coin Flip.mp3",
+      "sha256": "b4842f9a3f2d25004223313f5473bef74afd79915b6af9bdb35c70f6df8c2b50",
+      "bytes": 17280,
+      "aliases": [
+        "engine/assets/audio/Coin Flip.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/Tavern Quest.mp3",
+      "sha256": "98416937b2f44beda80528c320c76096929a13fe230d747c3a4064f62881098a",
+      "bytes": 4303201,
+      "aliases": [
+        "engine/assets/audio/Tavern Quest.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/battle/Dodge.mp3",
+      "sha256": "e07d8c4a9e1140a4de47336fa7c9710877108f5250cd6dd24f31365200d125ff",
+      "bytes": 96000,
+      "aliases": [
+        "engine/assets/audio/battle/Dodge.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/battle/Heal.mp3",
+      "sha256": "cc1b799d0a163ac839956b0790b9718bffa2e7f17c6dd6c020afc6c3a3745e96",
+      "bytes": 55380,
+      "aliases": [
+        "engine/assets/audio/battle/Heal.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/battle/M.Atk.mp3",
+      "sha256": "f5135d95c80dcfedf5970448a31bf3d6e833627a1824dee0c4cb092d0ee0f24b",
+      "bytes": 33600,
+      "aliases": [
+        "engine/assets/audio/battle/M.Atk.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/audio/battle/M.Def.mp3",
+      "sha256": "9fdb77b5bdcd389d555d267ed24f90164b6fe57b534cf2af5476025e0cdeff18",
+      "bytes": 63744,
+      "aliases": [
+        "engine/assets/audio/battle/M.Def.mp3"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/Blade.png",
+      "sha256": "babb68059849ea7cb9aedbe0b30cb0bdf0198ae54bebe7fef582c065578b8849",
+      "bytes": 89243,
+      "aliases": [
+        "engine/assets/battle/Blade.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/Heal.png",
+      "sha256": "5ab9da2f756f10083a169d541cbd8e2c4f475b083db5215ee3265a07fc224370",
+      "bytes": 743085,
+      "aliases": [
+        "engine/assets/battle/Heal.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/M.Attack.png",
+      "sha256": "7abb2701ab9315b495f068eb2a0d9d92219c72defb34e30060dabeb5695299d6",
+      "bytes": 1213683,
+      "aliases": [
+        "engine/assets/battle/M.Attack.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/M.Defense.png",
+      "sha256": "a7a33723dcdde086393012dd2228266e22b7f091a6aea0fe889256605375144a",
+      "bytes": 1703111,
+      "aliases": [
+        "engine/assets/battle/M.Defense.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/P.Attack.png",
+      "sha256": "b9a56d15c39d75d0f4953afd1121cf4a60d517601b95bfe3f090ff2152848646",
+      "bytes": 1031738,
+      "aliases": [
+        "engine/assets/battle/P.Attack.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/battle/P.Defense.png",
+      "sha256": "56ca1ed4f5c3a8550aecd0f00b3b24c11d543b0b9789979f7b8bbca2d4691afe",
+      "bytes": 1055127,
+      "aliases": [
+        "engine/assets/battle/P.Defense.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-1.png",
+      "sha256": "0163a05b27ab59f3a94cf379ccd5b61e69e9d0819fb3a56e79fc7e13e31a047a",
+      "bytes": 322454,
+      "aliases": [
+        "engine/assets/counters/Counter-1.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-2.png",
+      "sha256": "ad7f17e7ffe9290df4ed06810b6bd80417133e56a14eaa9a14cf8db3310d6bb4",
+      "bytes": 331027,
+      "aliases": [
+        "engine/assets/counters/Counter-2.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-3.png",
+      "sha256": "eef0182e7fe1824d0265d9e9419f2ea81ae594a374ba8ed3de56e9c1e90c21e3",
+      "bytes": 325302,
+      "aliases": [
+        "engine/assets/counters/Counter-3.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-4.png",
+      "sha256": "0b3169cb24c2b0e50aa72c2883c0dd970467915d5b48d2a74c2bc65a9e450c6a",
+      "bytes": 319404,
+      "aliases": [
+        "engine/assets/counters/Counter-4.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-5.png",
+      "sha256": "85f314ae9c68b8e05b27c08f89a9e208b12969e6cb113ef45acd2967928266de",
+      "bytes": 329164,
+      "aliases": [
+        "engine/assets/counters/Counter-5.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter-6.png",
+      "sha256": "9b45066100db47a512cea48d91f277899eff1a1b03a97524a634a7b7a438a4ae",
+      "bytes": 324062,
+      "aliases": [
+        "engine/assets/counters/Counter-6.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/counters/Counter.png",
+      "sha256": "721304ae162efb52a15ea70f7218390cab4cf022665c4a63349fbe8daa34b0cf",
+      "bytes": 2316357,
+      "aliases": [
+        "engine/assets/counters/Counter.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/exp/Stack 100-200EXP.png",
+      "sha256": "3dfcae61252146b2215be621ab00455de068612b6995aabb24ef8de3ada6363c",
+      "bytes": 152005,
+      "aliases": [
+        "engine/assets/exp/Stack 100-200EXP.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/favicon.png",
+      "sha256": "ba3c77d7c9172a375ad23fb449ad44a1ff4d7dad53a56770f71e352cbc7cb03d",
+      "bytes": 10391,
+      "aliases": [
+        "assets/site/web-s0/favicon.png",
+        "engine/assets/favicon.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/fonts/noto-sans/NotoSans-Italic-Variable.woff2",
+      "sha256": "d1cd64b1d71e55d3548eacdda2235d5ce3b5c15bd8ff1b40a461442a7f819b57",
+      "bytes": 1018368,
+      "aliases": [
+        "engine/assets/fonts/noto-sans/NotoSans-Italic-Variable.woff2"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/fonts/noto-sans/NotoSans-Variable.woff2",
+      "sha256": "4204916b05eabc58243435a9ddfef2a4b88b29c4547aac811c6818695eafcb11",
+      "bytes": 888276,
+      "aliases": [
+        "battle/assets/fonts/NotoSans-Variable.woff2",
+        "assets/site/web-s0/NotoSans-Variable.woff2",
+        "assets/fonts/NotoSans-Variable.woff2",
+        "engine/assets/fonts/noto-sans/NotoSans-Variable.woff2"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/lobby/Swap.png",
+      "sha256": "b9e181e1fc207a223f2fb615ed0dc851812ef93acfedb6088a5e5b8714e9034f",
+      "bytes": 1089970,
+      "aliases": [
+        "battle/assets/lobby/swap.png",
+        "assets/lobby/swap.png",
+        "engine/assets/lobby/Swap.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/lobby/background.webp",
+      "sha256": "487496dc5ac86b037002a196d17062da05ca925ea16253a0a9532e008bfe44b0",
+      "bytes": 32642,
+      "aliases": [
+        "battle/assets/lobby/background.webp",
+        "assets/lobby/background.webp",
+        "engine/assets/lobby/background.webp"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/lobby/grandis-legacy-logo.webp",
+      "sha256": "c62604a77d5307612c10e47a5eba0337d01b4bb1bb801d97dc4fe844208de8d0",
+      "bytes": 132856,
+      "aliases": [
+        "battle/assets/lobby/grandis-legacy-logo.webp",
+        "assets/site/web-s0/logo-transparent.webp",
+        "assets/lobby/grandis-legacy-logo.webp",
+        "engine/assets/lobby/grandis-legacy-logo.webp"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/status-icons/Icon-Bleed.png",
+      "sha256": "d64592f80dc70c4a092ee20c22ea06537361d21b1ba3b1ddd35de58dad21aeb6",
+      "bytes": 5756,
+      "aliases": [
+        "engine/assets/status-icons/Icon-Bleed.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/status-icons/Icon-Burn.png",
+      "sha256": "40a829720d86019ff33f3fb69bbf17fed7486eecf43cb96d0b199980e10c89db",
+      "bytes": 6021,
+      "aliases": [
+        "engine/assets/status-icons/Icon-Burn.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/status-icons/Icon-Freeze.png",
+      "sha256": "f5d0ace90bf961e229373a753bd6310b9e0b4bc9b541caca2ab52a33dba725f6",
+      "bytes": 7995,
+      "aliases": [
+        "engine/assets/status-icons/Icon-Freeze.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/status-icons/Icon-Poison.png",
+      "sha256": "6f4c37f9ed50dbc978dc82e2490278c4529b7df735c3a2a55cec0df9d2306aec",
+      "bytes": 9216,
+      "aliases": [
+        "engine/assets/status-icons/Icon-Poison.png"
+      ]
+    },
+    {
+      "canonical": "battle/engine/assets/status-icons/Icon-Stun.png",
+      "sha256": "5555889f55f6eb455c9d6ba2997b1aeae6895629618a0152ae07224aa362fa07",
+      "bytes": 8695,
+      "aliases": [
+        "engine/assets/status-icons/Icon-Stun.png"
+      ]
+    }
+  ]
+}
