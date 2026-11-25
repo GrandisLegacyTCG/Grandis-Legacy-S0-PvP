@@ -55,6 +55,8 @@ try{
   assert.equal(mirror.match.board.appState.aiHand.every(x=>x==='__HIDDEN_CARD_BACK__'),true,'Opponent private Hand stays private');
   const spectatorView=await spec.until(m=>m.match?.revision===initialRevision+1);
   assert.equal(spectatorView.match.board.appState.aiHand.every(x=>x==='__HIDDEN_CARD_BACK__'),true);
+  assert.equal(spectatorView.match.board.appState.pvpLocalLegalLegacyAbilities,undefined,'Spectators must not receive private Legacy legality');
+  for(const v of [ack.snapshot,mirror])assert.deepEqual(Object.keys(v.match.board.appState.pvpLocalLegalLegacyAbilities).sort(),['CENTER','LEFT','RIGHT']);
   console.log('PASS actor ACK + viewer-safe opponent/spectator snapshots share the committed revision');
   actor.send('runtime-intent',req);
   const acks=actor.msgs.filter(m=>m.type==='intent-result'&&m.clientActionId===id);

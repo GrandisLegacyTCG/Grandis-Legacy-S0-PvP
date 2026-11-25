@@ -1,6 +1,6 @@
 # Grandis Legacy — Season 0 PvP Standalone
 
-**Status:** Local QA Candidate. This source is not a claim of production stability.  
+**Status:** RC43 UI / PvP P01-P04 hotfix — Local QA Candidate. This source is not a claim of production stability.  
 **Standalone UI donor reference:** **VS AI RC43 Standalone** (presentation reference only). This reference does **not** assert that the PvP gameplay engine has adopted every RC43 rules change.  
 **Network ownership:** Independent PvP server-authoritative multiplayer. It must not be overwritten by VS AI integration.
 

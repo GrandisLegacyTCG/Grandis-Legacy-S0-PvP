@@ -396,6 +396,10 @@ Different clocks have different meanings. Define and test them separately:
 
 **Artwork gates** are additionally mandatory: revealed exact-card thumbnail, original failure retaining thumb, stable card instance DOM, rapid identity change, no private prefetch, current backs, cold/warm cache, and both standalone/Website asset parity.
 
+**Legacy legality:** The authority derives local Legacy action descriptors from the actual owner's Hand, Deck, Discard, turn and timing. Only the owner receives legal descriptors in `pvpLocalLegalLegacyAbilities`; do not publish search candidates until a legal choice opens. Spectators receive no legality metadata. A submitted ability intent is independently revalidated against canonical state.
+
+**Casting continuation:** After a committed action or mandatory Response/choice, the authority resumes eligible Casting releases during the active player's Battle Phase. Reuse the engine's Casting eligibility and locked position rules; never auto-PASS or skip a pending decision. Stop on a new Response, mandatory choice or match end. Preserve each resolved Attack's presentation journal even when its successor opens in the same committed revision. ACK/revision/idempotency still cover the entire transaction; no intermediate canonical board is sent.
+
 **Special acceptance rule:** For every pending type, the test must run `choice → server commit/ACK → viewer-safe snapshot → client render → next legal action` for Seat 1 and Seat 2. A test that stops immediately after a successful engine helper does **not** prove absence of a stuck multiplayer flow.
 
 ### 11.1. Test levels and honest status

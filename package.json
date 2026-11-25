@@ -8,7 +8,7 @@
     "check:syntax": "node --check server.js && node --check server/headless-rc32.mjs && node --check server/viewer-safe.mjs && node --check server/combat-presentation.mjs && node --check server/discard-presentation.mjs && node --check server/pvp-history-effects.mjs && node --check public/pvp/pvp-host.js && node --check public/battle/runtime/pvp-network.js && node --check public/battle/shared-app/app-runtime.js && node --check public/battle/runtime/pvp-touch-actions.js && node --check public/battle/runtime/pvp-mana-draft.js && node --check public/pvp/pvp-mobile-desktop.js && node --check public/pvp/db158-card-review.js && node --check server/ws-lite.mjs && node --check public/battle/engine/shared-app/app.bundle.js && node --check public/battle/shared-ui/pvp-mobile-preview-hold.js && node --check server/commit-semantics.mjs && node --check tests/step1-mana-continuation.mjs && node --check tests/step1-websocket-authority.mjs && node --check tests/step2-mobile-vsai-parity.mjs",
     "test:transition": "npm run test:ws-gate",
     "check:parity": "node tests/s1-source-parity.mjs",
-    "check": "npm run check:publication && npm run test:asset-cleanup && npm run check:rc42 && npm run test:step1 && npm run test:step2 && npm run test:step3 && npm run test:vsai-ui && npm run test:rc43-ui",
+    "check": "npm run check:publication && npm run test:asset-cleanup && npm run check:rc42 && npm run test:step1 && npm run test:step2 && npm run test:step3 && npm run test:vsai-ui && npm run test:rc43-ui && npm run test:pvp-phase-legacy-casting",
     "test:s0-catalog": "npm run check:catalog",
     "check:catalog": "node tests/s0-catalog-static.mjs",
     "test:ws-gate": "python3 tests/ws-gate.py",
@@ -93,7 +93,8 @@
     "test:vsai-ui": "node tests/vsai-ui-followup-contract.mjs && python3 tests/ui-followup-synthetic.py && python3 tests/vsai-followup-stage-qa.py",
     "test:rc43-ui": "node tests/rc43-ui-preservation.mjs && python3 tests/rc43-ui-browser.py",
     "check:publication": "node tests/public-package-hygiene.mjs",
-    "test:asset-cleanup": "node tests/asset-cleanup.mjs"
+    "test:asset-cleanup": "node tests/asset-cleanup.mjs",
+    "test:pvp-phase-legacy-casting": "node tests/pvp-legacy-casting-continuation.mjs && python3 tests/pvp-phase-controls-browser.py"
   },
   "engines": {
     "node": ">=18"

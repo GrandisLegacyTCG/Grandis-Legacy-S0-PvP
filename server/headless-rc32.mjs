@@ -571,7 +571,7 @@ export class Season0HeadlessAuthority {
    * Provoke must execute here rather than waiting for a setTimeout callback.
    * Each user intent + its immediate automatic consequences is one revision.
    */
-  #settleServerContinuations() {
+  #settleServerContinuations(castingBoundaries = []) {
     for (let step = 0; step < 8; step++) {
       const s = this.#canonical?.appState;
       if (!s) return;
@@ -589,11 +589,24 @@ export class Season0HeadlessAuthority {
       const drawReady = s.phase === 'Draw' &&
         s.drawPhaseResolvedFor === s.turn && !s.drawPresentationPending && !s.pvpTurnReady;
       const endReady = s.phase === 'End' && !!s.autoEndTurnPending;
-      if (!drawReady && !endReady) return;
+      const battleReady = s.phase === 'Battle' && (s.pendingCastings||[]).some(pc=>pc?.side===s.turn);
+      if (!drawReady && !endReady && !battleReady) return;
       const seat = s.turn === 'PLAYER' ? 1 : s.turn === 'AI' ? 2 : null;
       if (!seat) throw new Error('Automatic continuation has no active seat.');
       this.#restore(seat);
       const before = JSON.stringify(this.#bridge.getCanonicalSnapshot(seat).appState);
+      if (battleReady) {
+        // Reuse the donor engine's release/cancel/eligibility logic, after all
+        // choices from the previous Attack have finished. No automatic PASS.
+        if (!this.#bridge.settlePvpBattleCastings()) return;
+        // Retain the settled previous action as a presentation boundary. A
+        // later Casting can open its Response in the same committed revision.
+        castingBoundaries.push({snapshot:clone(this.#canonical),actorSeat:seat});
+        this.#canonical = clone(this.#bridge.getCanonicalSnapshot(seat));
+        this.#bridgeSeat = seat;
+        this.#bridgeRevision = this.#revision;
+        continue;
+      }
       const result = this.#bridge.applyServerIntent('advancePhase', []);
       if (!result?.ok) throw new Error('Automatic phase continuation failed: ' + String(result?.error || 'rejected'));
       const next = clone(this.#bridge.getCanonicalSnapshot(seat));
@@ -603,6 +616,19 @@ export class Season0HeadlessAuthority {
       this.#bridgeRevision = this.#revision;
     }
     throw new Error('Automatic phase continuation exceeded safe step limit.');
+  }
+  #captureCommittedTransitions(before, castingBoundaries, actorSeat) {
+    // Only publish after the entire transaction has succeeded. Preserve the
+    // independent combat journal of each Casting (even two at one revision)
+    // without exposing intermediate snapshots or changing ACK semantics.
+    let previous=before, seat=actorSeat;
+    for (const boundary of castingBoundaries) {
+      this.#combatPresentation.capture(previous.appState,boundary.snapshot.appState);
+      this.#discardPresentation.capture(previous.appState,boundary.snapshot.appState,seat);
+      previous=boundary.snapshot;seat=boundary.actorSeat;
+    }
+    this.#combatPresentation.capture(previous.appState,this.#canonical.appState);
+    this.#discardPresentation.capture(previous.appState,this.#canonical.appState,seat);
   }
   /** A verified seat may concede without turn/response ownership. */
   forfeit(seat) {
@@ -625,7 +651,17 @@ export class Season0HeadlessAuthority {
     if (![1,2].includes(seat)) throw new Error('Invalid viewer seat.');
     if (!this.#started) return null;
     this.#restore(1);
-    return clone(this.#bridge.getCanonicalSnapshot(seat));
+    const raw = clone(this.#bridge.getCanonicalSnapshot(seat));
+    const st = raw.appState;
+    // Compute per-viewer legal actions using the real deck, never the
+    // browser projection. This is public ability data, not deck candidates.
+    const legal = {LEFT:[], CENTER:[], RIGHT:[]};
+    if (st.turn==='PLAYER' && ['Deploy','Reform'].includes(st.phase) && !st.pending && !st.responseWindow && !st.gameOver) {
+      this.#restore(seat);
+      for(const lane of Object.keys(legal)) legal[lane] = clone(this.#bridge.getActivatedLegacyAbilitiesFor('PLAYER',lane)||[]);
+    }
+    st.pvpLocalLegalLegacyAbilities = legal;
+    return raw;
   }
   canSeatAct(seat) {
     if (![1, 2].includes(seat) || !this.#canonical?.appState) return false;
@@ -689,7 +725,8 @@ export class Season0HeadlessAuthority {
     this.#revision += 1;
     this.#bridgeSeat = seat;
     this.#bridgeRevision = this.#revision;
-    try { this.#settleServerContinuations(); }
+    const castingBoundaries=[];
+    try { this.#settleServerContinuations(castingBoundaries); }
     catch (error) {
       // Do not publish a partially settled authority state.
       this.#canonical = rollback;
@@ -698,8 +735,7 @@ export class Season0HeadlessAuthority {
       this.#bridgeRevision = -1;
       throw error;
     }
-    this.#combatPresentation.capture(rollback.appState,this.#canonical.appState);
-    this.#discardPresentation.capture(rollback.appState,this.#canonical.appState,seat);
+    this.#captureCommittedTransitions(rollback,castingBoundaries,seat);
     return {ok: true, revision: this.#revision};
   }
   /** Season 1-style two-step Response transaction, committed once or not at all. */
@@ -745,9 +781,9 @@ export class Season0HeadlessAuthority {
       const next=clone(this.#bridge.getCanonicalSnapshot(seat));
       if (JSON.stringify(next.appState)===before)throw new Error('Atomic transaction made no progress.');
       this.#canonical=next;this.#revision+=1;this.#bridgeSeat=seat;this.#bridgeRevision=this.#revision;
-      this.#settleServerContinuations();
-      this.#combatPresentation.capture(rollback.appState,this.#canonical.appState);
-      this.#discardPresentation.capture(rollback.appState,this.#canonical.appState,seat);
+      const castingBoundaries=[];
+      this.#settleServerContinuations(castingBoundaries);
+      this.#captureCommittedTransitions(rollback,castingBoundaries,seat);
       return {ok:true,revision:this.#revision};
     } catch(error) {
       // Restore on next action. Never publish a partially applied step.

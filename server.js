@@ -228,6 +228,7 @@ class Season0BattleAuthority {
     const safe=clone(this.viewForSeat(1)),st=safe.appState;
     stripPrivateHistoryEffectsForSpectator(safe);
     delete st.cardSwapNotices;
+    delete st.pvpLocalLegalLegacyAbilities;
     // A spectator must not see EITHER player's unpublished hand or Mana.
     st.playerHand=Array.from({length:st.playerHandCount||st.playerHand?.length||0},()=> '__HIDDEN_CARD_BACK__');
     st.playerLegacy=Array.from({length:st.playerLegacyCount||st.playerLegacy?.length||0},()=> '__HIDDEN_CARD_BACK__');

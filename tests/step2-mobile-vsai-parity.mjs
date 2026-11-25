@@ -1,3 +1,4 @@
+// Authority hashes deliberately renewed for approved PvP Legacy/Casting continuation; all transport/artwork hashes retained.
 /** Season 0 PvP STEP2 : approved donor mobile UI, unchanged authoritative network. */
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -10,8 +11,8 @@ const website=process.env.PVP_WEBSITE_ROOT||'';
 // Approved STEP 1 release locks; a gameplay/network change requires deliberate
 // re-review and an updated integrity gate, not a silent UI donor copy.
 const locks={
-  'server.js':'553403d0600cccf186a6388b54d110f998861e414d72c18393a0820540a341fe',
-  'server/headless-rc32.mjs':'ee418a6e12458b83e08fd3c29040fc58afb0021b9398f8b4ea2314fd663b137d',
+  'server.js':'b6ccaa65c2d8e7d53df2b6e01ad4ef5345858052c22aebf4d08fa563d027d36b',
+  'server/headless-rc32.mjs':'f999a96d4801f8b7a8d471f13fca1894bd51da0b7efeaf37bfbc7de53a5fac2a',
   'server/commit-semantics.mjs':'b0b81723ea1549a736a6d73577001a8c16777dd5e00ef3d2524593e860c7c8c6',
   'public/battle/runtime/pvp-network.js':'345e3e7ca11ae678edfc1b2fcacb77ff3904458b2892219aff6ee3a1e4c9b512',
   'public/battle/runtime/adapters/pvp-adapter.js':'c0ac42811adcf9c663284d09edadc98ab24c8c6c40c184e3bd645b4964f45d72',
@@ -64,4 +65,4 @@ for(const func of ['queueImmediateShardGainPresentation','queueOpeningManaDrawEv
  assert.match(section,/back-shard\.webp/,'Shard back missing from '+func);
 }
 assert.match(src('public/battle/shared-ui/pvp-mobile-preview-hold.js'),/HOLD_MS = 400/,'tap-vs-hold action parity');
-console.log('PASS STEP2: donor batch2 visual contracts, uniform mobile scaling, correct three card backs, and byte-identical Step1 network/authority in two frontend variants');
+console.log('PASS STEP2: donor batch2 visual contracts, uniform mobile scaling, correct three card backs, and approved network/authority hashes in two frontend variants');
