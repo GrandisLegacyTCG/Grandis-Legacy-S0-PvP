@@ -21,5 +21,5 @@ for (const first of [1,2]) {
   const masked=viewerSafeBoard(a._viewForMaskingOnly(seat),{seat,revision:a.revision,secret:Buffer.alloc(32)});
   assertViewerSafeBoard(masked);
  }
- console.log('PASS RC41 authority first seat',first,'revision',a.revision);
+ console.log('PASS authority first seat',first,'revision',a.revision);
 }

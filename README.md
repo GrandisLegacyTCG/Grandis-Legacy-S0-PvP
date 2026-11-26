@@ -1,6 +1,6 @@
 # Grandis Legacy — Season 0 PvP Standalone
 
-**Status:** RC44 integration — Local QA Candidate. This source is not a claim of production stability.  
+**Status:** RC44 — Local QA Candidate. This source is not a claim of production stability.  
 **Standalone UI donor reference:** **VS AI RC44 Standalone** (gameplay and presentation reference). Card data targets Main Deck R4.0 / Legacy R4.0 and Rulebook v3.6.  
 **Network ownership:** Independent PvP server-authoritative multiplayer. It must not be overwritten by VS AI integration.
 
@@ -8,7 +8,7 @@
 
 - A complete standalone PvP server, authoritative gameplay adapter and two-seat WebSocket implementation.
 - Self-contained Lobby, Battlefield, card artwork, thumbnail-first loading, static UI and local assets.
-- Automated gameplay/network/privacy regression tests and public network engineering rules.
+- Five current public smoke and integrity tests, plus the public network engineering rules. The complete regression suite is maintained separately in the private development archive.
 
 Private development notes, donor change histories, internal handoffs, QA screenshots/logs and internal release incident reports are intentionally **not included**. Network behavior and mandatory engineering rules remain public in [`docs/NETWORK_RULES.md`](docs/NETWORK_RULES.md).
 
@@ -21,7 +21,7 @@ npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 npm start
 ```
 
-**Always use `npm start` for the extracted ZIP**, or run `npm run prepare:assets` before using `node server.js` directly. `npm run verify:assets` checks that original public asset paths have been restored. `npm run check` runs the active local regression suite; `npm run check:publication` verifies public-repo documentation hygiene.
+**Always use `npm start` for the extracted ZIP**, or run `npm run prepare:assets` before using `node server.js` directly. `npm run verify:assets` checks that original public asset paths have been restored. `npm run check` runs the limited public checks (publication, gameplay, Mana, network and assets); full historical QA is maintained privately; `npm run check:publication` verifies public-repo documentation hygiene.
 
 The server serves the Lobby at `/`, Battlefield at `/battle/`, WebSocket at `/ws`, and health information at `/health`. The included Dockerfile installs the required native WebSocket implementation, hydrates local binary aliases and precompresses static files.
 

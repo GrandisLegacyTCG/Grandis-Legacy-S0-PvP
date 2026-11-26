@@ -38,7 +38,7 @@ const safeEvent = (event) => {
   }
   if(event.type==='PVP_RC44_FEEDBACK'){
     const feedback=safeFeedback(event.feedback,0);
-    return feedback&&/^RC44-FX-\d+$/.test(String(event.id))?{type:event.type,id:event.id,feedback}:null;
+    return feedback&&/^RC44-FX-\d+$/.test(String(event.id))?{type:event.type,id:event.id,feedback,...(event.await_cleanse===true?{await_cleanse:true}:{})}:null;
   }
   const out = {};
   for (const k of ['id', 'type', 'side', 'actor_side', 'reason', 'group_id', 'group_index', 'hand_index', 'timestamp']) {

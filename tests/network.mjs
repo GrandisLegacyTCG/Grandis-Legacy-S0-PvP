@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
 import {spawn} from 'node:child_process';
 import {setTimeout as sleep} from 'node:timers/promises';
-const BUILD = 'gl-s0-pvp-rc44-r40-r40-20261127';
+const context={window:{}};
+vm.runInNewContext(readFileSync(new URL('../public/build-meta.js',import.meta.url),'utf8'),context);
+const BUILD=context.window.GL_PVP_BUILD_META.buildId;
 const port = 25100 + Math.floor(Math.random()*2200);
 const processHandle=spawn(process.execPath,['server.js'],{
  cwd:process.cwd(),env:{...process.env,HOST:'127.0.0.1',PORT:String(port),IDLE_SWEEP_MS:'5000'},stdio:['ignore','pipe','pipe']
@@ -19,7 +23,7 @@ async function connect(id,role='player',seatToken=''){
 }
 try{
  await wait(()=>logs.includes('Listening'),25000);
- const a=await connect('step1-seat-1'),b=await connect('step1-seat-2'),spec=await connect('step1-spectator','spectator');
+ const a=await connect('qa-seat-1'),b=await connect('qa-seat-2'),spec=await connect('qa-spectator','spectator');
  try {
   assert.equal(a.msgs[0].local.seat,1);assert.equal(b.msgs[0].local.seat,2);
   a.send('set-deck',{deckKey:'s0_starter_01_blue_red'});b.send('set-deck',{deckKey:'s0_starter_02_yellow_blue'});
@@ -44,7 +48,7 @@ try{
   actor.send('resync'); const stable=await actor.until(m=>m.type==='snapshot'&&m.forceImport&&m.match.status==='started');
   assert.equal(stable.match.revision,initialRevision);
   console.log('PASS missing action ID never mutates the authoritative state');
-  const id='step1.valid.advance.0001';
+  const id='qa.valid.advance.0001';
   const req={clientActionId:id,baseRevision:initialRevision,intent:'advancePhase',args:[]};
   actor.send('runtime-intent',req);
   const ack=await actor.until(m=>m.type==='intent-result'&&m.clientActionId===id);
@@ -67,8 +71,8 @@ try{
   actor.send('runtime-intent',{...req,intent:'acknowledgePvpTurnStart'});
   const conflict=await actor.until(m=>m.type==='intent-result'&&m.code==='ACTION_ID_CONFLICT');
   assert.equal(conflict.ok,false);assert.equal(conflict.snapshot.match.revision,initialRevision+1);
-  actor.send('runtime-intent',{clientActionId:'step1.stale.2',baseRevision:initialRevision,intent:'advancePhase',args:[]});
-  const stale=await actor.until(m=>m.clientActionId==='step1.stale.2');
+  actor.send('runtime-intent',{clientActionId:'qa.stale.2',baseRevision:initialRevision,intent:'advancePhase',args:[]});
+  const stale=await actor.until(m=>m.clientActionId==='qa.stale.2');
   assert.equal(stale.ok,false);assert.equal(stale.code,'STALE_REVISION');
   console.log('PASS duplicate idempotency, conflict ID rejection and stale revision');
   // A new connection owning the same verified seat replaces the old socket.
@@ -77,12 +81,12 @@ try{
    assert.equal(replacement.msgs[0].local.seat,actor.msgs[0].local.seat);
    // Replaced sockets must not have access to the mutable seat, whether
    // their transport closes immediately or they had buffered frames.
-   try{actor.send('runtime-intent',{clientActionId:'step1.stale-socket.9',baseRevision:initialRevision+1,
+   try{actor.send('runtime-intent',{clientActionId:'qa.stale-socket.9',baseRevision:initialRevision+1,
      intent:'advancePhase',args:[]})}catch{}
    replacement.send('resync'); const current=await replacement.until(m=>m.forceImport&&m.match?.status==='started');
    assert.equal(current.match.revision,initialRevision+1);
    console.log('PASS verified seat reconnect does not authorize a stale socket');
-   const concede={clientActionId:'step1.concede.010',baseRevision:current.match.revision};
+   const concede={clientActionId:'qa.concede.010',baseRevision:current.match.revision};
    replacement.send('surrender-match',concede);
    const ended=await replacement.until(m=>m.type==='intent-result'&&m.clientActionId===concede.clientActionId);
    assert.equal(ended.ok,true,'A seat may concede despite no active-turn ownership');
@@ -95,8 +99,8 @@ try{
    assert.equal(settled.ok,true,'Lost-ACK replay must remain idempotent after FINISHED');
    assert.equal(settled.appliedRevision,finalRevision);
    assert.equal(settled.snapshot.match.revision,finalRevision,'Replay must not apply concession twice');
-   replacement.send('runtime-intent',{clientActionId:'step1.finished.011',baseRevision:finalRevision,intent:'advancePhase',args:[]});
-   const afterFinished=await replacement.until(m=>m.type==='intent-result'&&m.clientActionId==='step1.finished.011');
+   replacement.send('runtime-intent',{clientActionId:'qa.finished.011',baseRevision:finalRevision,intent:'advancePhase',args:[]});
+   const afterFinished=await replacement.until(m=>m.type==='intent-result'&&m.clientActionId==='qa.finished.011');
    assert.equal(afterFinished.ok,false,'New actions forbidden after FINISHED');
    assert.equal(afterFinished.snapshot.match.revision,finalRevision);
    console.log('PASS lost surrender ACK replay after finished cannot mutate twice');

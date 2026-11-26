@@ -4,8 +4,5 @@ node_modules/
 .DS_Store
 __pycache__/
 
-# Generated QA artifacts (not public source notes)
+# Generated QA artifacts
 tests/.generated/
-tests/*_RESULTS.json
-tests/RC34_PVP_REGRESSION.json
-docs/*.log

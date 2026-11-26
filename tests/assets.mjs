@@ -16,7 +16,11 @@ for(const doc of docPaths){
 }
 assert.deepEqual(missing,[],'A production script or stylesheet is missing');
 const artwork=readdirSync(join(root,'battle/card-art')).filter(x=>/^S0-.*\.webp$/.test(x));
-assert.ok(artwork.length>=240,'Some Season 0 card artwork is missing');
+assert.equal(artwork.length,250,'Season 0 original artwork count');
+const thumbs=readdirSync(join(root,'battle/assets/thumbnails')).filter(x=>/^S0-.*\.webp$/.test(x));
+assert.deepEqual(thumbs.sort(),artwork.sort(),'Exact-card thumbnail coverage');
+for(const effect of ['Cleanse','Invincible','Negate','Reflect','Revive'])assert.ok(existsSync(join(root,'engine/assets/battle',effect+'.png')),'Missing VFX '+effect);
+for(const effect of ['Invincible','Negate','Reflect','Revive'])assert.ok(existsSync(join(root,'engine/assets/audio/battle',effect+'.mp3')),'Missing SFX '+effect);
 for(const p of [
  'assets/lobby/grandis-legacy-logo.webp','engine/assets/lobby/Swap.png',
  'battle/engine/assets/audio/Card Sound.mp3','battle/engine/assets/audio/battle/P.Atk.mp3',

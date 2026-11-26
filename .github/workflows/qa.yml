@@ -1,4 +1,4 @@
-name: Grandis Legacy PvP Season 0 - mandatory network and package QA
+name: Grandis Legacy PvP Season 0 - public deployment checks
 on:
   push:
   pull_request:
@@ -18,24 +18,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Set up Python for WebSocket integration test
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install WebSocket QA dependency
-        run: python -m pip install websocket-client==1.8.0
       - name: Install production Node dependencies (PvP native ws transport)
         run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund
       - name: Build deterministic static compression
         run: npm run build:precompress
-      - name: Public-package hygiene, two-seat network, privacy and UI regression
+      - name: Run public smoke and integrity checks
         run: npm run check
       - name: Verify Docker image can build
-        run: docker build --pull -t grandis-legacy-pvp-s0-net-rc6:ci .
+        run: docker build --pull -t grandis-legacy-pvp-s0:ci .
       - name: Verify native ws transport in Docker
         run: |
-          docker run -d --rm --name gl-pvp-net-rc6 -e PVP_ALLOWED_ORIGINS=https://grandislegacytcg.web.id -p 3066:3000 grandis-legacy-pvp-s0-net-rc6:ci
+          trap 'docker rm -f gl-pvp-qa >/dev/null 2>&1 || true' EXIT
+          docker run -d --rm --name gl-pvp-qa -e PVP_ALLOWED_ORIGINS=https://grandislegacytcg.web.id -p 3066:3000 grandis-legacy-pvp-s0:ci
           # Read the paired frontend build instead of hardcoding a previous release.
           node scripts/verify-docker-health.mjs
           GL_PVP_BACKEND_URL=http://127.0.0.1:3066 npm run smoke:northflank
-          docker stop gl-pvp-net-rc6
+          docker stop gl-pvp-qa
