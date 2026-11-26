@@ -368,6 +368,7 @@ const RUNTIME_SOURCES = Object.freeze([
   'engine/shared-app/active-starters.js',
   'runtime/season0-generated/rc41-approved-print-overrides.js',
   'runtime/season0-generated/rc42-main-deck-r398-overlay.js',
+  'runtime/season0-generated/rc44-main-deck-r40-overlay.js',
   'engine/shared-app/app.bundle.js'
 ]);
 
@@ -479,7 +480,7 @@ export class Season0HeadlessAuthority {
       performance: { now: () => 0 }, crypto: webcrypto,
       location: { href: 'https://pvp-season0.invalid/', origin: 'https://pvp-season0.invalid' },
       navigator: { userAgent: 'Node PvP Season 0 authority' },
-      document: doc, GL_APP_MODE: 'PVP', GL_PVP_SHARED_BOARD_ACTIVE: true
+      document: doc, GL_APP_MODE: 'PVP', GL_PVP_SHARED_BOARD_ACTIVE: true, GL_PVP_HEADLESS_AUTHORITY: true
     };
     ctx.window = ctx; ctx.globalThis = ctx;
     vm.createContext(ctx, { name: 'gl-s0-headless-authority' });
@@ -594,6 +595,7 @@ export class Season0HeadlessAuthority {
       const seat = s.turn === 'PLAYER' ? 1 : s.turn === 'AI' ? 2 : null;
       if (!seat) throw new Error('Automatic continuation has no active seat.');
       this.#restore(seat);
+      this.#bridge.beginPvpFeedbackTransaction?.();
       const before = JSON.stringify(this.#bridge.getCanonicalSnapshot(seat).appState);
       if (battleReady) {
         // Reuse the donor engine's release/cancel/eligibility logic, after all
@@ -653,6 +655,8 @@ export class Season0HeadlessAuthority {
     this.#restore(1);
     const raw = clone(this.#bridge.getCanonicalSnapshot(seat));
     const st = raw.appState;
+    const incoming=this.#bridge.getPvpIncomingDamage?.();
+    if(incoming&&st.responseWindow&&Number.isFinite(incoming.damage))st.pvpRc44IncomingDamage=incoming.damage;
     // Compute per-viewer legal actions using the real deck, never the
     // browser projection. This is public ability data, not deck candidates.
     const legal = {LEFT:[], CENTER:[], RIGHT:[]};
@@ -687,6 +691,7 @@ export class Season0HeadlessAuthority {
       throw new Error('Cannot activate an opponent Hero, Legacy or Racial Trait.');
     }
     this.#restore(seat);
+    this.#bridge.beginPvpFeedbackTransaction?.();
     // Import normalizes a small number of render-only fields (e.g.
     // gameResultShown). Compare action against the RESTORED baseline, not
     // against the pre-import serialized state, or seat 2 invalid actions
@@ -752,6 +757,7 @@ export class Season0HeadlessAuthority {
         throw new Error('Invalid atomic step.');
     }
     this.#restore(seat);
+    this.#bridge.beginPvpFeedbackTransaction?.();
     const local=()=>this.#bridge.getCanonicalSnapshot(1).appState;
     const first=local();
     if (expected==='response_window') {

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {setTimeout as delay} from 'node:timers/promises';
-const BUILD='gl-s0-pvp-rc42-r398-r40-20261124-s3';
+const BUILD='gl-s0-pvp-rc44-r40-r40-20261127';
 const PORT=21200+Math.floor(Math.random()*800);
 const proc=spawn(process.execPath,['server.js'],{cwd:process.cwd(),env:{...process.env,HOST:'127.0.0.1',PORT:String(PORT),IDLE_SWEEP_MS:'900'},stdio:['ignore','pipe','pipe']});
 let log='';proc.stdout.on('data',b=>log+=b.toString());proc.stderr.on('data',b=>log+=b.toString());

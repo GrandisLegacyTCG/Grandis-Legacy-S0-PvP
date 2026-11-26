@@ -14,7 +14,7 @@ try{
  assert.ok(alive,'backend failed to start '+logs.slice(-250));
  const health=await(await fetch(base+'/health')).json();
  assert.equal(health.ok,true);
- assert.match(health.buildId,/-s3$/);
+ assert.equal(health.buildId,'gl-s0-pvp-rc44-r40-r40-20261127');
  for(const p of ['/pvp/','/pvp/battle/','/assets/site/web-s0/favicon.png','/assets/site/web-s0/logo-transparent.webp']){
   const res=await fetch(base+p,{method:'HEAD'});assert.equal(res.status,200,'asset route '+p);
  }

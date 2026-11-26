@@ -9,7 +9,7 @@ const list=(dir)=>!existsSync(dir)?[]:readdirSync(dir,{withFileTypes:true}).flat
 const docs=list(join(ROOT,'docs'));
 assert.deepEqual(docs,['docs/NETWORK_RULES.md'],'Only the normative network rules may be in top-level public docs');
 const readme=readFileSync(join(ROOT,'README.md'),'utf8');
-assert.match(readme,/VS AI RC43 Standalone/,'Only donor version/provenance reference is required');
+assert.match(readme,/VS AI RC44 Standalone/,'Only donor version/provenance reference is required');
 assert.doesNotMatch(readme,/Update Notes|Change History|PATCH32_AUDIT|STEP3_FINAL_RELEASE|G01[–-]G05|UI_SYNC2_Audit/i,'No internal donor update history');
 const rules=readFileSync(join(ROOT,'docs/NETWORK_RULES.md'),'utf8');
 for(const requirement of ['server','WebSocket','ACK','revision','idempotency','reconnect','Response','pending','privacy','Spectator','continuation']){

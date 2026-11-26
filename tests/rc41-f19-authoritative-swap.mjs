@@ -25,7 +25,7 @@ for (const seat of [1,2]){
   assert(before.CENTER&&before.LEFT&&before.RIGHT);
   s.turn=side;s.phase='Battle';s.round=3;s.gameOver=false;s.responseWindow=null;
   s.pending={type:'optional_swap',decision_side:side,source_side:side,source_lane:'CENTER',card_id:'S0-THF-024',
-    swap_lane:'LEFT',swap_options:['LEFT','RIGHT'],commit_token:'qa-F19-'+seat+'-'+decide,next_pending:null};
+    target_lane:'LEFT',swap_lane:'LEFT',swap_options:['LEFT'],commit_token:'qa-F19-'+seat+'-'+decide,next_pending:null};
   a.injectFixtureForF19(snapshot);
   const rev=a.revision;
   const ownerView=viewerSafeBoard(a._viewForMaskingOnly(seat),{seat,revision:rev,secret:Buffer.alloc(32)});

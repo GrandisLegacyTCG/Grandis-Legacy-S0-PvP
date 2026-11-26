@@ -6,6 +6,24 @@
 const HIDDEN = '__HIDDEN_CARD_BACK__';
 const clone = (v) => structuredClone(v);
 const hidden = (n) => Array.from({length: Math.max(0, Math.min(1000, Number(n) || 0))}, () => HIDDEN);
+function safeFeedback(src,depth){
+  if(!src||depth>4||!['attack','heal','cleanse','invincible','negate','reflect','revive','hp','status','group','attachment_discard','defense'].includes(src.kind))return null;
+  const out={kind:src.kind};
+  if(['PLAYER','AI'].includes(src.side))out.side=src.side;
+  if(['LEFT','CENTER','RIGHT'].includes(src.lane))out.lane=src.lane;
+  for(const k of ['hero_id','card_id','legacy_card_id'])if(/^S0-[A-Z0-9]+-[A-Z0-9]+$/.test(String(src[k]||'')))out[k]=src[k];
+  if(typeof src.hero_instance==='string'&&/^[A-Za-z0-9:_-]{1,100}$/.test(src.hero_instance))out.hero_instance=src.hero_instance;
+  for(const k of ['hp_before','hp_after'])if(Number.isFinite(src[k]))out[k]=Math.max(0,Math.min(10000,src[k]));
+  for(const k of ['omit_defense','has_damage','play_sound','cleanse','visual_heal_only','sound_only','burn'])if(typeof src[k]==='boolean')out[k]=src[k];
+  if(['heal','damage'].includes(src.hp_change))out.hp_change=src.hp_change;
+  for(const k of ['attack_kind','defense_kind'])if(['P','M'].includes(src[k]))out[k]=src[k];
+  if(['hit','block','dodge','negate','invincible'].includes(src.outcome))out.outcome=src.outcome;
+  if(src.reason==='stoneblood')out.reason=src.reason;
+  if(['Poison','Burn','Freeze','Sleep','Stun','Bleed'].includes(src.status))out.status=src.status;
+  if(src.slot===0||src.slot===1)out.slot=src.slot;
+  for(const k of ['parallel','after'])if(Array.isArray(src[k]))out[k]=src[k].slice(0,12).map(x=>safeFeedback(x,depth+1)).filter(Boolean);
+  return out;
+}
 const safeEvent = (event) => {
   if (!event || typeof event !== 'object') return null;
   // Only the affected player receives their resolved loss notification.
@@ -17,6 +35,10 @@ const safeEvent = (event) => {
     const ownAbilitySpend=event.side==='PLAYER'&&event.source_side==='PLAYER'&&event.loss_kind==='ABILITY_SPEND';
     const enemyRemoval=event.side==='PLAYER'&&event.source_side==='AI'&&event.loss_kind!=='ABILITY_SPEND';
     if(!ownAbilitySpend&&!enemyRemoval)return null;
+  }
+  if(event.type==='PVP_RC44_FEEDBACK'){
+    const feedback=safeFeedback(event.feedback,0);
+    return feedback&&/^RC44-FX-\d+$/.test(String(event.id))?{type:event.type,id:event.id,feedback}:null;
   }
   const out = {};
   for (const k of ['id', 'type', 'side', 'actor_side', 'reason', 'group_id', 'group_index', 'hand_index', 'timestamp']) {
@@ -398,6 +420,9 @@ export function viewerSafeBoard(raw, {revision, secret, seat} = {}) {
     }));
   delete st.lastSwapCompleted;delete st.lastSwapCanceled;
   st.presentationEvents = (st.presentationEvents||[]).map(safeEvent).filter(Boolean).slice(-80);
+  st.pvpRc44FeedbackEvents=(st.pvpRc44FeedbackEvents||[]).map(safeEvent).filter(Boolean).slice(-64);
+  delete st.pvpRc44FeedbackSeq;delete st.s0_intimidate_direct_attacks;
+  if(!Number.isFinite(st.pvpRc44IncomingDamage))delete st.pvpRc44IncomingDamage;
   st.log = [];
   const rawPending = st.pending;
   st.pending = guardedPending(rawPending);

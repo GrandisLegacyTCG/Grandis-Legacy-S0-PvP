@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {readFileSync} from 'node:fs';
 import {setTimeout as wait} from 'node:timers/promises';
-const build='gl-s0-pvp-rc42-r398-r40-20261124-s3';
+const build='gl-s0-pvp-rc44-r40-r40-20261127';
 const port=25800+Math.floor(Math.random()*900);
 const rounds=Number(process.env.PVP_SOAK_ROUNDS||20);
 const child=spawn(process.execPath,process.env.PVP_SOAK_FORCE_GC==='1'?['--expose-gc','tests/step3-probed-server.mjs']:['server.js'],{cwd:process.cwd(),env:{...process.env,HOST:'127.0.0.1',PORT:String(port),IDLE_SWEEP_MS:'20000'},stdio:['ignore','pipe','pipe']});

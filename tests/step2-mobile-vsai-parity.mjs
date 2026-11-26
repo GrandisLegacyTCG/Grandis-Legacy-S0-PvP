@@ -11,10 +11,10 @@ const website=process.env.PVP_WEBSITE_ROOT||'';
 // Approved STEP 1 release locks; a gameplay/network change requires deliberate
 // re-review and an updated integrity gate, not a silent UI donor copy.
 const locks={
-  'server.js':'b6ccaa65c2d8e7d53df2b6e01ad4ef5345858052c22aebf4d08fa563d027d36b',
-  'server/headless-rc32.mjs':'f999a96d4801f8b7a8d471f13fca1894bd51da0b7efeaf37bfbc7de53a5fac2a',
+  'server.js':'1df65f507a5c380efc3bc687004de0a8b4f8b9ae03a121fa59fd5256f4def257',
+  'server/headless-rc32.mjs':'a3c6b93862dac969df3509fa4fdc26d066f55c13410b2735b24982c23503bcb0',
   'server/commit-semantics.mjs':'b0b81723ea1549a736a6d73577001a8c16777dd5e00ef3d2524593e860c7c8c6',
-  'public/battle/runtime/pvp-network.js':'345e3e7ca11ae678edfc1b2fcacb77ff3904458b2892219aff6ee3a1e4c9b512',
+  'public/battle/runtime/pvp-network.js':'bed795be74073bcd70df6464e90de048550ba9f32ee2d5ff6d4b6a19ec8d389f',
   'public/battle/runtime/adapters/pvp-adapter.js':'c0ac42811adcf9c663284d09edadc98ab24c8c6c40c184e3bd645b4964f45d72',
   'public/battle/engine/js/static-data.js':'be601cba58794a93eeb2a50522a43f19df8935e38e47651f9fb123c63cd84d93'
 };

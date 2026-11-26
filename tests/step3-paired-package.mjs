@@ -4,7 +4,7 @@ import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs';
 import {join, resolve, relative} from 'node:path';
 import {createHash} from 'node:crypto';
 const standalone=resolve(new URL('../public/',import.meta.url).pathname);
-const expected='gl-s0-pvp-rc42-r398-r40-20261124-s3';
+const expected='gl-s0-pvp-rc44-r40-r40-20261127';
 const site=process.env.PVP_WEBSITE_ROOT ? resolve(process.env.PVP_WEBSITE_ROOT) : null;
 const b=readFileSync(join(standalone,'build-meta.js'),'utf8');
 assert.ok(b.includes(expected),'Standalone build S3 missing');

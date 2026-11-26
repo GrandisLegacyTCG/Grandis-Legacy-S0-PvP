@@ -1,7 +1,7 @@
 # Grandis Legacy — Season 0 PvP Standalone
 
-**Status:** RC43 UI / PvP P01-P04 hotfix — Local QA Candidate. This source is not a claim of production stability.  
-**Standalone UI donor reference:** **VS AI RC43 Standalone** (presentation reference only). This reference does **not** assert that the PvP gameplay engine has adopted every RC43 rules change.  
+**Status:** RC44 integration — Local QA Candidate. This source is not a claim of production stability.  
+**Standalone UI donor reference:** **VS AI RC44 Standalone** (gameplay and presentation reference). Card data targets Main Deck R4.0 / Legacy R4.0 and Rulebook v3.6.  
 **Network ownership:** Independent PvP server-authoritative multiplayer. It must not be overwritten by VS AI integration.
 
 ## What this repository contains

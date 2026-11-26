@@ -25,7 +25,7 @@ assert.match(loader,/card-art\\\/\(S0-/);
 const lobby=String(file('public/index.html'));
 const battle=String(file('public/battle/index.html'));
 for(const html of [lobby,battle])for(const name of ['pvp-card-thumbnails.js','pvp-artwork-loader.js'])
- assert.ok(html.includes(name+'?v=20261125-ui-sync1'),'Script not loaded from both pages '+name);
+ assert.ok(html.includes(name+'?v='+(name==='pvp-card-thumbnails.js'?'20261127-rc44-r40':'20261125-ui-sync1')),'Script not loaded from both pages '+name);
 assert.ok(lobby.includes('pvp-ui-sync.css?v=20261125-ui-sync1'));
 assert.ok(battle.includes('pvp-ui-sync.css?v=20261125-ui-sync1'));
 const host=String(file('public/pvp/pvp-host.js'));

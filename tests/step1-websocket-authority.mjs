@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {setTimeout as sleep} from 'node:timers/promises';
-const BUILD = 'gl-s0-pvp-rc42-r398-r40-20261124-s3';
+const BUILD = 'gl-s0-pvp-rc44-r40-r40-20261127';
 const port = 25100 + Math.floor(Math.random()*2200);
 const processHandle=spawn(process.execPath,['server.js'],{
  cwd:process.cwd(),env:{...process.env,HOST:'127.0.0.1',PORT:String(port),IDLE_SWEEP_MS:'5000'},stdio:['ignore','pipe','pipe']

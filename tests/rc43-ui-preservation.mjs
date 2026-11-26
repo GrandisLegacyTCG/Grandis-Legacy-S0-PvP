@@ -1,5 +1,5 @@
 // Authority hashes deliberately renewed for approved PvP Legacy/Casting continuation; all transport/artwork hashes retained.
-/** RC43 visual donor adoption: protected gameplay/transport never overwritten. */
+/** RC44 release integrity: intentional engine and reconnect-only feedback changes repinned; remaining core hashes retained. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
@@ -8,13 +8,13 @@ const ROOT=resolve(new URL('../',import.meta.url).pathname);
 const get=x=>readFileSync(join(ROOT,x));
 const str=x=>String(get(x));
 const HASHES={
-  'server.js':'b6ccaa65c2d8e7d53df2b6e01ad4ef5345858052c22aebf4d08fa563d027d36b',
-  'public/battle/runtime/pvp-network.js':'345e3e7ca11ae678edfc1b2fcacb77ff3904458b2892219aff6ee3a1e4c9b512',
+  'server.js':'1df65f507a5c380efc3bc687004de0a8b4f8b9ae03a121fa59fd5256f4def257',
+  'public/battle/runtime/pvp-network.js':'bed795be74073bcd70df6464e90de048550ba9f32ee2d5ff6d4b6a19ec8d389f',
   'public/battle/runtime/adapters/pvp-adapter.js':'c0ac42811adcf9c663284d09edadc98ab24c8c6c40c184e3bd645b4964f45d72',
   'public/battle/runtime/adapters/authority-adapter.js':'859992904b9cc814e8a3ae249e60431c9eafdcd90a7c81db236b60458fabbb00',
-  'public/battle/engine/shared-app/app.bundle.js':'a978738c2a9ed4aa5f91f7864e56cb3d3b1d785bb703cf75d985207ccca7ead1',
+  'public/battle/engine/shared-app/app.bundle.js':'bcff9aeea5ffacc8fe4856334e1de1b31ca08fbd6cd1a01c20c233f2c5f9e2ff',
   'public/battle/runtime/pvp-artwork-loader.js':'cd8713227c4a520ecd93e0bf455ddd6eed68dffa9067247e94eeb67765891297',
-  'public/battle/runtime/pvp-card-thumbnails.js':'aed60340a6d87252c3a6797354ab9f9932732a587c53320077106c84ace87f5f'
+  'public/battle/runtime/pvp-card-thumbnails.js':'4033351a112ce095f9490df4a180de0d258e8ac8f1625645cae28a6eba8613ef'
 };
 for(const [path,sha] of Object.entries(HASHES))assert.equal(createHash('sha256').update(get(path)).digest('hex'),sha,'Protected core regression: '+path);
 const html=str('public/battle/index.html'),runtime=str('public/battle/shared-app/app-runtime.js'),css=str('public/battle/runtime/pvp-vsai-rc43-ui.css'),platform=str('public/battle/shared-ui/pvp-platform.js'),scroll=str('public/battle/shared-ui/pvp-mobile-card-list-scroll.js');
