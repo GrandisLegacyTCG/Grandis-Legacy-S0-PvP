@@ -1,7 +1,7 @@
 # Grandis Legacy — Season 0 PvP Standalone
 
 **Status:** RC44 — Local QA Candidate. This source is not a claim of production stability.  
-**Standalone UI donor reference:** **VS AI RC44 Standalone** (gameplay and presentation reference). Card data targets Main Deck R4.0 / Legacy R4.0 and Rulebook v3.6.  
+**Standalone UI donor reference:** **VS AI RC44 Standalone** (Revised v7 Clean Runtime, gameplay and presentation reference). Card data targets Main Deck R4.0 / Legacy R4.0 and Rulebook v3.6.  
 **Network ownership:** Independent PvP server-authoritative multiplayer. It must not be overwritten by VS AI integration.
 
 ## What this repository contains
@@ -11,6 +11,8 @@
 - Five current public smoke and integrity tests, plus the public network engineering rules. The complete regression suite is maintained separately in the private development archive.
 
 Private development notes, donor change histories, internal handoffs, QA screenshots/logs and internal release incident reports are intentionally **not included**. Network behavior and mandatory engineering rules remain public in [`docs/NETWORK_RULES.md`](docs/NETWORK_RULES.md).
+
+Current card data and Card Review use the RC44 R4.0 snapshot; startup rejects an incomplete snapshot. The pinned DEV45 foundation is required for engine integrity, not a live historical fallback.
 
 ## Install and run
 

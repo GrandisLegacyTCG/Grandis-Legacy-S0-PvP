@@ -13,7 +13,7 @@ import WebSocket from 'ws';
 const DEFAULT='https://p01--grandis-legacy-s0-pvp--2kwws8nzlcc2.code.run';
 const BACKEND=String(process.env.GL_PVP_BACKEND_URL||DEFAULT).replace(/\/+$/,'');
 const WEBSITE_ORIGIN=String(process.env.GL_PVP_WEBSITE_ORIGIN||'https://grandislegacytcg.web.id');
-const BUILD_ID='gl-s0-pvp-rc44-r40-r40-20261127';
+const BUILD_ID='gl-s0-pvp-rc44-r40-r40-20261127-clean1';
 const base=new URL(BACKEND);
 assert.ok(base.protocol==='https:' || (base.protocol==='http:' && /^(localhost|127\.0\.0\.1)$/.test(base.hostname)),
   'Production health must use HTTPS; plain HTTP is allowed only on localhost for Docker CI.');

@@ -363,12 +363,9 @@ export function applyOptimizedPvpIntent({bridge, readPending, name, args}) {
 
 const RUNTIME_SOURCES = Object.freeze([
   'engine/js/static-data.js',
-  'runtime/overrides/grand-finale-designer-nerf.js',
   'engine/js/runtime-authority.js',
   'engine/shared-app/active-starters.js',
-  'runtime/season0-generated/rc41-approved-print-overrides.js',
-  'runtime/season0-generated/rc42-main-deck-r398-overlay.js',
-  'runtime/season0-generated/rc44-main-deck-r40-overlay.js',
+  'runtime/season0-generated/rc44-main-deck-r40-active.js',
   'engine/shared-app/app.bundle.js'
 ]);
 
@@ -502,11 +499,12 @@ export class Season0HeadlessAuthority {
         !meta.ids.every(id => STARTERS.has(id))) {
       throw new Error('Season 0 starter authority mismatch.');
     }
-    // RC32 override is a deliberately authorized APP patch, not an OSA edit.
+    // Pinned raw foundation integrity check; live printed effects are resolved
+    // by the required RC44 R4.0 snapshot in initCards.
     const finale = ctx.GL_CARD_DEFINITIONS?.cards?.find(c => c.card_id === 'S0-CLE-031');
     if (!finale || Number(finale.attack?.damage_by_class?.Bard) !== 60 ||
                    Number(finale.attack?.damage_by_class?.Maestro) !== 90) {
-      throw new Error('RC32 Grand Finale approved local override is missing.');
+      throw new Error('Pinned Grand Finale foundation integrity mismatch.');
     }
     bridge.setSharedBoardMode(true);
     bridge.setRenderSuppressed(true);

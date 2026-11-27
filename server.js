@@ -26,8 +26,8 @@ const PUBLIC=path.join(BASE,'public');
 const PORT=Number(process.env.PORT||3000);
 const HOST=String(process.env.HOST||'0.0.0.0').trim()||'0.0.0.0';
 const VERSION='S0-RC44-PVP-NET-RC6-STAGE2-INTEGRATION-1';
-const BUILD_ID='gl-s0-pvp-rc44-r40-r40-20261127';
-const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC44 · Main R4.0 / Legacy R4.0 · Rulebook v3.6 · Network RC6 Stage 2 · Integration Candidate`;
+const BUILD_ID='gl-s0-pvp-rc44-r40-r40-20261127-clean1';
+const BUILD_LABEL=`Grandis Legacy PvP · Season 0 RC44 · Main R4.0 / Legacy R4.0 · Rulebook v3.6 · Network RC6 Stage 2 · Local QA Candidate`;
 const AUTHORITY_BUNDLE_SHA256=createHash('sha256').update(readFileSync(path.join(PUBLIC,'battle/engine/shared-app/app.bundle.js'))).digest('hex');
 // Parse the approved Season 0 RC42 engine BEFORE the server accepts players. This
 // removes script reads + JS compilation from the synchronous START MATCH path.

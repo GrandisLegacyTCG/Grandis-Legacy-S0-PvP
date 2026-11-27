@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "deduplication": "byte-identical static binary URL aliases required by the active standalone PvP runtime only; exclude unused site showcase or legacy aliases",
-  "replacedAssetFiles": 96,
-  "savedRawBytes": 27856716,
+  "replacedAssetFiles": 94,
+  "savedRawBytes": 27827529,
   "groups": [
     {
       "canonical": "battle/assets/keywords-review/all-opponents.png",
@@ -297,8 +297,7 @@
       "sha256": "ffb2be69858295e8dc51841c035a6d0f717447e786394f43edf9aa6abf938fac",
       "bytes": 319,
       "aliases": [
-        "assets/lobby/chevron-down.png",
-        "assets/review-db158/assets/ui/chevron-down.png"
+        "assets/lobby/chevron-down.png"
       ]
     },
     {
@@ -421,14 +420,6 @@
         "battle/assets/ui/Background.png",
         "assets/ui/Background.png",
         "engine/assets/Background.png"
-      ]
-    },
-    {
-      "canonical": "battle/engine/assets/Field.png",
-      "sha256": "c50d530c7ad4b812b2b6bba3bbbd6d0f084a4f3e3a2ccee2a796168265d3fabe",
-      "bytes": 28868,
-      "aliases": [
-        "engine/assets/Field.png"
       ]
     },
     {
